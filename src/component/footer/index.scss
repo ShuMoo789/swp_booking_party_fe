@@ -1,0 +1,39 @@
+.footer {
+    background-color: black;
+    color: white;
+    padding: 20px;
+  
+    .footer-sections {
+      display: flex;
+      justify-content: space-between;
+  
+      .section, .cta-section {
+        h4 { margin-bottom: 10px; }
+  
+        ul { 
+           li { margin-bottom: 5px; }
+         }
+      }
+  
+      .cta-section {
+         p { margin-bottom: 10px; }
+  
+         button {
+           background-color: red;
+           color: white;
+           border-radius: 5px;
+           padding: 10px;
+         }
+       }
+     }
+  
+     .social-media {
+       margin-top:20px;
+  
+       // Thêm các kiểu cho các biểu tượng mạng xã hội ở đây
+     }
+  
+     p { 
+       margin-top :20px; 
+     }
+  }  
