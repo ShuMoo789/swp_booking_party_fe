@@ -1,5 +1,6 @@
-import React from 'react';
-import './Footer.scss';
+import './index.scss';
+import { Button } from 'react-bootstrap';
+import { FaFacebook, FaTwitter, FaInstagram, FaYoutube } from 'react-icons/fa';
 
 const Footer = () => {
   return (
@@ -29,21 +30,32 @@ const Footer = () => {
             <li>Seller/Policy</li>
             <li>Customer policy</li>
             <li>Contact us</li>
-            <li>FAQ's</li>
+            <li>Q&A</li>
           </ul>
         </div>
 
         <div className="cta-section">
           <p>Become our customer to receive the best experience</p>
           <button type="button">Register now!</button>
+          <div className="social-media">
+            FOLLOW US &nbsp;&nbsp;
+            <Button variant="primary" href="https://facebook.com">
+              <FaFacebook/>
+            </Button>
+            &nbsp;&nbsp;&nbsp;
+            <Button variant="info" href="https://x.com">
+              <FaTwitter/>
+            </Button>
+            &nbsp;&nbsp;&nbsp;
+            <Button variant="danger" href="https://instagram.com">
+              <FaInstagram/>
+            </Button>
+            &nbsp;&nbsp;&nbsp;
+            <Button variant="warning" href="https://youtube.com">
+              <FaYoutube/>
+            </Button>
+          </div>
         </div>
-
-      </div>
-
-      {/* Phần mạng xã hội */}
-      <div className="social-media">
-        FOLLOW US
-        {/* Thêm các biểu tượng mạng xã hội ở đây */}
       </div>
 
       <p>© 2022 - Copyright of FIVESTARs LLC</p>
@@ -52,11 +64,3 @@ const Footer = () => {
 };
 
 export default Footer;
-
-/* import React from 'react'
-
-function Footer() {
-  return (
-    <div>Footer</div>
-  )
-} */
