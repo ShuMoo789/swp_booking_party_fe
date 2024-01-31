@@ -146,7 +146,7 @@
         </div>
       </div>
       <a className="btn btn-default" href="changepassword.jsp">
-        Thay đổi mật khẩu
+        Đổi mật khẩu
       </a>
     </div>
   </form>
@@ -172,3 +172,4 @@
 
                   </form>    */}
 </>
+
