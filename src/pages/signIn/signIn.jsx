@@ -7,7 +7,6 @@ import {
   Typography,
 } from "@mui/material";
 import { useFormik } from "formik";
-import React, { useEffect } from "react";
 // import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import * as Yup from "yup";
@@ -93,7 +92,7 @@ export default function SignIn() {
               </Link>
             </Typography>
             <Typography textAlign="center" sx={{ color: "#526D82" }}>
-              Don't have an account?{" "}
+              Dont have an account?{" "}
               <Link to="/register" style={{ color: "#0079FF" }}>
                 Register Now!
               </Link>
@@ -101,7 +100,7 @@ export default function SignIn() {
             <Typography textAlign="center" sx={{ color: "#526D82" }}>
               Wanna back to homepage{" "}
               <Link to="/" style={{ color: "#0079FF" }}>
-                Let's Go
+                Lets Go
               </Link>
             </Typography>
           </Stack>
