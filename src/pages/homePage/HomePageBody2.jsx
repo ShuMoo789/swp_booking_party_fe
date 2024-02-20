@@ -1,9 +1,8 @@
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
-import * as React from "react";
 
 import "./HomePageBody2.scss";
-import Carousels from "../Carousel/Carousel";
+import Carousels from "../../component/Carousel/Carousels";
 
 function Home2() {
   return (

@@ -9,9 +9,8 @@ import {
   Typography,
 } from "@mui/material";
 import { useFormik } from "formik";
-import React from "react";
 // import { useDispatch } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import * as Yup from "yup";
 // import { images } from "../../Constants";
 // import { register } from "../../Redux/authSlice";
@@ -109,7 +108,7 @@ export default function SignUp() {
           <Typography textAlign="center">
             Have an account ?{" "}
             <Link to="/loginpage" style={{ color: "#0079FF" }}>
-              Let's Login !
+              Lets Login !
             </Link>{" "}
           </Typography>
 

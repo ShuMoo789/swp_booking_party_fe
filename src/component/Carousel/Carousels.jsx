@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 // import { Box, Grid, Paper, Typography } from "@mui/material";
 import ArrowForwardOutlinedIcon from "@mui/icons-material/ArrowForwardOutlined";
 import ArrowBackOutlinedIcon from "@mui/icons-material/ArrowBackOutlined";
@@ -11,7 +10,8 @@ import Item from "./Item";
 import { dataImg } from "./slider";
 
 function SampleNextArrow(props) {
-  const { className, style, onClick } = props;
+  // eslint-disable-next-line react/prop-types
+  const { className, onClick } = props;
   return (
     <div className={className} onClick={onClick}>
       <ArrowForwardOutlinedIcon style={{ color: "black" }} />
@@ -20,7 +20,8 @@ function SampleNextArrow(props) {
 }
 
 function SamplePrevArrow(props) {
-  const { className, style, onClick } = props;
+  // eslint-disable-next-line react/prop-types
+  const { className, onClick } = props;
   return (
     <div className={className} onClick={onClick}>
       <ArrowBackOutlinedIcon style={{ color: "black" }} />

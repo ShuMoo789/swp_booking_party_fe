@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
-import { Box, Paper, Stack, CardMedia } from "@mui/material";
-import images from "../../Constant/images";
+import { Box, Paper, Stack } from "@mui/material";
+
 import "./ForgotPassword.css";
 
 const ForgotPassword = () => {
