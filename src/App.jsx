@@ -1,8 +1,10 @@
-import { useState } from "react";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
-import Layout from "./component/layout";
-import Login from "./pages/login";
-import Home from "./pages/home";
+
+import HomeMain from "./pages/homePage/HomePage";
+import { Layout } from "./component/Layout";
+import SignIn from "./pages/signIn/signIn";
+import SignUp from "./pages/signUp/signUp";
+import ForgotPassword from "./pages/forgotPassword/forgotPassword";
 
 function App() {
   const router = createBrowserRouter([
@@ -11,14 +13,22 @@ function App() {
       element: <Layout />,
       children: [
         {
-          path: "login",
-          element: <Login />,
-        },
-        {
           path: "",
-          element: <Home />,
+          element: <HomeMain />,
         },
       ],
+    },
+    {
+      path: "login",
+      element: <SignIn />,
+    },
+    {
+      path: "resetpassword",
+      element: <ForgotPassword />,
+    },
+    {
+      path: "register",
+      element: <SignUp />,
     },
   ]);
 

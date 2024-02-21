@@ -1,0 +1,27 @@
+$color_1: black;
+
+.bg_container-signup {
+    margin-top: 2rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+.image-signup {
+}
+.Register_Button {
+    &:hover {
+        color: $color_1;
+    }
+}
+@media screen and (max-width: 600px) {
+    .bg_container-signup {
+        margin-top: 0;
+    }
+    .form-signup {
+        width: 300px !important;
+    }
+    .textfield-signup {
+        width: 300px !important;
+    }
+}

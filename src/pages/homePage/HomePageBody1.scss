@@ -1,0 +1,49 @@
+$color_1: black;
+
+.main_container {
+    background-image: url(../../Assets/bg_home1.png);
+    background-position: center;
+    background-size: cover;
+    background-repeat: repeat;
+    background-attachment: fixed;
+    align-items: center;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+    display: flex;
+    margin-top: 70px;
+}
+.image-homepagebody1 {
+    height: 60vh;
+    width: 50vw !important;
+    object-fit: contain !important;
+}
+.home1_button {
+    &:hover {
+        color: $color_1;
+    }
+}
+@media screen and (max-width: 600px) {
+    .image-homepagebody1 {
+        margin-right: 100px;
+        height: 60vh;
+        width: 100% !important;
+    }
+}
+@media screen and (max-width: 1200px) {
+    .image-homepagebody1 {
+        margin-right: 100px;
+        height: 60vh;
+        width: 100% !important;
+    }
+    .main_container {
+        background-image: url(../../Assets/bg_home1.png);
+        background-position: center;
+        background-size: cover;
+        background-repeat: repeat;
+        background-attachment: fixed;
+        align-items: center;
+        justify-content: center;
+        flex-wrap: wrap;
+        display: flex;
+    }
+}

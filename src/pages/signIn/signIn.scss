@@ -1,0 +1,29 @@
+$color_1: black;
+
+.bg_container-signin {
+    display: flex;
+    margin-top: 2rem;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+.image-signin {
+    // height: 80%;
+    // width: 60vw !important;
+}
+.Login_Button {
+    &:hover {
+        color: $color_1;
+    }
+}
+@media screen and (max-width: 600px) {
+    .bg_container-signin {
+        margin-top: 0;
+    }
+    .form-fg {
+        width: 300px !important;
+    }
+    .textfield-signin {
+        width: 300px !important;
+    }
+}

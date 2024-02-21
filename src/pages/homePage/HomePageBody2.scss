@@ -1,0 +1,10 @@
+@media screen and (max-width: 600px) {
+    .home-body {
+        max-width: 500px;
+    }
+    .image-gallary {
+        max-width: 500px !important;
+        object-fit: contain !important;
+        height: 400px !important;
+    }
+}
