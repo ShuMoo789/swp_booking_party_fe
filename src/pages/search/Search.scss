@@ -1,0 +1,86 @@
+.container {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.dropdown {
+  width: 80%;
+  display: flex; // thêm thuộc tính này để hiển thị các option theo hàng ngang
+  flex-wrap: wrap; // thêm thuộc tính này để cho phép các option xuống dòng nếu không đủ chỗ
+  margin-left: 140px;
+  color: black;
+}
+
+.dropdown .text {
+  display: none !important;
+}
+
+.dropdown .menu {
+  width: 100%;
+  display: flex; // thêm thuộc tính này để hiển thị các option theo hàng ngang
+  flex-wrap: wrap; // thêm thuộc tính này để cho phép các option xuống dòng nếu không đủ chỗ
+  flex-direction: column;
+}
+
+.dropdown .menu > .item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  width: 50%;
+  height: 50%;
+  margin: 10px; // thêm thuộc tính này để tạo khoảng cách giữa các option
+  border: 1px solid gray; // thêm thuộc tính này để tạo viền cho mỗi option
+  border-radius: 10px; // thêm thuộc tính này để bo tròn góc của mỗi option
+  cursor: pointer; // thêm thuộc tính này để cho biết người dùng có thể nhấn vào option
+  transition: all 0.3s ease; // thêm thuộc tính này để tạo hiệu ứng chuyển đổi khi hover hoặc active
+  box-shadow: 0 0 10px rgba(211, 211, 211, 0.61);
+  margin-top: 30px;
+}
+
+.dropdown .menu > .item:hover {
+  transform: scale(1.05); // thêm thuộc tính này để tăng kích thước option khi hover
+  box-shadow: 0 0 5px rgba(212, 209, 209, 0.811); // thêm thuộc tính này để tạo bóng đổ cho option khi hover
+}
+
+.dropdown .menu > .item:active {
+  transform: scale(0.95); // thêm thuộc tính này để giảm kích thước option khi active
+}
+
+.dropdown .menu > .item > .image {
+  width: 100%;
+  height: 90%;
+  object-fit: cover;
+}
+
+.dropdown .menu > .item > .description {
+  flex: 1;
+  margin: 10px;
+}
+
+.dropdown .menu > .item > .button {
+  margin: 10px;
+  display: none; // thêm thuộc tính này để ẩn nút Search
+}
+
+.search {
+  width: 50%; // thêm thuộc tính này để tăng kích thước của thanh Search
+  height: 40px; // thêm thuộc tính này để tăng kích thước của thanh Search
+  border-radius: 50px; // thêm thuộc tính này để tạo hình dạng viên thuốc con nhộng cho thanh Search
+  padding: 5px; // thêm thuộc tính này để tạo khoảng cách giữa nội dung và viền của thanh Search
+  font-size: 18px; // thêm thuộc tính này để tăng kích thước chữ của thanh Search
+  outline: none; // thêm thuộc tính này để bỏ đường viền khi focus vào thanh Search
+  transition: all 0.3s ease; // thêm thuộc tính này để tạo hiệu ứng chuyển đổi khi hover hoặc active
+  display: flex; // thêm thuộc tính này để căn giữa thanh Search
+  justify-content: right; // thêm thuộc tính này để căn giữa thanh Search
+}
+
+.search-bar:hover {
+  box-shadow: 0 0 10px rgba(212, 209, 209, 0.811); // thêm thuộc tính này để tạo bóng đổ cho thanh Search khi hover
+}
+
+.search-bar:active {
+  transform: scale(0.95); // thêm thuộc tính này để giảm kích thước thanh Search khi active
+}
