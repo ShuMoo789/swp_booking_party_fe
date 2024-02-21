@@ -1,4 +1,5 @@
-import login from "../Assets/login.png";
+import login from "../assets/login-img.jpg";
+import register from "../assets/register-img.jpg";
 import bg_home1 from "../Assets/bg_home1.png";
 import right_home_img from "../Assets/right_home_img.png";
 import slide_img1 from "../Assets/slide_img1.png";
@@ -12,8 +13,10 @@ import avatar_img from "../Assets/avatar.png";
 import cv_candidate from "../Assets/cv.png";
 import mono_avatar from "../Assets/mono_avatar.png";
 import logo_rework_home from "../Assets/rework_logo_home.png";
+import gift_card from "../Assets/gift-cards.jpg";
 const images = {
   login,
+  register,
   bg_home1,
   right_home_img,
   slide_img1,
@@ -27,5 +30,6 @@ const images = {
   cv_candidate,
   mono_avatar,
   logo_rework_home,
+  gift_card,
 };
 export default images;

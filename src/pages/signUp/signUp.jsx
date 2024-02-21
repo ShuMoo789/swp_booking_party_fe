@@ -9,18 +9,14 @@ import {
   Typography,
 } from "@mui/material";
 import { useFormik } from "formik";
-// import { useDispatch } from "react-redux";
+
 import { Link } from "react-router-dom";
 import * as Yup from "yup";
-// import { images } from "../../Constants";
-// import { register } from "../../Redux/authSlice";
+
 import images from "../../Constant/images";
 import "./signUp.scss";
 
 export default function SignUp() {
-  //   const dispatch = useDispatch();
-  //   const navigate = useNavigate();
-
   const formik = useFormik({
     initialValues: {
       id: 0,
@@ -75,29 +71,14 @@ export default function SignUp() {
     }
   };
 
-  // const handleSubmit = () => {
-  //   dispatch(
-  //     register({
-  //       username: formik.values.username,
-  //       email: formik.values.email,
-  //       password: formik.values.password,
-  //       confirm: formik.values.confirm,
-  //       checkbox: formik.values.checkbox,
-  //       role: "user",
-  //     })
-  //   );
-  //   setTimeout(() => {
-  //     navigate("/loginpage");
-  //   }, 1000);
-  // };
-
   return (
     <Box className="bg_container-signup">
       <CardMedia
         className="image-signup"
         component="img"
-        src={images.login}
+        src={images.register}
         alt="images"
+        style={{ width: "45%", paddingRight: "100px" }}
       />
       <Box className="form-signup">
         <Stack spacing={2}>
@@ -107,7 +88,10 @@ export default function SignUp() {
 
           <Typography textAlign="center">
             Have an account ?{" "}
-            <Link to="/loginpage" style={{ color: "#0079FF" }}>
+            <Link
+              to="/login"
+              style={{ color: "#0079FF", textDecoration: "none" }}
+            >
               Lets Login !
             </Link>{" "}
           </Typography>
@@ -144,9 +128,6 @@ export default function SignUp() {
             error={formik.touched.email && Boolean(formik.errors.email)}
             helperText={formik.touched.email && formik.errors.email}
           />
-          {/* <FormHelperText sx={{ fontSize: "18px", color: "red" }}>
-                {formik.touched.email && formik.errors.email}
-              </FormHelperText> */}
 
           <TextField
             className="textfield-signup"
@@ -162,9 +143,6 @@ export default function SignUp() {
             error={formik.touched.password && Boolean(formik.errors.password)}
             helperText={formik.touched.password && formik.errors.password}
           />
-          {/* <FormHelperText sx={{ fontSize: "18px", color: "red" }}>
-                {formik.touched.password && formik.errors.password}
-              </FormHelperText> */}
 
           <TextField
             className="textfield-signup"
@@ -180,9 +158,6 @@ export default function SignUp() {
             error={formik.touched.confirm && Boolean(formik.errors.confirm)}
             helperText={formik.touched.confirm && formik.errors.confirm}
           />
-          {/* <FormHelperText sx={{ fontSize: "18px", color: "red" }}>
-                {formik.touched.confirm && formik.errors.confirm}
-              </FormHelperText> */}
 
           <FormControlLabel
             name="checkbox"
@@ -208,7 +183,6 @@ export default function SignUp() {
               formik.values.confirm,
               formik.values.checkbox
             )}
-            // onClick={handleSubmit}
           >
             SIGN UP
           </Button>

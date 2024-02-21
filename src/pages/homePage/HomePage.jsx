@@ -3,8 +3,9 @@ import { Box } from "@mui/material";
 
 import HomePageBody1 from "./HomePageBody1";
 import HomePageBody2 from "./HomePageBody2";
-import Navigation from "../../component/Navigate/Navigation";
-import Footer from "../../component/Navigate/Footer";
+
+import HomePageBody3 from "./HomePageBody3";
+import HomePageBody4 from "./HomePageBody4";
 
 export default function HomeMain() {
   //   const accessToken = useSelector((state) => state.user);
@@ -12,10 +13,10 @@ export default function HomeMain() {
   return (
     <Box className="main-container">
       <main>
-        <Navigation />
         <HomePageBody1 />
         <HomePageBody2 />
-        <Footer />
+        <HomePageBody3 />
+        <HomePageBody4 />
       </main>
     </Box>
   );
