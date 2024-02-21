@@ -1,0 +1,44 @@
+.profile{
+    margin-top: 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    h1 {
+       width: 60%;
+        }
+
+    .box{
+        background-color: rgb(240, 240, 240);
+        border-radius: 20px;
+        width: 60vw;
+        overflow: hidden; 
+        position: relative;
+
+        .banner{
+            img{
+                width: 100%;
+                height: 200px;
+                object-fit: cover;
+            }
+        }
+
+        .avatar{
+            position: absolute;
+            top: 120px;
+            left: 50px;
+        }
+
+        .information{
+            padding: 50px;
+            margin-top: 30px;
+            p{
+                margin: 20px 0;
+            }
+        }
+    }
+
+    .box-2{
+        margin-top: 20px;
+        padding: 20px;
+    }
+} 
