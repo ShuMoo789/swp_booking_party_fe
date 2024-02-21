@@ -40,6 +40,7 @@ export default function SignIn() {
         className="image-signin"
         component="img"
         src={images.login}
+        style={{ width: "40%" }}
         alt="images"
       />
       <Box className="form-signin">
@@ -86,20 +87,26 @@ export default function SignIn() {
           </Button>
           <Stack spacing={1}>
             <Typography textAlign="center" sx={{ color: "#526D82" }}>
-              Forgot password?{" "}
-              <Link to="/resetpassword" style={{ color: "#0079FF" }}>
-                Click here to find your password
-              </Link>
-            </Typography>
-            <Typography textAlign="center" sx={{ color: "#526D82" }}>
               Dont have an account?{" "}
-              <Link to="/register" style={{ color: "#0079FF" }}>
+              <Link
+                to="/register"
+                style={{ color: "#0079FF", textDecoration: "none" }}
+              >
                 Register Now!
               </Link>
             </Typography>
             <Typography textAlign="center" sx={{ color: "#526D82" }}>
-              Wanna back to homepage{" "}
-              <Link to="/" style={{ color: "#0079FF" }}>
+              Forgot password?{" "}
+              <Link
+                to="/resetpassword"
+                style={{ color: "#0079FF", textDecoration: "none" }}
+              >
+                Click here to find your password
+              </Link>
+            </Typography>
+            <Typography textAlign="center" sx={{ color: "#526D82" }}>
+              Wanna back to homepage!{" "}
+              <Link to="/" style={{ color: "#0079FF", textDecoration: "none" }}>
                 Lets Go
               </Link>
             </Typography>

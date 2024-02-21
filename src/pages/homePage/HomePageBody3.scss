@@ -1,0 +1,31 @@
+.home4_button:hover {
+    color: black;
+}
+.image-form {
+    height: 100%;
+    width: 100%;
+    padding-top: 100px;
+}
+
+@media screen and (max-width: 1000px) {
+    .form-homepagebody4 {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .contact-title {
+        padding-top: 3rem;
+    }
+    .left-homepagebody4 {
+        margin-top: 3rem;
+    }
+    .textfield-homepagebody4 {
+        width: 99% !important;
+    }
+    .textauto-homepagebody4 {
+        width: 98% !important;
+    }
+    .textfield__homepagebody4 {
+        width: 97% !important;
+    }
+}

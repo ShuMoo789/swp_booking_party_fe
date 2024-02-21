@@ -11,7 +11,7 @@ export default function Footer() {
       style={{
         height: "150px",
         backgroundColor: "#D6DDFF",
-        marginTop: "2rem",
+        // marginTop: "2rem",
       }}
     >
       <Box sx={{ textAlign: "center", paddingTop: "2rem" }}>

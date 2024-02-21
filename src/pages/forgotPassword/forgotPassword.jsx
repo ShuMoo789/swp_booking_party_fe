@@ -4,7 +4,7 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import { Box, Paper, Stack } from "@mui/material";
 
-import "./ForgotPassword.css";
+import "./ForgotPassword.scss";
 
 const ForgotPassword = () => {
   const [email, setEmail] = useState("");

@@ -1,9 +1,8 @@
-import React, { useState } from "react";
-import { Box, Grid, Paper, Typography } from "@mui/material";
-import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import { Paper } from "@mui/material";
 
+// eslint-disable-next-line react/prop-types
 function Item({ item }) {
   return (
     <Paper
@@ -12,6 +11,7 @@ function Item({ item }) {
         backgroundSize: "cover",
         backgroundRepeat: "no-repeat",
         backgroundPosition: "center",
+        // eslint-disable-next-line react/prop-types
         backgroundImage: `url(${item.image})`,
         height: { lg: "400px", xs: "200px" },
         marginLeft: "10px",
@@ -22,7 +22,9 @@ function Item({ item }) {
       {
         <img
           style={{ display: "none" }}
+          // eslint-disable-next-line react/prop-types
           src={item.image}
+          // eslint-disable-next-line react/prop-types
           alt={item.imageText}
         />
       }

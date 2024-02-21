@@ -1,7 +1,7 @@
 import { Button, CardMedia, Grid } from "@mui/material";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
-import { HashLink } from "react-router-hash-link";
+
 import { useRef } from "react";
 
 import { Link } from "react-router-dom";
@@ -37,22 +37,17 @@ export default function Navigation() {
                   Home
                 </Button>
               </Link>
-              <HashLink smooth to="/#work-evironment">
+              <Link to="/hhh">
                 <Button sx={{ color: "black", fontWeight: "bolder" }}>
-                  Content
+                  Discovery
                 </Button>
-              </HashLink>
-              <HashLink smooth to="/#footer123">
+              </Link>
+              <Link to="/hhh">
                 <Button sx={{ color: "black", fontWeight: "bolder" }}>
-                  footer
+                  FAQs
                 </Button>
-              </HashLink>
-
-              {/* <a href="#work-evironment">
-                <Button sx={{ color: "black", fontWeight: "bolder" }}>
-                  next
-                </Button>
-              </a> */}
+              </Link>
+              s{" "}
             </Grid>
             <Grid
               item

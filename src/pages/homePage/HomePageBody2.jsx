@@ -18,7 +18,14 @@ function Home2() {
       ></Typography>
       <Box
         className="home-body"
-        sx={{ pt: "2rem", ml: "auto", mr: "auto", maxWidth: 1200, flexGrow: 1 }}
+        sx={{
+          pt: "2rem",
+          ml: "auto",
+          mr: "auto",
+          maxWidth: 1200,
+          flexGrow: 1,
+          mb: "40px",
+        }}
       >
         <Carousels />
       </Box>
