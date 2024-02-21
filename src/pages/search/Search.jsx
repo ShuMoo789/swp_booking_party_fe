@@ -28,7 +28,7 @@ const options = [
     button: { content: 'Search', onClick: () => console.log('Search by package') },
   },
 ];
-//Search
+
 const Search = () => {
   const [value, setValue] = useState('');
 
