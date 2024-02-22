@@ -7,17 +7,47 @@ import SignUp from "./pages/signUp/signUp";
 import ForgotPassword from "./pages/forgotPassword/forgotPassword";
 import PackageList from "./pages/packagelist/packagelist";
 import PartyHostList from "./pages/partyhostlist/partyhostlist";
+import PartyHostList from "./pages/partyhostlist/partyhostlist";
+import PackageList from "./pages/packagelist/packagelist";
 
 function App() {
   const router = createBrowserRouter([
     {
-      path: "/",
+      path: "partyhostlist",
+      element: <PartyHostList />,
+    },
+    
+    {
+      path: "packagelist",
+      element: <PackageList />,
+    },
+
+    {
+      path: "",
+      element: <HomeMain />,
+      children: [
+        {
+          path: "partyhostlist",
+          element: <PartyHostList />,
+        },
+
+        {
+          path: "packagelist",
+          element: <PackageList />,
+        },
+
+      ],
+    },
+
+    {
+      path: "",
       element: <Layout />,
       children: [
         {
           path: "",
           element: <HomeMain />,
         },
+
         {
           path: "partyhostlist",
           element: <PartyHostList />,
