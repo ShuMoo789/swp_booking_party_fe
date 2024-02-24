@@ -1,5 +1,4 @@
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
-
 import HomeMain from "./pages/homePage/HomePage";
 import { Layout } from "./component/Layout";
 import SignIn from "./pages/signIn/signIn";
@@ -7,6 +6,7 @@ import SignUp from "./pages/signUp/signUp";
 import ForgotPassword from "./pages/forgotPassword/forgotPassword";
 import { Profile } from "./pages/profile";
 import { ServiceList } from "./pages/serviceList";
+import OrderCart from "./pages/orderCart";
 
 function App() {
   const router = createBrowserRouter([
@@ -17,6 +17,10 @@ function App() {
         {
           path: "",
           element: <HomeMain />,
+        },
+        {
+          path: "orderCart",
+          element: <OrderCart />,
         },
         {
           path: "profile",
