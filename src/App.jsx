@@ -1,5 +1,4 @@
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
-
 import HomeMain from "./pages/homePage/HomePage";
 import { Layout } from "./component/Layout";
 import PartyHostList from "./pages/partyhostlist/partyhostlist";
@@ -10,32 +9,6 @@ import ForgotPassword from "./pages/forgotPassword/forgotPassword";
 
 function App() {
   const router = createBrowserRouter([
-    {
-      path: "partyhostlist",
-      element: <PartyHostList />,
-    },
-
-    {
-      path: "packagelist",
-      element: <PackageList />,
-    },
-
-    {
-      path: "",
-      element: <HomeMain />,
-      children: [
-        {
-          path: "partyhostlist",
-          element: <PartyHostList />,
-        },
-
-        {
-          path: "packagelist",
-          element: <PackageList />,
-        },
-      ],
-    },
-
     {
       path: "",
       element: <Layout />,
@@ -52,15 +25,6 @@ function App() {
         {
           path: "packagelist",
           element: <PackageList />,
-        },
-
-        {
-          path: "profile",
-          element: <Profile />,
-        },
-        {
-          path: "servicelist",
-          element: <ServiceList />,
         },
       ],
     },
