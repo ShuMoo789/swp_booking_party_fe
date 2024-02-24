@@ -1,38 +1,44 @@
-// Biến màu sắc
-$primary-color: #3498db;
-$secondary-color: #2ecc71;
-$border-color: #ccc;
-$shadow-color: rgba(0, 0, 0, 0.1);
+// partyhostlist.scss
 
-.package-list {
-  text-align: center;
+// Biến
+$primary-color: #1890ff;
+$secondary-color: #13c2c2;
+$background-color: #f0f0f0;
+$text-color: #333;
+$box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 
-  .package-item {
-    border: 1px solid $border-color;
+.party-host-list {
+  margin: 20px;
+  
+  .party-host {
+    background-color: $background-color;
     border-radius: 5px;
-    margin: 20px;
     padding: 20px;
-    box-shadow: 0 4px 6px $shadow-color;
-    transition: transform 0.3s ease;
-
-    &:hover {
-      transform: translateY(-5px);
-    }
-
+    margin-bottom: 20px;
+    box-shadow: $box-shadow;
+    
     h2 {
-      font-size: 1.5rem;
+      font-size: 20px;
       margin-bottom: 10px;
-      color: $primary-color;
+      color: $text-color;
     }
-
+    
     p {
-      margin-bottom: 5px;
+      margin: 10px 0;
+      
+      &.contact {
+        font-weight: bold;
+      }
     }
+  }
+}
 
-    img {
-      max-width: 30%;
-      border-radius: 5px;
-      margin-top: 10px;
-    }
+// Hiệu ứng hover
+.party-host {
+  transition: transform 0.3s ease-in-out;
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   }
 }
