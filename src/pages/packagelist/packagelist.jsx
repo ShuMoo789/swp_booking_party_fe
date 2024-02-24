@@ -2,7 +2,6 @@ import React from "react";
 import "./packagelist.scss";
 import { Button, Card, Col, Row, Typography } from "antd";
 
-// Component để hiển thị một gói phần mềm
 function PackageItem(props) {
   return (
     <Card

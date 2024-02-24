@@ -53,6 +53,15 @@ function App() {
           path: "packagelist",
           element: <PackageList />,
         },
+
+        {
+          path: "profile",
+          element: <Profile />,
+        },
+        {
+          path: "servicelist",
+          element: <ServiceList />,
+        },
       ],
     },
     {
