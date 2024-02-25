@@ -6,7 +6,11 @@ import PackageList from "./pages/packagelist/packagelist";
 import SignIn from "./pages/signIn/signIn";
 import SignUp from "./pages/signUp/signUp";
 import ForgotPassword from "./pages/forgotPassword/forgotPassword";
+
 import PickDate from "./pages/pickDate/pickDate";
+import { Profile } from "./pages/profile";
+import { ServiceList } from "./pages/serviceList";
+
 function App() {
   const router = createBrowserRouter([
     {
@@ -17,6 +21,7 @@ function App() {
           path: "",
           element: <HomeMain />,
         },
+
 
         {
           path: "partyhostlist",
@@ -29,6 +34,13 @@ function App() {
         {
           path: "pickDate",
           element: <PickDate />,
+        {
+          path: "profile",
+          element: <Profile />,
+        },
+        {
+          path: "servicelist",
+          element: <ServiceList />,
         },
       ],
     },

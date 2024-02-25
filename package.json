@@ -16,6 +16,7 @@
     "@mui/material": "^5.15.10",
     "@mui/styled-engine-sc": "^6.0.0-alpha.16",
     "@reduxjs/toolkit": "^2.2.1",
+
     "antd": "^5.14.1",
     "formik": "^2.4.5",
     "prop-types": "^15.8.1",
