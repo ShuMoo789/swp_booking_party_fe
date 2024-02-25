@@ -47,6 +47,7 @@ function App() {
         {
           path: "pickDate",
           element: <PickDate />,
+        },
         {
           path: "orderCart",
           element: <OrderCart />,
