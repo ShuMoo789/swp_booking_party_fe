@@ -8,14 +8,19 @@ import {
 } from "@mui/material";
 import { useFormik } from "formik";
 // import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import * as Yup from "yup";
 // import { images } from "../../Constants";
 // import { login } from "../../Redux/authSlice";
 import "./signIn.scss";
 import images from "../../Constant/images";
+import api from "../../config/axios";
+import { useDispatch } from "react-redux";
+import { login } from "../../redux/features/authenSlice";
 
 export default function SignIn() {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const formik = useFormik({
     initialValues: {
       username: "",
@@ -33,6 +38,21 @@ export default function SignIn() {
         .max(20, "max 20 character"),
     }),
   });
+
+  const handleLogin = async (e) => {
+    console.log(formik.values);
+    try {
+      const response = await api.post("/authentication/login", {
+        username: formik.values.username,
+        password: formik.values.password,
+      });
+      localStorage.setItem("token", response.data.token);
+      dispatch(login(response.data));
+      navigate("/");
+    } catch (e) {
+      console.log(e);
+    }
+  };
 
   return (
     <Box className="bg_container-signin">
@@ -80,7 +100,7 @@ export default function SignIn() {
           <Button
             className="Login_Button"
             sx={{ backgroundColor: "#626AD1", color: "white" }}
-            // onClick={handleLogin}
+            onClick={handleLogin}
             disabled={!formik.isValid || formik.isSubmitting}
           >
             SIGN IN

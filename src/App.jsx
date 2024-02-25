@@ -43,6 +43,7 @@ function App() {
         {
           path: "pickDate",
           element: <PickDate />,
+        },
         {
           path: "profile",
           element: <Profile />,
