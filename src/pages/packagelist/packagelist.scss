@@ -10,21 +10,22 @@ $shadow-color: rgba(0, 0, 0, 0.1);
     font-size: 2rem;
     margin-bottom: 20px;
     color: $primary-color;
-    font-family: 'Arial', sans-serif;
+    font-family: "Arial", sans-serif;
   }
 
   .package-list {
-    .package-items {
+    &__items {
       display: flex;
       justify-content: center;
       flex-wrap: wrap;
       gap: 20px;
+      padding: 20px;
 
       .package-item {
         border: 1px solid $border-color;
         border-radius: 5px;
         width: 620px;
-        overflow: hidden; 
+        overflow: hidden;
         position: relative;
         box-shadow: 0 4px 6px $shadow-color;
         transition: transform 0.3s ease;
@@ -35,8 +36,26 @@ $shadow-color: rgba(0, 0, 0, 0.1);
 
         img {
           display: block;
-          width: 273px;
+          width: 100%;
           border-radius: 5px;
+        }
+
+        .package-details {
+          padding: 20px;
+
+          p {
+            margin-bottom: 10px;
+          }
+        }
+
+        .ant-btn {
+          margin-top: 10px;
+        }
+        .ant-card-body {
+          .btn-get-started {
+            margin: 50px;
+            display: block;
+          }
         }
       }
     }

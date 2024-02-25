@@ -6,7 +6,7 @@ import PackageList from "./pages/packagelist/packagelist";
 import SignIn from "./pages/signIn/signIn";
 import SignUp from "./pages/signUp/signUp";
 import ForgotPassword from "./pages/forgotPassword/forgotPassword";
-
+import PickDate from "./pages/pickDate/pickDate";
 function App() {
   const router = createBrowserRouter([
     {
@@ -25,6 +25,10 @@ function App() {
         {
           path: "packagelist",
           element: <PackageList />,
+        },
+        {
+          path: "pickDate",
+          element: <PickDate />,
         },
       ],
     },
