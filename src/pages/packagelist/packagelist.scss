@@ -1,0 +1,63 @@
+$primary-color: #3498db;
+$secondary-color: #2ecc71;
+$border-color: #ccc;
+$shadow-color: rgba(0, 0, 0, 0.1);
+
+.container {
+  text-align: center;
+
+  h1 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    color: $primary-color;
+    font-family: "Arial", sans-serif;
+  }
+
+  .package-list {
+    &__items {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 20px;
+      padding: 20px;
+
+      .package-item {
+        border: 1px solid $border-color;
+        border-radius: 5px;
+        width: 620px;
+        overflow: hidden;
+        position: relative;
+        box-shadow: 0 4px 6px $shadow-color;
+        transition: transform 0.3s ease;
+
+        &:hover {
+          transform: scale(1.1);
+        }
+
+        img {
+          display: block;
+          width: 100%;
+          border-radius: 5px;
+        }
+
+        .package-details {
+          padding: 20px;
+
+          p {
+            margin-bottom: 10px;
+          }
+        }
+
+        .ant-btn {
+          margin-top: 10px;
+        }
+        .ant-card-body {
+          .btn-get-started {
+            margin: 50px;
+            display: block;
+          }
+        }
+      }
+    }
+  }
+}

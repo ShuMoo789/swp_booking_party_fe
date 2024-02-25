@@ -1,10 +1,13 @@
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
-
 import HomeMain from "./pages/homePage/HomePage";
 import { Layout } from "./component/Layout";
+import PartyHostList from "./pages/partyhostlist/partyhostlist";
+import PackageList from "./pages/packagelist/packagelist";
 import SignIn from "./pages/signIn/signIn";
 import SignUp from "./pages/signUp/signUp";
 import ForgotPassword from "./pages/forgotPassword/forgotPassword";
+
+import PickDate from "./pages/pickDate/pickDate";
 import { Profile } from "./pages/profile";
 import { ServiceList } from "./pages/serviceList";
 import { useDispatch, useSelector } from "react-redux";
@@ -20,13 +23,26 @@ import { login, logout } from "./redux/features/authenSlice";
 function App() {
   const router = createBrowserRouter([
     {
-      path: "/",
+      path: "",
       element: <Layout />,
       children: [
         {
           path: "",
           element: <HomeMain />,
         },
+
+
+        {
+          path: "partyhostlist",
+          element: <PartyHostList />,
+        },
+        {
+          path: "packagelist",
+          element: <PackageList />,
+        },
+        {
+          path: "pickDate",
+          element: <PickDate />,
         {
           path: "profile",
           element: <Profile />,
