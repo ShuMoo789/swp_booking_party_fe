@@ -10,6 +10,9 @@ import ForgotPassword from "./pages/forgotPassword/forgotPassword";
 import PickDate from "./pages/pickDate/pickDate";
 import { Profile } from "./pages/profile";
 import { ServiceList } from "./pages/serviceList";
+
+import OrderCart from "./pages/orderCart";
+
 import { useDispatch, useSelector } from "react-redux";
 import {
   decrement,
@@ -19,6 +22,7 @@ import {
 import Password from "antd/es/input/Password";
 import axios from "axios";
 import { login, logout } from "./redux/features/authenSlice";
+
 
 function App() {
   const router = createBrowserRouter([
@@ -43,6 +47,10 @@ function App() {
         {
           path: "pickDate",
           element: <PickDate />,
+        },
+        {
+          path: "orderCart",
+          element: <OrderCart />,
         },
         {
           path: "profile",
