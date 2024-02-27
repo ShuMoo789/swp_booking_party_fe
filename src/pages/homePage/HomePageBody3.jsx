@@ -126,7 +126,7 @@ export default function HomePageBody3() {
           />
           <TextareaAutosize
             className="textauto-homepagebody4"
-            placeholder=" Messege"
+            placeholder=" Message"
             style={{ width: 500, height: 150 }}
           />
           <Button

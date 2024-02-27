@@ -13,6 +13,7 @@ import * as Yup from "yup";
 // import { images } from "../../Constants";
 // import { login } from "../../Redux/authSlice";
 import "./signIn.scss";
+
 import images from "../../Constant/images";
 import api from "../../config/axios";
 import { useDispatch } from "react-redux";
@@ -40,7 +41,6 @@ export default function SignIn() {
   });
 
   const handleLogin = async (e) => {
-    console.log(formik.values);
     try {
       const response = await api.post("/authentication/login", {
         username: formik.values.username,
@@ -55,17 +55,24 @@ export default function SignIn() {
   };
 
   return (
-    <Box className="bg_container-signin">
+    <Box
+      className="bg_container-signin"
+      style={{
+        backgroundImage: `url(${images.login_bg2})`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+      }}
+    >
       <CardMedia
         className="image-signin"
         component="img"
-        src={images.login}
+        src={images.cake}
         style={{ width: "40%" }}
         alt="images"
       />
       <Box className="form-signin">
         <Stack spacing={5}>
-          <Typography textAlign="center" variant="h2" color="#9376E0">
+          <Typography textAlign="center" variant="h2" color="goldenrod">
             Sign In
           </Typography>
 

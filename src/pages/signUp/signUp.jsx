@@ -2,8 +2,7 @@ import {
   Box,
   Button,
   CardMedia,
-  Checkbox,
-  FormControlLabel,
+  // Checkbox,
   Stack,
   TextField,
   Typography,
@@ -24,7 +23,7 @@ export default function SignUp() {
       email: "",
       password: "",
       confirm: "",
-      checkbox: false,
+      // checkbox: false,
     },
 
     validationSchema: Yup.object({
@@ -50,20 +49,20 @@ export default function SignUp() {
       confirm: Yup.string()
         .required("required!!")
         .oneOf([Yup.ref("password"), null], "Passwords must match"),
-      checkbox: Yup.boolean().oneOf(
-        [true],
-        "The terms and conditions must be accepted."
-      ),
+      // checkbox: Yup.boolean().oneOf(
+      //   [true],
+      //   "The terms and conditions must be accepted."
+      // ),
     }),
   });
 
-  const checkDisabled = (username, email, password, confirm, checkbox) => {
+  const checkDisabled = (username, email, password, confirm) => {
     if (
       username !== "" &&
       email !== "" &&
       password !== "" &&
-      confirm !== "" &&
-      checkbox
+      confirm !== ""
+      // checkbox
     ) {
       return false;
     } else {
@@ -72,13 +71,25 @@ export default function SignUp() {
   };
 
   return (
-    <Box className="bg_container-signup">
+    <Box
+      className="bg_container-signup"
+      style={{
+        backgroundImage: `url(${images.login_bg2})`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+      }}
+    >
       <CardMedia
         className="image-signup"
         component="img"
-        src={images.register}
+        src={images.cake}
         alt="images"
-        style={{ width: "45%", paddingRight: "100px" }}
+        style={{
+          width: "45%",
+          paddingRight: "50px",
+          marginRight: "-20px",
+          marginTop: "70px",
+        }}
       />
       <Box className="form-signup">
         <Stack spacing={2}>
@@ -110,9 +121,6 @@ export default function SignUp() {
             error={formik.touched.username && Boolean(formik.errors.username)}
             helperText={formik.touched.username && formik.errors.username}
           />
-          {/* <FormHelperText sx={{ fontSize: "18px", color: "red" }}>
-                {formik.touched.username && formik.errors.username}
-              </FormHelperText> */}
 
           <TextField
             className="textfield-signup"
@@ -159,7 +167,7 @@ export default function SignUp() {
             helperText={formik.touched.confirm && formik.errors.confirm}
           />
 
-          <FormControlLabel
+          {/* <FormControlLabel
             name="checkbox"
             required
             control={
@@ -171,7 +179,7 @@ export default function SignUp() {
             }
             label="I accept the Terms or Conditions"
             error={formik.touched.checkbox && formik.errors.checkbox}
-          />
+          /> */}
 
           <Button
             className="Register_Button"
@@ -180,8 +188,7 @@ export default function SignUp() {
               formik.values.username,
               formik.values.email,
               formik.values.password,
-              formik.values.confirm,
-              formik.values.checkbox
+              formik.values.confirm
             )}
           >
             SIGN UP

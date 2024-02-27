@@ -1,5 +1,5 @@
-import ArrowForwardOutlinedIcon from "@mui/icons-material/ArrowForwardOutlined";
-import ArrowBackOutlinedIcon from "@mui/icons-material/ArrowBackOutlined";
+// import ArrowForwardOutlinedIcon from "@mui/icons-material/ArrowForwardOutlined";
+// import ArrowBackOutlinedIcon from "@mui/icons-material/ArrowBackOutlined";
 
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
@@ -8,28 +8,28 @@ import "slick-carousel/slick/slick-theme.css";
 import Item from "./Item";
 import { dataImg } from "./slider";
 
-function SampleNextArrow(props) {
-  // eslint-disable-next-line react/prop-types
-  const { className, onClick } = props;
-  return (
-    <div className={className} onClick={onClick}>
-      <ArrowForwardOutlinedIcon style={{ color: "black" }} />
-    </div>
-  );
-}
+// function SampleNextArrow(props) {
+//   // eslint-disable-next-line react/prop-types
+//   const { className, onClick } = props;
+//   return (
+//     <div className={className} onClick={onClick}>
+//       <ArrowForwardOutlinedIcon style={{ color: "black" }} />
+//     </div>
+//   );
+// }
 
-function SamplePrevArrow(props) {
-  // eslint-disable-next-line react/prop-types
-  const { className, onClick } = props;
-  return (
-    <div className={className} onClick={onClick}>
-      <ArrowBackOutlinedIcon style={{ color: "black" }} />
-    </div>
-  );
-}
+// function SamplePrevArrow(props) {
+//   // eslint-disable-next-line react/prop-types
+//   const { className, onClick } = props;
+//   return (
+//     <div className={className} onClick={onClick}>
+//       <ArrowBackOutlinedIcon style={{ color: "black" }} />
+//     </div>
+//   );
+// }
 function Carousels() {
   const settings = {
-    dots: true,
+    dots: false,
     infinite: true,
 
     slidesToShow: 3,
@@ -37,8 +37,8 @@ function Carousels() {
     autoplay: true,
     autoplaySpeed: 2000,
     rtl: true,
-    nextArrow: <SampleNextArrow />,
-    prevArrow: <SamplePrevArrow />,
+    // nextArrow: <SampleNextArrow />,
+    // prevArrow: <SamplePrevArrow />,
     responsive: [
       {
         breakpoint: 600,

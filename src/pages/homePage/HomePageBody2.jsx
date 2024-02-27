@@ -6,7 +6,11 @@ import Carousels from "../../component/Carousel/Carousels";
 
 function Home2() {
   return (
-    <div className="bg_homepagebody2" id="work-evironment">
+    <div
+      className="bg_homepagebody2"
+      id="work-evironment"
+      style={{ backgroundColor: "#CDCDB4" }}
+    >
       <Typography
         className="title-homepagebody2"
         sx={{
@@ -19,12 +23,13 @@ function Home2() {
       <Box
         className="home-body"
         sx={{
-          pt: "2rem",
+          pt: "2.5rem",
+          pb: "2.5rem",
           ml: "auto",
           mr: "auto",
           maxWidth: 1200,
           flexGrow: 1,
-          mb: "40px",
+          // mb: "40px",
         }}
       >
         <Carousels />
