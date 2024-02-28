@@ -7,6 +7,7 @@ import SignUp from "./pages/signUp/signUp";
 import ForgotPassword from "./pages/forgotPassword/forgotPassword";
 import { Profile } from "./pages/profile";
 import { ServiceList } from "./pages/serviceList";
+import PickSlot from "./pages/pickSlot/pickSlot";
 
 function App() {
   const router = createBrowserRouter([
@@ -17,6 +18,10 @@ function App() {
         {
           path: "",
           element: <HomeMain />,
+        },
+        {
+          path: "pickSlot",
+          element: <PickSlot />,
         },
         {
           path: "profile",
