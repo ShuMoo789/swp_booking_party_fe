@@ -23,7 +23,7 @@ export default function HomePageBody4() {
           component="img"
           src={images.gift_card}
           alt="images"
-          style={{ height: "35rem", width: "45rem", paddingRight: "-20px" }}
+          style={{ height: "30rem", width: "40rem", paddingRight: "-20px" }}
         />
       </Box>
       <Box className="left-homepagebody4" sx={{ width: 500 }}>

@@ -14,16 +14,15 @@ import { ServiceList } from "./pages/serviceList";
 import OrderCart from "./pages/orderCart";
 
 import { useDispatch, useSelector } from "react-redux";
-import {
-  decrement,
-  increment,
-  incrementByAmount,
-} from "./redux/features/counterSlice";
 import Password from "antd/es/input/Password";
 import axios from "axios";
 import { login, logout } from "./redux/features/authenSlice";
 import Dashboard from "./component/dashboard";
 import { Statistic } from "./pages/statistic";
+
+import FaqsMain from "./pages/faqs/FaqsMain";
+import { Search } from "./pages/search";
+
 
 function App() {
   const router = createBrowserRouter([
@@ -57,8 +56,24 @@ function App() {
           element: <Profile />,
         },
         {
+          path: "search",
+          element: <Search />,
+        },
+        {
+          path: "partyhostlist",
+          element: <PartyHostList />,
+        },
+        {
+          path: "packagelist",
+          element: <PackageList />,
+        },
+        {
           path: "servicelist",
           element: <ServiceList />,
+        },
+        {
+          path: "faqs",
+          element: <FaqsMain />,
         },
       ],
     },
@@ -87,25 +102,10 @@ function App() {
   ]);
 
   // lấy giá trị trên store => useSelector
-  const counter = useSelector((store) => store.counter.value);
-  const dispatch = useDispatch();
+
+  // const dispatch = useDispatch();
   //tương tác với giá trị trên store => dispatch action
-
-  const loginHandler = async () => {
-    const response = await axios.post("http://4rent.tech:8081/login", {
-      username: "string",
-      password: "string",
-    });
-    dispatch(login(response.data));
-  };
-  const logoutHandler = async () => {
-    dispatch(logout());
-  };
-
   return (
-    // <>
-    //   <RouterProvider router={router} />
-    // </>
     <>
       <RouterProvider router={router} />
     </>

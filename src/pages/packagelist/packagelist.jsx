@@ -1,6 +1,7 @@
 import React from "react";
 import "./packagelist.scss";
 import { Button, Card, Col, Row, Typography } from "antd";
+import { Link } from "react-router-dom";
 
 function PackageItem(props) {
   return (
@@ -9,15 +10,21 @@ function PackageItem(props) {
       style={{ width: "100%", height: "700px", marginBottom: "20px" }}
       cover={
         <div style={{ height: "250px", overflow: "hidden" }}>
-        <img
-          alt={props.name}
-          src={props.img}
-          style={{ width: "100%", objectFit: "cover" }}
-        />
+          <img
+            alt={props.name}
+            src={props.img}
+            style={{ width: "100%", objectFit: "cover" }}
+          />
         </div>
       }
     >
-      <div style={{ height: "calc(100% - 250px)", overflow: "auto", padding: "20px" }}>
+      <div
+        style={{
+          height: "calc(100% - 250px)",
+          overflow: "auto",
+          padding: "20px",
+        }}
+      >
         <Typography.Title level={3}>{props.name}</Typography.Title>
         <p>
           <strong>Theme:</strong> {props.theme}
@@ -32,7 +39,9 @@ function PackageItem(props) {
         <p>
           <strong>Price:</strong> {props.price}
         </p>
-        <Button className="btn-get-started">Book Now</Button>
+        <Link to="/serviceList">
+          <Button className="btn-get-started">Book Now</Button>
+        </Link>
       </div>
     </Card>
   );
