@@ -5,6 +5,7 @@ import Typography from "@mui/material/Typography";
 import { Box, Paper, Stack } from "@mui/material";
 
 import "./ForgotPassword.scss";
+import images from "../../Constant/images";
 
 const ForgotPassword = () => {
   const [email, setEmail] = useState("");
@@ -32,20 +33,32 @@ const ForgotPassword = () => {
     // Code xử lý xác nhận email ở đây
   };
 
+  const handleBack = () => {
+    setStep(step - 1);
+  };
+
   return (
-    <Box className="bg_container-fg">
+    <Box
+      className="bg_container-fg"
+      style={{
+        backgroundImage: `url(${images.login_bg2})`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+      }}
+    >
       <Box className="form-fg">
         {step === 1 && (
           <form className="reset_password__step1" onSubmit={handleEmailSubmit}>
             <Paper
               sx={{
+                backgroundColor: "rgba(255, 255, 255, 0.8)", // Màu nền của form
+                borderRadius: "10px", // Bo tròn góc form
+                boxShadow: "0 0 10px rgba(0, 0, 0, 0.2)", // Đổ bóng cho form
                 display: "flex",
                 justifyContent: "center",
                 width: "800px",
                 height: "400px",
-                m: "auto",
-                backgroundColor: "#DCDCDC",
-                mt: "8rem",
+                margin: "auto",
               }}
             >
               <Stack
@@ -69,9 +82,17 @@ const ForgotPassword = () => {
                   onChange={(e) => setEmail(e.target.value)}
                   required
                 />
-                <Button type="submit" variant="contained">
-                  Submit
-                </Button>
+                <Stack
+                  direction="row"
+                  spacing={2}
+                  justifyContent="center"
+                  alignItems="center"
+                  width="500px"
+                >
+                  <Button type="submit" variant="contained">
+                    Submit
+                  </Button>
+                </Stack>
               </Stack>
             </Paper>
           </form>
@@ -83,13 +104,14 @@ const ForgotPassword = () => {
           >
             <Paper
               sx={{
+                backgroundColor: "rgba(255, 255, 255, 0.8)", // Màu nền của form
+                borderRadius: "10px", // Bo tròn góc form
+                boxShadow: "0 0 10px rgba(0, 0, 0, 0.2)", // Đổ bóng cho form
                 display: "flex",
                 justifyContent: "center",
                 width: "800px",
                 height: "400px",
-                m: "auto",
-                backgroundColor: "#DCDCDC",
-                mt: "8rem",
+                margin: "auto",
               }}
             >
               <Stack
@@ -122,9 +144,20 @@ const ForgotPassword = () => {
                   onChange={(e) => setCode(e.target.value)}
                   required
                 />
-                <Button type="submit" variant="contained" color="primary">
-                  Confirm
-                </Button>
+                <Stack
+                  direction="row"
+                  spacing={2}
+                  justifyContent="space-between"
+                  alignItems="center"
+                  width="500px"
+                >
+                  <Button variant="outlined" onClick={handleBack}>
+                    Back
+                  </Button>
+                  <Button type="submit" variant="contained" color="primary">
+                    Confirm
+                  </Button>
+                </Stack>
               </Stack>
             </Paper>
           </form>
@@ -136,13 +169,14 @@ const ForgotPassword = () => {
           >
             <Paper
               sx={{
+                backgroundColor: "rgba(255, 255, 255, 0.8)", // Màu nền của form
+                borderRadius: "10px", // Bo tròn góc form
+                boxShadow: "0 0 10px rgba(0, 0, 0, 0.2)", // Đổ bóng cho form
                 display: "flex",
                 justifyContent: "center",
                 width: "800px",
                 height: "400px",
-                m: "auto",
-                backgroundColor: "#DCDCDC",
-                mt: "8rem",
+                margin: "auto",
               }}
             >
               <Stack
@@ -177,9 +211,20 @@ const ForgotPassword = () => {
                   type="password"
                 />
                 {/* Hiển thị thông báo xác nhận email ở đây */}
-                <Button type="submit" variant="contained" color="primary">
-                  Change Password
-                </Button>
+                <Stack
+                  direction="row"
+                  spacing={2}
+                  justifyContent="space-between"
+                  alignItems="center"
+                  width="500px"
+                >
+                  <Button variant="outlined" onClick={handleBack}>
+                    Back
+                  </Button>
+                  <Button type="submit" variant="contained" color="primary">
+                    Change Password
+                  </Button>
+                </Stack>
               </Stack>
             </Paper>
           </form>

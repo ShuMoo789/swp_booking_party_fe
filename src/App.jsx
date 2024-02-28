@@ -12,17 +12,7 @@ import { Profile } from "./pages/profile";
 import { ServiceList } from "./pages/serviceList";
 
 import OrderCart from "./pages/orderCart";
-
-import { useDispatch, useSelector } from "react-redux";
-import {
-  decrement,
-  increment,
-  incrementByAmount,
-} from "./redux/features/counterSlice";
-import Password from "antd/es/input/Password";
-import axios from "axios";
-import { login, logout } from "./redux/features/authenSlice";
-
+import FaqsMain from "./pages/faqs/FaqsMain";
 
 function App() {
   const router = createBrowserRouter([
@@ -34,7 +24,6 @@ function App() {
           path: "",
           element: <HomeMain />,
         },
-
 
         {
           path: "partyhostlist",
@@ -60,6 +49,10 @@ function App() {
           path: "servicelist",
           element: <ServiceList />,
         },
+        {
+          path: "faqs",
+          element: <FaqsMain />,
+        },
       ],
     },
     {
@@ -77,30 +70,30 @@ function App() {
   ]);
 
   // lấy giá trị trên store => useSelector
-  const counter = useSelector((store) => store.counter.value);
-  const dispatch = useDispatch();
+
+  // const dispatch = useDispatch();
   //tương tác với giá trị trên store => dispatch action
 
-  const loginHandler = async () => {
-    const response = await axios.post("http://4rent.tech:8081/login", {
-      username: "string",
-      password: "string",
-    });
-    dispatch(login(response.data));
-  };
-  const logoutHandler = async () => {
-    dispatch(logout());
-  };
+  // const loginHandler = async () => {
+  //   const response = await axios.post("http://4rent.tech:8081/login", {
+  //     username: "string",
+  //     password: "string",
+  //   });
+  //   dispatch(login(response.data));
+  // };
+  // const logoutHandler = async () => {
+  //   dispatch(logout());
+  // };
 
   return (
-    // <>
-    //   <RouterProvider router={router} />
-    // </>
     <>
-      <button onClick={loginHandler}>Login</button>
-      <button onClick={logoutHandler}>Logout</button>
       <RouterProvider router={router} />
     </>
+    // <>
+    //   <button onClick={loginHandler}>Login</button>
+    //   <button onClick={logoutHandler}>Logout</button>
+    //   <RouterProvider router={router} />
+    // </>
   );
 }
 
