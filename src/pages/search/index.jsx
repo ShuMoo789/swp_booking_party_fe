@@ -95,13 +95,14 @@ export const Search = () => {
               title="Party Host"
               description="Choosing your suppliers here"
             />
-
-            <Button
-              type="primary"
-              style={{ marginTop: "10px", marginRight: "12px" }}
-            >
-              View
-            </Button>
+            <Link to="/partyhostlist">
+              <Button
+                type="primary"
+                style={{ marginTop: "10px", marginRight: "12px" }}
+              >
+                View
+              </Button>
+            </Link>
           </Card>
         </div>
 
@@ -122,13 +123,14 @@ export const Search = () => {
               title="Package List"
               description="Explore our package list by clicking View"
             />
-
-            <Button
-              type="primary"
-              style={{ marginTop: "10px", marginRight: "12px" }}
-            >
-              View
-            </Button>
+            <Link to="/packagelist">
+              <Button
+                type="primary"
+                style={{ marginTop: "10px", marginRight: "12px" }}
+              >
+                View
+              </Button>
+            </Link>
           </Card>
         </div>
 
@@ -145,14 +147,16 @@ export const Search = () => {
               />
             }
           >
-            <Meta title="Service" description="Others" />
+            <Meta title="Service List" description="Others" />
 
-            <Button
-              type="primary"
-              style={{ marginTop: "10px", marginRight: "12px" }}
-            >
-              View
-            </Button>
+            <Link to="/serviceList">
+              <Button
+                type="primary"
+                style={{ marginTop: "10px", marginRight: "12px" }}
+              >
+                View
+              </Button>
+            </Link>
           </Card>
         </div>
       </div>

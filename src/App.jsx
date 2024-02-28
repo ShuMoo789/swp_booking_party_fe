@@ -14,15 +14,15 @@ import { ServiceList } from "./pages/serviceList";
 import OrderCart from "./pages/orderCart";
 
 import { useDispatch, useSelector } from "react-redux";
-import {
-  decrement,
-  increment,
-  incrementByAmount,
-} from "./redux/features/counterSlice";
-import Password from "antd/es/input/Password";
+// import {
+//   decrement,
+//   increment,
+//   incrementByAmount,
+// } from "./redux/features/counterSlice";
+// import Password from "antd/es/input/Password";
 import axios from "axios";
 import { login, logout } from "./redux/features/authenSlice";
-
+import { Search } from "./pages/search";
 
 function App() {
   const router = createBrowserRouter([
@@ -33,16 +33,6 @@ function App() {
         {
           path: "",
           element: <HomeMain />,
-        },
-
-
-        {
-          path: "partyhostlist",
-          element: <PartyHostList />,
-        },
-        {
-          path: "packagelist",
-          element: <PackageList />,
         },
         {
           path: "pickDate",
@@ -55,6 +45,18 @@ function App() {
         {
           path: "profile",
           element: <Profile />,
+        },
+        {
+          path: "search",
+          element: <Search />,
+        },
+        {
+          path: "partyhostlist",
+          element: <PartyHostList />,
+        },
+        {
+          path: "packagelist",
+          element: <PackageList />,
         },
         {
           path: "servicelist",
@@ -93,12 +95,9 @@ function App() {
   };
 
   return (
-    // <>
-    //   <RouterProvider router={router} />
-    // </>
     <>
-      <button onClick={loginHandler}>Login</button>
-      <button onClick={logoutHandler}>Logout</button>
+      {/* <button onClick={loginHandler}>Login</button>
+      <button onClick={logoutHandler}>Logout</button> */}
       <RouterProvider router={router} />
     </>
   );

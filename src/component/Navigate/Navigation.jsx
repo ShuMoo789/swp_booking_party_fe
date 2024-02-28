@@ -53,7 +53,7 @@ export default function Navigation() {
                   Home
                 </Button>
               </Link>
-              <Link to="/hhh">
+              <Link to="/search">
                 <Button sx={{ color: "black", fontWeight: "bolder" }}>
                   Discovery
                 </Button>
