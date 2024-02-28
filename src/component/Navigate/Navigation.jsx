@@ -42,10 +42,12 @@ export default function Navigation() {
         <Toolbar>
           <Grid container justifyContent="center">
             <Grid item xs={4}>
-              <CardMedia
-                sx={{ height: 38, width: 38, ml: 1.2 }}
-                image={images.logo_rework_home}
-              />
+              <a href="/">
+                <CardMedia
+                  sx={{ height: 38, width: 38, ml: 1.2 }}
+                  image={images.logo_cake}
+                />
+              </a>
             </Grid>
             <Grid item xs={4} align="center">
               <Link to="/" onClick={handleHomeClick}>
@@ -58,7 +60,7 @@ export default function Navigation() {
                   Discovery
                 </Button>
               </Link>
-              <Link to="/hhh">
+              <Link to="/faqs">
                 <Button sx={{ color: "black", fontWeight: "bolder" }}>
                   FAQs
                 </Button>
