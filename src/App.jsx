@@ -12,8 +12,17 @@ import { Profile } from "./pages/profile";
 import { ServiceList } from "./pages/serviceList";
 
 import OrderCart from "./pages/orderCart";
+
+import { useDispatch, useSelector } from "react-redux";
+import Password from "antd/es/input/Password";
+import axios from "axios";
+import { login, logout } from "./redux/features/authenSlice";
+import Dashboard from "./component/dashboard";
+import { Statistic } from "./pages/statistic";
+
 import FaqsMain from "./pages/faqs/FaqsMain";
 import { Search } from "./pages/search";
+
 
 function App() {
   const router = createBrowserRouter([
@@ -79,6 +88,16 @@ function App() {
     {
       path: "register",
       element: <SignUp />,
+    },
+    {
+      path: "dashboard",
+      element: <Dashboard />,
+      children: [
+        {
+          path: "statistics",
+          element: <Statistic />,
+        },
+      ],
     },
   ]);
 

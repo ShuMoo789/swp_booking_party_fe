@@ -48,7 +48,14 @@ export default function SignIn() {
       });
       localStorage.setItem("token", response.data.token);
       dispatch(login(response.data));
-      navigate("/");
+      console.log(response.data.role);
+      if (response.data.role == "PARTY_HOST") {
+        navigate("/dashboard");
+      } else if (response.data.role === "ADMIN") {
+        navigate("/dashboard");
+      } else {
+        navigate("/");
+      }
     } catch (e) {
       console.log(e);
     }
