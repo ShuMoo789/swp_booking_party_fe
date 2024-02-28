@@ -15,26 +15,32 @@ export default function Footer() {
       }}
     >
       <Box sx={{ textAlign: "center", paddingTop: "2rem" }}>
-        <Typography sx={{ color: "#9CA3AF" }}>
+        <Typography sx={{ color: "" }}>
           Made by <span style={{ fontWeight: "bolder" }}>ME</span>
         </Typography>
-        <Typography sx={{ color: "#9CA3AF" }}>
+        <Typography sx={{ color: "" }}>
           © 2024 <span style={{ fontWeight: "bolder" }}>SWP391</span>. All
           rights reserved
         </Typography>
       </Box>
       <Box className="footer-icon">
-        <AiFillFacebook
-          style={{ margin: "1rem", color: "#9CA3AF", fontSize: "25px" }}
-        />
+        <a href="https://www.facebook.com/phanngoc2213">
+          <AiFillFacebook
+            style={{ margin: "1rem", color: "black", fontSize: "25px" }}
+          />
+        </a>
 
-        <AiTwotoneMail
-          style={{ margin: "1rem", color: "#9CA3AF", fontSize: "25px" }}
-        />
+        <a href="https://www.facebook.com/phanngoc2213">
+          <AiTwotoneMail
+            style={{ margin: "1rem", color: "black", fontSize: "25px" }}
+          />
+        </a>
 
-        <AiFillTwitterSquare
-          style={{ margin: "1rem", color: "#9CA3AF", fontSize: "25px" }}
-        />
+        <a href="https://www.facebook.com/phanngoc2213">
+          <AiFillTwitterSquare
+            style={{ margin: "1rem", color: "black", fontSize: "25px" }}
+          />
+        </a>
       </Box>
     </div>
   );
