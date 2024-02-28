@@ -1,21 +1,25 @@
 import React from "react";
-import { DatePicker, Space } from "antd";
+import { DatePicker, Space, Button } from "antd";
 import "./pickDate.scss";
 
-const onChange = (date, dateString) => {
-  console.log(date, dateString);
-};
+const PickDate = () => {
+  const onChange = (date, dateString) => {
+    console.log(date, dateString);
+  };
 
-const PickDate = () => (
-  <Space direction="vertical" size={12} className="pick-date-container">
-    <DatePicker onChange={onChange} className="pick-date" needConfirm />
-    <DatePicker
-      onChange={onChange}
-      className="pick-date"
-      showTime
-      needConfirm={false}
-    />
-  </Space>
-);
+  return (
+    <Space direction="vertical" size={12} className="pick-date-container">
+      <DatePicker onChange={onChange} className="pick-date" />
+      <DatePicker
+        onChange={onChange}
+        className="pick-date"
+        showTime={{ format: "HH:mm" }}
+      />
+      <div className="custom-footer">
+        <Button type="primary">Custom Action</Button>
+      </div>
+    </Space>
+  );
+};
 
 export default PickDate;

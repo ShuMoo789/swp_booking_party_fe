@@ -22,7 +22,8 @@ import {
 import Password from "antd/es/input/Password";
 import axios from "axios";
 import { login, logout } from "./redux/features/authenSlice";
-
+import Dashboard from "./component/dashboard";
+import { Statistic } from "./pages/statistic";
 
 function App() {
   const router = createBrowserRouter([
@@ -34,7 +35,6 @@ function App() {
           path: "",
           element: <HomeMain />,
         },
-
 
         {
           path: "partyhostlist",
@@ -74,6 +74,16 @@ function App() {
       path: "register",
       element: <SignUp />,
     },
+    {
+      path: "dashboard",
+      element: <Dashboard />,
+      children: [
+        {
+          path: "statistics",
+          element: <Statistic />,
+        },
+      ],
+    },
   ]);
 
   // lấy giá trị trên store => useSelector
@@ -97,8 +107,6 @@ function App() {
     //   <RouterProvider router={router} />
     // </>
     <>
-      <button onClick={loginHandler}>Login</button>
-      <button onClick={logoutHandler}>Logout</button>
       <RouterProvider router={router} />
     </>
   );
