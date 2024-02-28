@@ -1,4 +1,4 @@
-import images from "../../Constant/images";
+import images from "../../constant/images";
 
 export const dataImg = [
   {

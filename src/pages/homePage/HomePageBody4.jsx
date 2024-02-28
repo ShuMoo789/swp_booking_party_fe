@@ -1,7 +1,7 @@
 import { Box, CardMedia, Stack, Typography } from "@mui/material";
 
 import "./HomePageBody3.scss";
-import images from "../../Constant/images";
+import images from "../../constant/images";
 
 export default function HomePageBody4() {
   return (

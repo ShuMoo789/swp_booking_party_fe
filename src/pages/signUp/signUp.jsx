@@ -12,7 +12,7 @@ import { useFormik } from "formik";
 import { Link } from "react-router-dom";
 import * as Yup from "yup";
 
-import images from "../../Constant/images";
+import images from "../../constant/images";
 import "./signUp.scss";
 
 export default function SignUp() {

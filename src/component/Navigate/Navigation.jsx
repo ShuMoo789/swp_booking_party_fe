@@ -6,7 +6,7 @@ import { useRef } from "react";
 import { Dropdown, Space } from "antd";
 import { Link } from "react-router-dom";
 import { DownOutlined } from "@ant-design/icons";
-import images from "../../Constant/images";
+import images from "../../constant/images";
 import "./Navigation.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../redux/features/authenSlice";

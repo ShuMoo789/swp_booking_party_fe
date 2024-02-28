@@ -14,7 +14,7 @@ import * as Yup from "yup";
 // import { login } from "../../Redux/authSlice";
 import "./signIn.scss";
 
-import images from "../../Constant/images";
+import images from "../../constant/images";
 import api from "../../config/axios";
 import { useDispatch } from "react-redux";
 import { login } from "../../redux/features/authenSlice";

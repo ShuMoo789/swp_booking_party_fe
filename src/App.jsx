@@ -1,6 +1,6 @@
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import HomeMain from "./pages/homePage/HomePage";
-import { Layout } from "./component/Layout";
+import { Layout } from "./component/layout";
 import PartyHostList from "./pages/partyhostlist/partyhostlist";
 import PackageList from "./pages/packagelist/packagelist";
 import SignIn from "./pages/signIn/signIn";
@@ -22,7 +22,6 @@ import { Statistic } from "./pages/statistic";
 
 import FaqsMain from "./pages/faqs/FaqsMain";
 import { Search } from "./pages/search";
-
 
 function App() {
   const router = createBrowserRouter([
