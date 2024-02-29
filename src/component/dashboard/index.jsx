@@ -27,7 +27,7 @@ const itemsPartyHost = [
   },
   {
     key: "3",
-    label: <Link to={"/dashboard/packagelist"}>Package list</Link>,
+    label: <Link to={"/dashboard/package"}>Package list</Link>,
     icon: <CodepenOutlined />,
   },
   {
@@ -61,6 +61,10 @@ const items = [
   { key: "1", label: <a href="/profile">Profile</a> },
   { key: "2", label: <a href="/login">Logout</a> },
 ];
+
+const onFinish = (values) => {
+
+}
 
 const Dashboard = () => {
   const user = useSelector((store) => store.authen);

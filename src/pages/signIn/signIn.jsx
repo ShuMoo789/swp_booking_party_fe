@@ -18,6 +18,7 @@ import images from "../../constant/images";
 import api from "../../config/axios";
 import { useDispatch } from "react-redux";
 import { login } from "../../redux/features/authenSlice";
+import { toast } from "react-toastify";
 
 export default function SignIn() {
   const navigate = useNavigate();
@@ -57,6 +58,7 @@ export default function SignIn() {
         navigate("/");
       }
     } catch (e) {
+      toast.error(e.response.data);
       console.log(e);
     }
   };

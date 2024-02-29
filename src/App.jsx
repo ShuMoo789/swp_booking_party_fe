@@ -22,6 +22,7 @@ import { Statistic } from "./pages/statistic";
 
 import FaqsMain from "./pages/faqs/FaqsMain";
 import { Search } from "./pages/search";
+import { ManagePackage } from "./pages/manage-package";
 
 function App() {
   const router = createBrowserRouter([
@@ -95,6 +96,10 @@ function App() {
         {
           path: "statistics",
           element: <Statistic />,
+        },
+        {
+          path: "package",
+          element: <ManagePackage />,
         },
       ],
     },
