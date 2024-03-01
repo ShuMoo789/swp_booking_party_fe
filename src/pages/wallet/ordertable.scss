@@ -1,0 +1,36 @@
+@import url('https://fonts.googleapis.com/css?family=Assistant');
+body {
+  background: #eee;
+  font-family: Assistant, sans-serif;
+}
+.table{
+    width: 100vw;
+}
+.cell-1 {
+  border-collapse: separate;
+  border-spacing: 1 4em;
+  background: #fff;
+  border-bottom: 1px solid transparent;
+  /*background-color: gold;*/
+  background-clip: padding-box;
+}
+
+thead {
+  background: #65b5ff;
+}
+.success {
+    color: green;
+  }
+  
+  .failed {
+    color: red;
+  }
+  
+  .pending {
+    color: blue;
+  }
+  
+
+
+
+
