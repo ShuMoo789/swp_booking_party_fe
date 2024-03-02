@@ -10,6 +10,8 @@ import ForgotPassword from "./pages/forgotPassword/forgotPassword";
 import PickDate from "./pages/pickDate/pickDate";
 import { Profile } from "./pages/profile";
 import { ServiceList } from "./pages/serviceList";
+import PickSpot from "./pages/pickSpot/pickSpot";
+import Feedback from "./pages/feedback/feedback";
 
 import OrderCart from "./pages/orderCart";
 
@@ -50,6 +52,14 @@ function App() {
         {
           path: "orderCart",
           element: <OrderCart />,
+        },
+        {
+          path: "pickSpot",
+          element: <PickSpot />,
+        },
+        {
+          path: "feedback",
+          element: <Feedback />,
         },
         {
           path: "profile",

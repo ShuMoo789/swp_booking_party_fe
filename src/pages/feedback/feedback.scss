@@ -1,0 +1,59 @@
+.feedback-container {
+  background-color: rgb(188, 220, 231);
+  padding: 141.5px;
+  border-radius: 10px;
+  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+  text-align: center;
+
+  h5 {
+    margin-bottom: 20px;
+    color: #333;
+    font-size: 24px;
+  }
+
+  .rating-container {
+    margin-bottom: 20px;
+
+    .star {
+      font-size: 36px;
+      color: darkgray;
+      cursor: pointer;
+
+      &.filled {
+        color: lightyellow;
+      }
+
+      &:hover {
+        color: lightyellow;
+      }
+    }
+  }
+
+  .comment-input {
+    width: 100%;
+    margin-bottom: 20px;
+    font-size: 16px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+
+    &:focus {
+      outline: none;
+      border-color: #007bff;
+    }
+  }
+
+  .submit-button {
+    font-size: 18px;
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+
+    &:hover {
+      background-color: #0056b3;
+    }
+  }
+}
