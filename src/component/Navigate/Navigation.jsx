@@ -57,7 +57,7 @@ export default function Navigation() {
               </Link>
               <Link to="/search">
                 <Button sx={{ color: "black", fontWeight: "bolder" }}>
-                  Discovery
+                  Book
                 </Button>
               </Link>
               <Link to="/faqs">

@@ -1,9 +1,11 @@
 import React from "react";
 import { Avatar, List } from "antd";
 import "./partyhostlist.scss";
+import { Link } from "react-router-dom";
 
 function PartyHost({ name, address, description, img }) {
   return (
+    <Link to="/serviceList">
     <List.Item className="party-host">
       <List.Item.Meta
         avatar={
@@ -23,6 +25,7 @@ function PartyHost({ name, address, description, img }) {
         }
       />
     </List.Item>
+    </Link>
   );
 }
 

@@ -12,7 +12,6 @@ import { Profile } from "./pages/profile";
 import { ServiceList } from "./pages/serviceList";
 import PickSpot from "./pages/pickSpot/pickSpot";
 import Feedback from "./pages/feedback/feedback";
-
 import OrderCart from "./pages/orderCart";
 
 import { useDispatch, useSelector } from "react-redux";
