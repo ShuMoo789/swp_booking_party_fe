@@ -20,6 +20,7 @@ import { PlusOutlined } from "@ant-design/icons";
 import uploadFile from "../../utils/upload";
 import api from "../../config/axios";
 import { toast } from "react-toastify";
+import { data } from "../statistic";
 
 export const ManagePackage = () => {
   const [packages, setPakages] = useState([]);
@@ -51,7 +52,9 @@ export const ManagePackage = () => {
           return {
             key: index,
             label: <PackageDetail data={item} fetchPackage={fetchPackage} />,
-            children: <ServiceList list={item.serviceUploads} />,
+            children: (
+              <ServiceList list={item.serviceUploads} packages={item} />
+            ),
           };
         })
     );
@@ -112,17 +115,6 @@ export const ManagePackage = () => {
     form.resetFields();
     setShowModalAdd(false);
   };
-
-  // const deletePackage = async (packageId) => {
-  //   try {
-  //     await api.delete(`/delete-packageUpload/${packageId}`);
-  //     toast.success("Package deleted successfully!");
-  //     fetchPackage(); // Reload packages after deletion
-  //   } catch (error) {
-  //     console.error("Error deleting package:", error);
-  //     toast.error("Failed to delete package. Please try again later.");
-  //   }
-  // };
 
   return (
     <div>
@@ -308,8 +300,9 @@ export const ManagePackage = () => {
   );
 };
 
-function ServiceList({ list }) {
-  console.log(list);
+function ServiceList({ list, packages }) {
+  // console.log(list);
+  console.log(packages);
   // useEffect(() => {
   //   const fetch = async () => {
   //     try {
@@ -368,14 +361,34 @@ function ServiceList({ list }) {
     },
   ];
   return (
-    <div>
+    <div style={{ margin: "10px 0" }}>
+      <Row>
+        <Col span={12} style={{ marginBottom: "8px" }}>
+          <strong>Theme:</strong> {packages.theme}
+        </Col>
+        <Col span={12} style={{ marginBottom: "8px" }}>
+          <strong>Venue:</strong> {packages.venue}
+        </Col>
+        <Col span={12} style={{ marginBottom: "8px" }}>
+          <strong>Price per child:</strong> {packages.pricePerChild}
+        </Col>
+        <Col span={12} style={{ marginBottom: "8px" }}>
+          <strong>Price total:</strong> {packages.priceTotal}
+        </Col>
+        <Col span={24} style={{ marginBottom: "8px" }}>
+          <strong>Description:</strong> {packages.description}
+        </Col>
+      </Row>
+
       <Row
         justify={"start"}
         style={{
           marginBottom: 20,
         }}
       >
-        <Button type="primary">Add new service</Button>
+        <Button style={{ marginTop: 20 }} type="primary">
+          Add new service
+        </Button>
       </Row>
       <Table dataSource={list} columns={columns} />
     </div>
