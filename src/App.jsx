@@ -25,6 +25,9 @@ import { Statistic } from "./pages/statistic";
 import FaqsMain from "./pages/faqs/FaqsMain";
 import { Search } from "./pages/search";
 import { ManagePackage } from "./pages/manage-package";
+import { ManageOrder } from "./pages/manage-order";
+import Wallet from "./pages/wallet";
+import Packageregisterlist from "./pages/package-register-list/packageregister";
 
 function App() {
   const router = createBrowserRouter([
@@ -85,6 +88,10 @@ function App() {
           path: "faqs",
           element: <FaqsMain />,
         },
+        {
+          path: "wallet",
+          element: <Wallet />,
+        },
       ],
     },
     {
@@ -108,8 +115,24 @@ function App() {
           element: <Statistic />,
         },
         {
+          path: "order",
+          element: <ManageOrder />,
+        },
+        {
           path: "package",
           element: <ManagePackage />,
+        },
+        // {
+        //   path: "wallet",
+        //   element: <Wallet />,
+        // },
+        // {
+        //   path: "feedback",
+        //   element: <Feedback />,
+        // },
+        {
+          path: "packageregisterlist",
+          element: <Packageregisterlist />,
         },
       ],
     },
