@@ -28,6 +28,7 @@ import { ManagePackage } from "./pages/manage-package";
 import { ManageOrder } from "./pages/manage-order";
 import Wallet from "./pages/wallet";
 import Packageregisterlist from "./pages/package-register-list/packageregister";
+import { ManageSchedule } from "./pages/manage-schedule";
 
 function App() {
   const router = createBrowserRouter([
@@ -49,7 +50,7 @@ function App() {
           element: <PackageList />,
         },
         {
-          path: "pickDate",
+          path: "pickdate",
           element: <PickDate />,
         },
         {
@@ -121,6 +122,10 @@ function App() {
         {
           path: "package",
           element: <ManagePackage />,
+        },
+        {
+          path: "schedule",
+          element: <ManageSchedule />,
         },
         // {
         //   path: "wallet",
