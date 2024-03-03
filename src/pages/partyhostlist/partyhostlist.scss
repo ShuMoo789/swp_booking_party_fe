@@ -5,11 +5,6 @@ $background-color: #f0f0f0;
 $text-color: #333;
 $box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 
-// body {
-//   background-color: rgb(247, 224, 239);
-//   color: #333;
-// }
-
 .party-host-list {
   margin-top: 80px;
   display: flex;
@@ -24,7 +19,7 @@ $box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .party-host {
-  background-color: cornsilk;
+  background-color: #ccfbff;
   border-radius: 8px;
   padding: 20px;
   margin-bottom: 20px;

@@ -31,6 +31,7 @@ export const options = {
     title: {
       display: true,
       text: "Chart depicting revenue and customer statistics by month.",
+      position: "bottom",
     },
   },
 };
@@ -69,5 +70,10 @@ export const data = {
 };
 
 export const Statistic = () => {
-  return <Line data={data} options={options} />;
+  return (
+    <div>
+      <h2>Statistics</h2>
+      <Line data={data} options={options} />;
+    </div>
+  );
 };

@@ -51,7 +51,7 @@ export default function SignIn() {
       dispatch(login(response.data));
       console.log(response.data.role);
       if (response.data.role == "PARTY_HOST") {
-        navigate("/dashboard");
+        navigate("/dashboard/statistics");
       } else if (response.data.role === "ADMIN") {
         navigate("/dashboard");
       } else {

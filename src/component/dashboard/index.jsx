@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Breadcrumb, Layout, Menu, theme, Dropdown, Button, Row } from "antd";
 import { Link } from "react-router-dom";
 import {
+  HomeOutlined,
   LineChartOutlined,
   FileDoneOutlined,
   CodepenOutlined,
@@ -17,26 +18,31 @@ const { Header, Content, Footer, Sider } = Layout;
 const itemsPartyHost = [
   {
     key: "1",
+    label: <Link to={"/"}>Home</Link>,
+    icon: <HomeOutlined />,
+  },
+  {
+    key: "2",
     label: <Link to={"/dashboard/statistics"}>Statistics</Link>,
     icon: <LineChartOutlined />,
   },
   {
-    key: "2",
-    label: <Link to={"/dashboard/orderlist"}>Order list</Link>,
+    key: "3",
+    label: <Link to={"/dashboard/order"}>Manage Order</Link>,
     icon: <FileDoneOutlined />,
   },
   {
-    key: "3",
-    label: <Link to={"/dashboard/package"}>Package list</Link>,
+    key: "4",
+    label: <Link to={"/dashboard/package"}>Manage Package</Link>,
     icon: <CodepenOutlined />,
   },
   {
-    key: "4",
+    key: "5",
     label: <Link to={"/dashboard/wallet"}>Wallet</Link>,
     icon: <WalletOutlined />,
   },
   {
-    key: "5",
+    key: "6",
     label: <Link to={"/dashboard/feedback"}>Feedback</Link>,
     icon: <LikeOutlined />,
   },
@@ -53,7 +59,7 @@ const itemsAdmin = [
     label: (
       <Link to={"/dashboard/packageregisterlist"}>Package register list</Link>
     ),
-    icon: <UserOutlined />,
+    icon: <CodepenOutlined />,
   },
 ];
 
@@ -62,9 +68,7 @@ const items = [
   { key: "2", label: <a href="/login">Logout</a> },
 ];
 
-const onFinish = (values) => {
-
-}
+const onFinish = (values) => {};
 
 const Dashboard = () => {
   const user = useSelector((store) => store.authen);
