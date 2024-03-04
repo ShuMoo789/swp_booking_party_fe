@@ -46,7 +46,7 @@ function App() {
           element: <PartyHostList />,
         },
         {
-          path: "packagelist",
+          path: "packagelist/:id",
           element: <PackageList />,
         },
         {
