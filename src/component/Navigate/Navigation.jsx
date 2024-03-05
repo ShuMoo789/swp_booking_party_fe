@@ -5,7 +5,7 @@ import Toolbar from "@mui/material/Toolbar";
 import { useRef } from "react";
 import { Dropdown, Space } from "antd";
 import { Link } from "react-router-dom";
-import { DownOutlined } from "@ant-design/icons";
+import { CaretDownOutlined } from "@ant-design/icons";
 import images from "../../constant/images";
 import "./Navigation.scss";
 import { useDispatch, useSelector } from "react-redux";
@@ -24,12 +24,28 @@ export default function Navigation() {
   };
   const items = [
     {
-      label: <Link to={"/profile"}>Profile</Link>,
+      label: (
+        <Link to={"/profile"} style={{ fontSize: "1rem" }}>
+          Profile
+        </Link>
+      ),
       key: "0",
     },
     {
-      label: <Button onClick={logoutHandler}>Logout</Button>,
-      key: "1s",
+      label: (
+        <Link to={"/dashboard/statistics"} style={{ fontSize: "1rem" }}>
+          Dashboard
+        </Link>
+      ),
+      key: "1",
+    },
+    {
+      label: (
+        <Button onClick={logoutHandler} style={{ color: "red" }}>
+          Log out
+        </Button>
+      ),
+      key: "2",
     },
   ];
   return (
@@ -82,9 +98,16 @@ export default function Navigation() {
                   }}
                 >
                   <a className="user_info" onClick={(e) => e.preventDefault()}>
-                    <Space>
+                    <Space
+                      style={{
+                        textTransform: "uppercase",
+                        fontWeight: "bold",
+                        fontSize: "15px",
+                        marginTop: "11px",
+                      }}
+                    >
                       {user.username}
-                      <DownOutlined />
+                      <CaretDownOutlined />
                     </Space>
                   </a>
                 </Dropdown>
