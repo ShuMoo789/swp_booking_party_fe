@@ -1,25 +1,30 @@
-import React from "react";
-import { DatePicker, Space, Button } from "antd";
+import React, { useState } from "react";
+import { DateTimePicker } from "react-rainbow-components";
 import "./pickDate.scss";
 
-const PickDate = () => {
-  const onChange = (date, dateString) => {
-    console.log(date, dateString);
-  };
+const containerStyles = {
+  maxWidth: 400,
+};
+
+const initialState = { value: new Date() };
+
+function PickDate() {
+  const [state, setState] = useState(initialState);
 
   return (
-    <Space direction="vertical" size={12} className="pick-date-container">
-      <DatePicker onChange={onChange} className="pick-date" />
-      <DatePicker
-        onChange={onChange}
-        className="pick-date"
-        showTime={{ format: "HH:mm" }}
+    <div
+      className="rainbow-align-content_center rainbow-m-vertical_large rainbow-p-horizontal_small rainbow-m_auto"
+      style={containerStyles}
+    >
+      <DateTimePicker
+        value={state.value}
+        minDate={new Date(2018, 0, 4)}
+        maxDate={new Date(2020, 0, 4)}
+        label="DateTimePicker Label"
+        onChange={(value) => setState({ value })}
       />
-      <div className="custom-footer">
-        <Button type="primary">Custom Action</Button>
-      </div>
-    </Space>
+    </div>
   );
-};
+}
 
 export default PickDate;

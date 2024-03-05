@@ -9,6 +9,7 @@ import {
   Modal,
   Row,
   Table,
+  Tag,
   Upload,
 } from "antd";
 import React, { useEffect, useState } from "react";
@@ -19,6 +20,7 @@ import { PlusOutlined } from "@ant-design/icons";
 import uploadFile from "../../utils/upload";
 import api from "../../config/axios";
 import { toast } from "react-toastify";
+import { data } from "../statistic";
 
 export const ManagePackage = () => {
   const [packages, setPakages] = useState([]);
@@ -28,6 +30,7 @@ export const ManagePackage = () => {
   const [previewImage, setPreviewImage] = useState("");
   const [previewTitle, setPreviewTitle] = useState("");
   const [fileList, setFileList] = useState([]);
+  const [render, setRender] = useState(0);
   const handleCancel = () => setPreviewOpen(false);
   const handlePreview = async (file) => {
     if (!file.url && !file.preview) {
@@ -41,20 +44,25 @@ export const ManagePackage = () => {
   };
   const fetchPackage = async () => {
     const response = await api.get("/packageUpload");
+    console.log(response.data);
     setPakages(
-      response.data.map((item, index) => {
-        return {
-          key: index,
-          label: <PackageDetail data={item} />,
-          children: <ServiceList />,
-        };
-      })
+      response.data
+        .filter((item) => item.packageULStatus != "UNAVAILABLE")
+        .map((item, index) => {
+          return {
+            key: index,
+            label: <PackageDetail data={item} fetchPackage={fetchPackage} />,
+            children: (
+              <ServiceList list={item.serviceUploads} packages={item} />
+            ),
+          };
+        })
     );
   };
 
   useEffect(() => {
     fetchPackage();
-  }, []);
+  }, [render]);
 
   const handleChange = ({ fileList: newFileList }) => setFileList(newFileList);
   const uploadButton = (
@@ -102,206 +110,226 @@ export const ManagePackage = () => {
     console.log(values);
     const response = await api.post("/create-packageUpload", values);
     console.log(response);
-    toast.success("Successfully create new package");
+    toast.success("Successfully create a new package!");
     fetchPackage();
     form.resetFields();
     setShowModalAdd(false);
   };
 
   return (
-    <div
-      style={{
-        padding: 20,
-      }}
-    >
-      <Row
-        justify={"end"}
+    <div>
+      <h2>Manage Package</h2>
+      <div
         style={{
-          marginBottom: 20,
+          padding: 20,
         }}
       >
-        <Button type="primary" onClick={() => setShowModalAdd(true)}>
-          Add new package
-        </Button>
-      </Row>
-
-      <Collapse
-        expandIcon={({ isActive }) =>
-          isActive ? <MinusSquareOutlined /> : <PlusSquareOutlined />
-        }
-        items={packages}
-        defaultActiveKey={["1"]}
-        // onChange={onChange}
-      />
-
-      {/* Modal add */}
-      <Modal
-        title="Add new package"
-        open={showModalAdd}
-        onOk={() => form.submit()}
-        onCancel={() => setShowModalAdd(false)}
-      >
-        <Form
-          form={form}
-          onFinish={onFinish}
-          labelCol={{
-            span: 24,
+        <Row
+          justify={"end"}
+          style={{
+            marginBottom: 20,
           }}
         >
-          <Form.Item
-            label="Combo name"
-            name={"name"}
-            rules={[
-              {
-                required: true,
-                message: "Please enter name!",
-              },
-            ]}
-          >
-            <Input />
-          </Form.Item>
+          <Button type="primary" onClick={() => setShowModalAdd(true)}>
+            Add a new package
+          </Button>
+        </Row>
 
-          <Row gutter={12}>
-            <Col span={12}>
-              {" "}
-              <Form.Item
-                label="Theme"
-                name={"theme"}
-                rules={[
-                  {
-                    required: true,
-                    message: "Please enter theme!",
-                  },
-                ]}
-              >
-                <Input />
-              </Form.Item>
-            </Col>
-            <Col span={12}>
-              {" "}
-              <Form.Item
-                label="Venue"
-                name={"venue"}
-                rules={[
-                  {
-                    required: true,
-                    message: "Please enter venue!",
-                  },
-                ]}
-              >
-                <Input />
-              </Form.Item>
-            </Col>
-          </Row>
-
-          <Row gutter={12}>
-            <Col span={12}>
-              {" "}
-              <Form.Item
-                label="Price per child"
-                name={"pricePerChild"}
-                rules={[
-                  {
-                    required: true,
-                    message: "Please enter theme!",
-                  },
-                ]}
-              >
-                <InputNumber
-                  style={{
-                    width: "100%",
-                  }}
-                  formatter={(value) =>
-                    `$ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ",")
-                  }
-                  parser={(value) => value.replace(/\$\s?|(,*)/g, "")}
-                  //   onChange={onChange}
-                />
-              </Form.Item>
-            </Col>
-            <Col span={12}>
-              {" "}
-              <Form.Item
-                label="Price total"
-                name={"priceTotal"}
-                rules={[
-                  {
-                    required: true,
-                    message: "Please enter venue!",
-                  },
-                ]}
-              >
-                <InputNumber
-                  style={{
-                    width: "100%",
-                  }}
-                  formatter={(value) =>
-                    `$ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ",")
-                  }
-                  parser={(value) => value.replace(/\$\s?|(,*)/g, "")}
-                  //   onChange={onChange}
-                />
-              </Form.Item>
-            </Col>
-          </Row>
-
-          <Form.Item
-            label="Description"
-            name={"description"}
-            rules={[
-              {
-                required: true,
-                message: "Please enter name!",
-              },
-            ]}
-          >
-            <TextArea rows={5} />
-          </Form.Item>
-          <Form.Item label="Image" name={"img"}>
-            <Upload
-              action="https://run.mocky.io/v3/435e224c-44fb-4773-9faf-380c5e6a2188"
-              listType="picture-card"
-              fileList={fileList}
-              onPreview={handlePreview}
-              onChange={handleChange}
-            >
-              {fileList.length >= 8 ? null : uploadButton}
-            </Upload>
-          </Form.Item>
-        </Form>
-      </Modal>
-
-      <Modal
-        open={previewOpen}
-        title={previewTitle}
-        footer={null}
-        onCancel={handleCancel}
-      >
-        <img
-          alt="example"
-          style={{
-            width: "100%",
-          }}
-          src={previewImage}
+        <Collapse
+          expandIcon={({ isActive }) =>
+            isActive ? <MinusSquareOutlined /> : <PlusSquareOutlined />
+          }
+          items={packages}
+          defaultActiveKey={["1"]}
+          // onChange={onChange}
         />
-      </Modal>
+
+        {/* Modal add */}
+        <Modal
+          title="Add a new package"
+          open={showModalAdd}
+          onOk={() => form.submit()}
+          onCancel={() => setShowModalAdd(false)}
+        >
+          <Form
+            form={form}
+            onFinish={onFinish}
+            labelCol={{
+              span: 24,
+            }}
+          >
+            <Form.Item
+              label="Name of the package"
+              name={"name"}
+              rules={[
+                {
+                  required: true,
+                  message: "Please enter name of the package!",
+                },
+              ]}
+            >
+              <Input />
+            </Form.Item>
+
+            <Row gutter={12}>
+              <Col span={12}>
+                {" "}
+                <Form.Item
+                  label="Theme"
+                  name={"theme"}
+                  rules={[
+                    {
+                      required: true,
+                      message: "Please enter theme!",
+                    },
+                  ]}
+                >
+                  <Input />
+                </Form.Item>
+              </Col>
+              <Col span={12}>
+                {" "}
+                <Form.Item
+                  label="Venue"
+                  name={"venue"}
+                  rules={[
+                    {
+                      required: true,
+                      message: "Please enter venue!",
+                    },
+                  ]}
+                >
+                  <Input />
+                </Form.Item>
+              </Col>
+            </Row>
+
+            <Row gutter={12}>
+              <Col span={12}>
+                {" "}
+                <Form.Item
+                  label="Price per child"
+                  name={"pricePerChild"}
+                  rules={[
+                    {
+                      required: true,
+                      message: "Please enter the price per child!",
+                    },
+                  ]}
+                >
+                  <InputNumber
+                    style={{
+                      width: "100%",
+                    }}
+                    formatter={(value) =>
+                      `$ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+                    }
+                    parser={(value) => value.replace(/\$\s?|(,*)/g, "")}
+                    //   onChange={onChange}
+                  />
+                </Form.Item>
+              </Col>
+              <Col span={12}>
+                {" "}
+                <Form.Item
+                  label="Price total"
+                  name={"priceTotal"}
+                  rules={[
+                    {
+                      required: true,
+                      message: "Please enter the price total!",
+                    },
+                  ]}
+                >
+                  <InputNumber
+                    style={{
+                      width: "100%",
+                    }}
+                    formatter={(value) =>
+                      `$ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+                    }
+                    parser={(value) => value.replace(/\$\s?|(,*)/g, "")}
+                    //   onChange={onChange}
+                  />
+                </Form.Item>
+              </Col>
+            </Row>
+
+            <Form.Item
+              label="Description"
+              name={"description"}
+              rules={[
+                {
+                  required: true,
+                  message: "Please enten the description!",
+                },
+              ]}
+            >
+              <TextArea rows={5} />
+            </Form.Item>
+            <Form.Item label="Image" name={"img"}>
+              <Upload
+                action="https://run.mocky.io/v3/435e224c-44fb-4773-9faf-380c5e6a2188"
+                listType="picture-card"
+                fileList={fileList}
+                onPreview={handlePreview}
+                onChange={handleChange}
+              >
+                {fileList.length >= 8 ? null : uploadButton}
+              </Upload>
+            </Form.Item>
+          </Form>
+        </Modal>
+
+        <Modal
+          open={previewOpen}
+          title={previewTitle}
+          footer={null}
+          onCancel={handleCancel}
+        >
+          <img
+            alt="example"
+            style={{
+              width: "100%",
+            }}
+            src={previewImage}
+          />
+        </Modal>
+      </div>
     </div>
   );
 };
 
-const ServiceList = () => {
+function ServiceList({ list, packages }) {
+  // console.log(list);
+  console.log(packages);
+  // useEffect(() => {
+  //   const fetch = async () => {
+  //     try {
+  //       const response = await api.get("/packegaUpload");
+  //       console.log(response.data.data);
+  //     } catch (e) {
+  //       console(e);
+  //     }
+  //   };
+  // }, []);
+
   const dataSource = [
     {
       key: "1",
-      name: "Mike",
-      age: 32,
-      address: "10 Downing Street",
+      name: "service 1",
+      quantity: 1,
+      description: "good",
+      price: 200,
+      status: "x",
     },
     {
       key: "2",
-      name: "John",
-      age: 42,
-      address: "10 Downing Street",
+      name: "service 2",
+      quantity: 1,
+      description: "good",
+      price: 200,
+      status: "x",
     },
   ];
 
@@ -312,32 +340,68 @@ const ServiceList = () => {
       key: "name",
     },
     {
-      title: "Age",
-      dataIndex: "age",
-      key: "age",
+      title: "Quantity",
+      dataIndex: "quantity",
+      key: "quantity",
     },
     {
-      title: "Address",
-      dataIndex: "address",
-      key: "address",
+      title: "Description",
+      dataIndex: "description",
+      key: "price",
+    },
+    {
+      title: "Price",
+      dataIndex: "pricePerChild",
+      key: "pricePerChild",
+    },
+    {
+      title: "Status",
+      dataIndex: "packageULStatus",
+      key: "packageULStatus",
     },
   ];
   return (
-    <div>
+    <div style={{ margin: "10px 0" }}>
+      <Row>
+        <Col span={12} style={{ marginBottom: "8px" }}>
+          <strong>Theme:</strong> {packages.theme}
+        </Col>
+        <Col span={12} style={{ marginBottom: "8px" }}>
+          <strong>Venue:</strong> {packages.venue}
+        </Col>
+        <Col span={12} style={{ marginBottom: "8px" }}>
+          <strong>Price per child:</strong> {packages.pricePerChild}
+        </Col>
+        <Col span={12} style={{ marginBottom: "8px" }}>
+          <strong>Price total:</strong> {packages.priceTotal}
+        </Col>
+        <Col span={24} style={{ marginBottom: "8px" }}>
+          <strong>Description:</strong> {packages.description}
+        </Col>
+      </Row>
+
       <Row
         justify={"start"}
         style={{
           marginBottom: 20,
         }}
       >
-        <Button type="primary">Add new service</Button>
+        <Button style={{ marginTop: 20 }} type="primary">
+          Add new service
+        </Button>
       </Row>
-      <Table dataSource={dataSource} columns={columns} />
+      <Table dataSource={list} columns={columns} />
     </div>
   );
-};
+}
 
-const PackageDetail = ({ data }) => {
+const PackageDetail = ({ data, fetchPackage }) => {
+  const handleDelete = async () => {
+    const response = await api.delete(`/delete-packageUpload/${data.id}`);
+    fetchPackage();
+    toast.success("Successfully delete package!");
+  };
+
   return (
     <Row>
       <Col span={2}>
@@ -345,6 +409,14 @@ const PackageDetail = ({ data }) => {
       </Col>
       <Col span={18}>
         <strong>{data.name}</strong>
+        <Tag
+          style={{
+            marginLeft: 10,
+          }}
+          color={data.packageULStatus === "PENDING" ? "warning" : ""}
+        >
+          {data.packageULStatus}
+        </Tag>
       </Col>
       <Col span={4}>
         <Button
@@ -355,7 +427,7 @@ const PackageDetail = ({ data }) => {
         >
           Update
         </Button>
-        <Button type="primary" danger>
+        <Button type="primary" danger onClick={handleDelete}>
           Delete
         </Button>
       </Col>
