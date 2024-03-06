@@ -21,7 +21,7 @@ import axios from "axios";
 import { login, logout } from "./redux/features/authenSlice";
 import Dashboard from "./component/dashboard";
 import { Statistic } from "./pages/statistic";
-
+import UserAccount from "./pages/userAccount";
 import FaqsMain from "./pages/faqs/FaqsMain";
 import { Search } from "./pages/search";
 import { ManagePackage } from "./pages/manage-package";
@@ -72,6 +72,10 @@ function App() {
         {
           path: "search",
           element: <Search />,
+        },
+        {
+          path: "useraccount",
+          element: <UserAccount />,
         },
         {
           path: "partyhostlist",
