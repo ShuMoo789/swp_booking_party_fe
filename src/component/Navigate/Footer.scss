@@ -1,4 +1,17 @@
-.footer-icon {
-    display: flex;
-    justify-content: center;
+// Footer.scss
+
+footer {
+  background-color: #17a2b8;
+}
+
+.text-white {
+  color: #ffffff;
+}
+
+.text-reset {
+  color: #ffffff;
+}
+
+.text-reset:hover {
+  color: #f0f0f0;
 }

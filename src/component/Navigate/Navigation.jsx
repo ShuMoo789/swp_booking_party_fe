@@ -1,22 +1,26 @@
-import { Button, CardMedia, Grid } from "@mui/material";
-import AppBar from "@mui/material/AppBar";
-import Toolbar from "@mui/material/Toolbar";
 
-import { useRef } from "react";
-import { Dropdown, Space } from "antd";
-import { Link } from "react-router-dom";
+import {
+  Button,
+  Grid,
+  AppBar,
+  Toolbar,
+  CardMedia,
+  Box,
+  Typography,
+} from "@mui/material";
 import { CaretDownOutlined } from "@ant-design/icons";
-import images from "../../constant/images";
-import "./Navigation.scss";
+import { Link } from "react-router-dom";
+import { Dropdown, Space } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../redux/features/authenSlice";
+import images from "../../constant/images";
+
+import "./Navigation.scss";
 
 export default function Navigation() {
-  const scrollRef = useRef(null);
   const dispatch = useDispatch();
-  const handleHomeClick = () => {
-    scrollRef.current = window.scrollTo({ top: 0, behavior: "smooth" });
-  };
+
+
 
   const user = useSelector((store) => store.authen);
   const logoutHandler = () => {
@@ -41,7 +45,7 @@ export default function Navigation() {
     },
     {
       label: (
-        <Button onClick={logoutHandler} style={{ color: "red" }}>
+        <Button onClick={logoutHandler} style={{ color: "green" }}>
           Log out
         </Button>
       ),
@@ -52,52 +56,72 @@ export default function Navigation() {
     <div>
       <AppBar
         sx={{
-          backgroundColor: "white",
+          backgroundColor: "#CCFBFF",
         }}
       >
         <Toolbar>
-          <Grid container justifyContent="center">
+          <Grid container alignItems="center" justifyContent="space-between">
             <Grid item xs={4}>
-              <a href="/">
-                <CardMedia
-                  sx={{ height: 38, width: 38, ml: 1.2 }}
-                  image={images.logo_cake}
-                />
-              </a>
-            </Grid>
-            <Grid item xs={4} align="center">
-              <Link to="/" onClick={handleHomeClick}>
-                <Button sx={{ color: "black", fontWeight: "bolder" }}>
-                  Home
-                </Button>
-              </Link>
-              <Link to="/search">
-                <Button sx={{ color: "black", fontWeight: "bolder" }}>
-                  BOOK HERE!!
-                </Button>
-              </Link>
-              <Link to="/faqs">
-                <Button sx={{ color: "black", fontWeight: "bolder" }}>
-                  FAQs
-                </Button>
-              </Link>
-              s{" "}
+              <Grid container alignItems="center">
+                <Grid item>
+                  <Link to="/" style={{ textDecoration: "none" }}>
+                    <CardMedia
+                      sx={{ height: 38, width: 38, borderRadius: "50%" }}
+                      image={images.birthday_logo}
+                    />
+                  </Link>
+                </Grid>
+                <Grid item>
+                  <Typography
+                    variant="h6"
+                    component="div"
+                    sx={{
+                      marginLeft: "10px",
+                      fontWeight: "bold",
+                      color: "#AF6480",
+                    }}
+                  >
+                    LittleStars
+                  </Typography>
+                </Grid>
+              </Grid>
             </Grid>
             <Grid
               item
               xs={4}
-              sx={{
-                display: "flex",
-                flexDirection: "row-reverse",
-              }}
+              sx={{ display: "flex", justifyContent: "center" }}
             >
+              <Box sx={{ display: "flex", justifyContent: "space-around" }}>
+                <Button component={Link} to="/" sx={{ fontWeight: "bold" }}>
+                  HOME
+                </Button>
+=
+                <Button
+                  component={Link}
+                  to="/search"
+                  sx={{ fontWeight: "bold" }}
+                >
+                  BOOK
+                </Button>
+                <Button component={Link} to="/faqs" sx={{ fontWeight: "bold" }}>
+                  FAQs
+                </Button>
+              </Box>
+
+            </Grid>
+            <Grid item xs={4} sx={{ textAlign: "right" }}>
               {user ? (
                 <Dropdown
                   menu={{
                     items,
                   }}
                 >
-                  <a className="user_info" onClick={(e) => e.preventDefault()}>
+
+                  <Button
+                    className="user_info"
+                    onClick={(e) => e.preventDefault()}
+
+                  >
                     <Space
                       style={{
                         textTransform: "uppercase",
@@ -109,7 +133,7 @@ export default function Navigation() {
                       {user.username}
                       <CaretDownOutlined />
                     </Space>
-                  </a>
+                  </Button>
                 </Dropdown>
               ) : (
                 <Button>

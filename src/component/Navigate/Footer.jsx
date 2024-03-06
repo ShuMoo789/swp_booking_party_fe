@@ -5,96 +5,44 @@ import "./Footer.scss";
 
 export default function Footer() {
   return (
-    <MDBFooter bgColor="dark" className="text-center text-lg-start text-muted">
-      <section className="d-flex justify-content-center justify-content-lg-space-around p-4 border-bottom">
+    <MDBFooter bgColor="info" className="text-center text-md-start text-muted">
+      <section className="d-flex justify-content-center justify-content-md-space-around p-4 border-bottom">
         <div className="text-center-small text-start-medium">
-          <MDBRow
-            className="text-center text-md-start"
-            style={{ marginLeft: "50px" }}
-          >
+          <MDBRow className="text-center text-md-start">
             <MDBCol
-              md="3"
-              lg="4"
+              md="4"
+              lg="3"
               xl="3"
               className="mx-auto mb-4 content-right-margin"
             >
-              <h6
-                className="text-uppercase fw-bold mb-4"
-                style={{ color: "white" }}
-              >
-                <MDBIcon color="white" icon="birthday-cake" className="me-3" />
+              <h6 className="text-uppercase fw-bold mb-4 text-white">
+                <MDBIcon icon="birthday-cake" className="me-3" />
                 The Booking Party For Kids
               </h6>
-              <p style={{ color: "white" }}>
-                Crafting unforgettable moments, one celebration at a time, where
-                imagination knows no bounds and joy knows no limits.
+              <p className="text-white">
+                Crafting magical memories for kids, one birthday extravaganza at
+                a time, where creativity takes flight and giggles are endless.
+                Make every child's special day extraordinary with us.
               </p>
             </MDBCol>
 
             <MDBCol
-              md="2"
-              lg="2"
-              xl="2"
-              className="mx-auto mb-4 content-right-margin"
+              md="4"
+              lg="3"
+              xl="3"
+              className="mx-auto mb-4 content-right-margin text-center" // Thêm class text-center vào đây
             >
-              <h6
-                className="text-uppercase fw-bold mb-4"
-                style={{ color: "white" }}
-              >
-                Products
+              <h6 className="text-uppercase fw-bold mb-4 text-white">
+                Plan Your Visit
               </h6>
-              <p style={{ color: "white" }}>
+              <p className="text-white">
                 <a href="#!" className="text-reset">
-                  Angular
+                  Our Packages
                 </a>
               </p>
-              <p style={{ color: "white" }}>
+              <p className="text-white">
                 <a href="#!" className="text-reset">
-                  React
-                </a>
-              </p>
-              <p style={{ color: "white" }}>
-                <a href="#!" className="text-reset">
-                  Vue
-                </a>
-              </p>
-              <p style={{ color: "white" }}>
-                <a href="#!" className="text-reset">
-                  Laravel
-                </a>
-              </p>
-            </MDBCol>
-
-            <MDBCol
-              md="3"
-              lg="2"
-              xl="2"
-              className="mx-auto mb-4 content-right-margin"
-            >
-              <h6
-                className="text-uppercase fw-bold mb-4"
-                style={{ color: "white" }}
-              >
-                Useful links
-              </h6>
-              <p style={{ color: "white" }}>
-                <a href="#!" className="text-reset">
-                  Pricing
-                </a>
-              </p>
-              <p style={{ color: "white" }}>
-                <a href="#!" className="text-reset">
-                  Settings
-                </a>
-              </p>
-              <p style={{ color: "white" }}>
-                <a href="#!" className="text-reset">
-                  Orders
-                </a>
-              </p>
-              <p style={{ color: "white" }}>
-                <a href="#!" className="text-reset">
-                  Help
+                  Our Services
                 </a>
               </p>
             </MDBCol>
@@ -105,69 +53,39 @@ export default function Footer() {
               xl="3"
               className="mx-auto mb-md-0 mb-4 content-right-margin"
             >
-              <h6
-                className="text-uppercase fw-bold mb-4"
-                style={{ color: "white" }}
-              >
-                Contact
+              <h6 className="text-uppercase fw-bold mb-4 text-white">
+                Contact Us
               </h6>
-              <p style={{ color: "white" }}>
+              <p className="text-white">
                 <MDBIcon
-                  color="white"
                   icon="home"
                   className="me-2"
                   style={{ paddingRight: "10px" }}
                 />
-                Tầng 6 - Nhà Văn Hóa Hồ Chí Minh
+                Luu Huu Phuoc, Dong Hoa, Di An, Binh Duong, Vietnam
               </p>
-              <p style={{ color: "white" }}>
+              <p className="text-white">
                 <MDBIcon
-                  color="white"
                   icon="envelope"
                   className="me-3"
                   style={{ paddingRight: "5px" }}
                 />
-                Booking4Kids@gmail.com
+                bookingpartyforkids@gmail.com
               </p>
-              <p style={{ color: "white" }}>
-                <MDBIcon color="white" icon="phone" className="me-3" /> + 01 234
-                567 88
+              <p className="text-white">
+                <MDBIcon icon="phone" className="me-3" /> 0766710603
               </p>
             </MDBCol>
-            <div className="text-center p-1" style={{ marginRight: "100px" }}>
-              <div style={{ marginRight: "100px" }}>
-                <a href="#" className="me-4 text-reset">
-                  <MDBIcon color="white" fab icon="facebook-f" />
+            <div className="text-center p-1">
+              <div>
+                <a href="http://facebook.com" className="me-4 text-reset">
+                  <MDBIcon fab icon="facebook-f" />
                 </a>
-                <a
-                  href="https://www.facebook.com/phanngoc2213"
-                  className="me-4 text-reset"
-                >
-                  <MDBIcon color="white" fab icon="twitter" />
+                <a href="https://twitter.com" className="me-4 text-reset">
+                  <MDBIcon fab icon="twitter" />
                 </a>
-                <a
-                  href="https://www.facebook.com/phanngoc2213"
-                  className="me-4 text-reset"
-                >
-                  <MDBIcon color="white" fab icon="google" />
-                </a>
-                <a
-                  href="https://www.facebook.com/phanngoc2213"
-                  className="me-4 text-reset"
-                >
-                  <MDBIcon color="white" fab icon="instagram" />
-                </a>
-                <a
-                  href="https://www.facebook.com/phanngoc2213"
-                  className="me-4 text-reset"
-                >
-                  <MDBIcon color="white" fab icon="linkedin" />
-                </a>
-                <a
-                  href="https://www.facebook.com/phanngoc2213"
-                  className="me-4 text-reset"
-                >
-                  <MDBIcon color="white" fab icon="github" />
+                <a href="https://instagram.com" className="me-4 text-reset">
+                  <MDBIcon fab icon="instagram" />
                 </a>
               </div>
             </div>

@@ -1,9 +1,10 @@
 import { combineReducers } from "@reduxjs/toolkit";
 import counterSlice from "./features/counterSlice";
 import authenSlice from "./features/authenSlice";
+import bookingSlice from "./features/bookingSlice";
 
 const rootReducer = combineReducers({
-  counter: counterSlice,
+  booking: bookingSlice,
   authen: authenSlice,
 });
 

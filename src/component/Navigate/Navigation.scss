@@ -1,5 +1,14 @@
-.user_info {
-  color: black;
+.AppBar {
+  background-color: #ccfbff;
+}
+
+.ButtonContainer {
+  display: flex;
+  justify-content: space-around;
+}
+
+.UserDropdown {
+  text-align: right;
 }
 
 .ant-dropdown {
