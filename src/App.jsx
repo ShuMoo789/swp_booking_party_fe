@@ -12,6 +12,9 @@ import { Profile } from "./pages/profile";
 import { ServiceList } from "./pages/serviceList";
 import PickSpot from "./pages/pickSpot/pickSpot";
 import Feedback from "./pages/feedback/feedback";
+
+import PaymentHistory from "./pages/paymenthistory";
+
 import OrderCart from "./pages/orderCart";
 
 import { useDispatch, useSelector } from "react-redux";
@@ -20,7 +23,7 @@ import axios from "axios";
 import { login, logout } from "./redux/features/authenSlice";
 import Dashboard from "./component/dashboard";
 import { Statistic } from "./pages/statistic";
-
+import UserAccount from "./pages/userAccount";
 import FaqsMain from "./pages/faqs/FaqsMain";
 import { Search } from "./pages/search";
 import { ManagePackage } from "./pages/manage-package";
@@ -66,6 +69,10 @@ function App() {
           element: <PickSpot />,
         },
         {
+          path: "paymenthistory",
+          element: <PaymentHistory />,
+        },
+        {
           path: "feedback",
           element: <Feedback />,
         },
@@ -76,6 +83,10 @@ function App() {
         {
           path: "search",
           element: <Search />,
+        },
+        {
+          path: "useraccount",
+          element: <UserAccount />,
         },
         {
           path: "partyhostlist",

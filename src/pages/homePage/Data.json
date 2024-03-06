@@ -4,7 +4,7 @@
     "title": "Sign Online Waiver",
     "des": "Everyone participating in our activities at The Big Box must sign a waiver online. Waivers only need to be filled out once a year and are saved to your name and email address. Guardian must sign the waiver for 18 years & under.",
     "img": "./img/faq1.jpg",
-    "link": ""
+    "link": "/search"
   },
   {
     "id": 2,
@@ -23,18 +23,13 @@
     "id": 4,
     "title": "Our Hours",
     "des": "We are open every day from 9AM to 9PM. See hetail Hours for all services and Statutory Holidays.",
-    "img": "./img/faq4.jpg"
+    "img": "./img/faq4.jpg",
+    "link": ""
   },
   {
     "id": 5,
     "title": "The Bite Box",
     "des": "Take a break and grab a drink & a bite at The Bite Box. Our Cafe has a delicious selection of Pizza, Hot Dogs, Chicken Tenders, Poutine, Fries, and much more.",
     "img": "./img/faq5.jpg"
-  },
-  {
-    "id": 6,
-    "title": "Asked Questions",
-    "des": "Find answers to our commonly asked questions in the link below.",
-    "img": "./img/faq6.jpg"
   }
 ]

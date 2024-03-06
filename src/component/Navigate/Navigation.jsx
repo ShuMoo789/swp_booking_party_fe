@@ -1,21 +1,20 @@
+import { Link } from "react-router-dom";
 import { Button, CardMedia, Grid } from "@mui/material";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 
-import { useRef } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Dropdown, Space } from "antd";
-import { Link } from "react-router-dom";
 import { CaretDownOutlined } from "@ant-design/icons";
 import images from "../../constant/images";
-import "./Navigation.scss";
-import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../redux/features/authenSlice";
+import "./Navigation.scss";
 
 export default function Navigation() {
-  const scrollRef = useRef(null);
   const dispatch = useDispatch();
+
   const handleHomeClick = () => {
-    scrollRef.current = window.scrollTo({ top: 0, behavior: "smooth" });
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   const user = useSelector((store) => store.authen);
@@ -71,17 +70,16 @@ export default function Navigation() {
                   Home
                 </Button>
               </Link>
-              <Link to="/search">
+              <Link to="/search" onClick={handleHomeClick}>
                 <Button sx={{ color: "black", fontWeight: "bolder" }}>
                   Book
                 </Button>
               </Link>
-              <Link to="/faqs">
+              <Link to="/faqs" onClick={handleHomeClick}>
                 <Button sx={{ color: "black", fontWeight: "bolder" }}>
                   FAQs
                 </Button>
               </Link>
-              s{" "}
             </Grid>
             <Grid
               item
@@ -97,7 +95,11 @@ export default function Navigation() {
                     items,
                   }}
                 >
-                  <a className="user_info" onClick={(e) => e.preventDefault()}>
+                  <a
+                    className="user_info"
+                    onClick={(e) => e.preventDefault()}
+                    style={{ cursor: "pointer" }}
+                  >
                     <Space
                       style={{
                         textTransform: "uppercase",

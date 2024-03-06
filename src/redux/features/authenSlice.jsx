@@ -13,7 +13,7 @@ export const authenSlice = createSlice({
       store = userData;
       return store;
     },
-    logout: (state) => {
+    logout: () => {
       return initialState;
     },
   },
