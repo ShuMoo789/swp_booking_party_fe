@@ -12,7 +12,9 @@ import { Profile } from "./pages/profile";
 import { ServiceList } from "./pages/serviceList";
 import PickSpot from "./pages/pickSpot/pickSpot";
 import Feedback from "./pages/feedback/feedback";
+
 import PaymentHistory from "./pages/paymenthistory";
+
 import OrderCart from "./pages/orderCart";
 
 import { useDispatch, useSelector } from "react-redux";
@@ -29,6 +31,7 @@ import { ManageOrder } from "./pages/manage-order";
 import Wallet from "./pages/wallet";
 import Packageregisterlist from "./pages/package-register-list/packageregister";
 import { ManageSchedule } from "./pages/manage-schedule";
+import { BookingPage } from "./pages/booking";
 
 function App() {
   const router = createBrowserRouter([
@@ -39,6 +42,10 @@ function App() {
         {
           path: "",
           element: <HomeMain />,
+        },
+        {
+          path: "booking/:hostId",
+          element: <BookingPage />,
         },
 
         {

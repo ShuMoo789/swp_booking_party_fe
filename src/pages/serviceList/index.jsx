@@ -195,5 +195,6 @@ export const ServiceList = () => {
         </Slider>
       </div>
     </div>
+    
   );
 };

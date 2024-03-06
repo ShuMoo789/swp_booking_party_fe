@@ -72,7 +72,7 @@ export default function Navigation() {
               </Link>
               <Link to="/search" onClick={handleHomeClick}>
                 <Button sx={{ color: "black", fontWeight: "bolder" }}>
-                  BOOK HERE!!
+                  Book
                 </Button>
               </Link>
               <Link to="/faqs" onClick={handleHomeClick}>
