@@ -9,6 +9,7 @@ import {
   WalletOutlined,
   LikeOutlined,
   UserOutlined,
+  CalendarOutlined,
 } from "@ant-design/icons";
 import { useSelector } from "react-redux";
 import { Outlet } from "react-router-dom";
@@ -28,22 +29,32 @@ const itemsPartyHost = [
   },
   {
     key: "3",
+    label: <Link to={"/dashboard/schedule"}>Schedule</Link>,
+    icon: <CalendarOutlined />,
+  },
+  {
+    key: "4",
     label: <Link to={"/dashboard/order"}>Manage Order</Link>,
     icon: <FileDoneOutlined />,
   },
   {
-    key: "4",
+    key: "5",
     label: <Link to={"/dashboard/package"}>Manage Package</Link>,
     icon: <CodepenOutlined />,
   },
   {
-    key: "5",
-    label: <Link to={"/dashboard/wallet"}>Wallet</Link>,
+    key: "6",
+    label: <Link to={"/dashboard/service"}>Manage Service</Link>,
+    icon: <CodepenOutlined />,
+  },
+  {
+    key: "7",
+    label: <Link to={"/dashboard/wallet"}>Your Wallet</Link>,
     icon: <WalletOutlined />,
   },
   {
-    key: "6",
-    label: <Link to={"/dashboard/feedback"}>Feedback</Link>,
+    key: "8",
+    label: <Link to={"/dashboard/feedbacklist"}>Feedback List</Link>,
     icon: <LikeOutlined />,
   },
 ];
@@ -60,6 +71,11 @@ const itemsAdmin = [
       <Link to={"/dashboard/packageregisterlist"}>Package register list</Link>
     ),
     icon: <CodepenOutlined />,
+  },
+  {
+    key: "3",
+    label: <Link to={"/dashboard/wallet"}>Wallet</Link>,
+    icon: <WalletOutlined />,
   },
 ];
 

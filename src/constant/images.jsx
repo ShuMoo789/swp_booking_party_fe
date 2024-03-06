@@ -1,7 +1,5 @@
 import login from "../assets/login-img.jpg";
 import register from "../assets/register-img.jpg";
-import bg_home1 from "../assets/bg_home1.png";
-import right_home_img from "../assets/right_home_img.png";
 import slide_img1 from "../assets/slide1.jpg";
 import slide_img2 from "../assets/slide2.jpg";
 import slide_img3 from "../assets/slide3.jpg";
@@ -16,15 +14,16 @@ import cv_candidate from "../assets/cv.png";
 import mono_avatar from "../assets/mono_avatar.png";
 import logo_rework_home from "../assets/rework_logo_home.png";
 import gift_card from "../assets/gc1.jpg";
-import right_birthday from "../assets/bg_birthday.png";
+import bg_birthday from "../assets/bg_birthday.png";
 import login_bg2 from "../assets/login_bg2.jpg";
 import cake from "../assets/cake.png";
-import logo_cake from "../assets/logo_final.png";
+import birthday_logo from "../assets/birthday_logo.avif";
+import bg_home1 from "../assets/bg_home1.png";
+import bg_home2 from "../assets/bg_home2.png";
+
 const images = {
   login,
   register,
-  bg_home1,
-  right_home_img,
   slide_img1,
   slide_img2,
   slide_img3,
@@ -39,9 +38,11 @@ const images = {
   mono_avatar,
   logo_rework_home,
   gift_card,
-  right_birthday,
   login_bg2,
   cake,
-  logo_cake,
+  birthday_logo,
+  bg_birthday,
+  bg_home1,
+  bg_home2,
 };
 export default images;

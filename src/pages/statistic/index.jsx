@@ -30,7 +30,7 @@ export const options = {
     },
     title: {
       display: true,
-      text: "Chart depicting revenue and customer statistics by month.",
+      text: "Chart depicting revenue and customer statistics by month",
       position: "bottom",
     },
   },
@@ -61,7 +61,7 @@ export const data = {
       backgroundColor: " rgb(173, 216, 230)",
     },
     {
-      label: " Customers",
+      label: "Customers",
       data: labels.map(() => Math.floor(Math.random() * 100) + 1),
       borderColor: "rgb(255, 159, 64)",
       backgroundColor: "rgb(255, 218, 185)",
@@ -73,7 +73,7 @@ export const Statistic = () => {
   return (
     <div>
       <h2>Statistics</h2>
-      <Line data={data} options={options} />;
+      <Line data={data} options={options} />
     </div>
   );
 };
