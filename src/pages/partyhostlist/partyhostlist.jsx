@@ -1,14 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { Avatar, List } from "antd";
 import "./partyhostlist.scss";
-import { Link } from "react-router-dom";
 import api from "../../config/axios";
 import { Link } from "react-router-dom";
 
 function PartyHost({ name, address, description, img, id }) {
   return (
     <Link to={`/packagelist/${id}`}>
-
       <List.Item className="party-host">
         <List.Item.Meta
           avatar={
