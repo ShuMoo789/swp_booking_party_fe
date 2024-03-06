@@ -2,27 +2,27 @@ import React, { useEffect, useState } from "react";
 import "./index.scss";
 import { Link } from "react-router-dom";
 import { Avatar, Image, Button, Form, Input, Upload } from "antd";
-import { PlusOutlined } from "@ant-design/icons";
+import { UploadOutlined } from "@ant-design/icons";
+import { toast } from "react-toastify";
 import api from "../../config/axios";
 import uploadFile from "../../utils/upload";
+
 export const Profile = () => {
   const [avatar, setAvatar] = useState("");
   const [form] = Form.useForm();
   const [profile, setProfile] = useState();
+  const [userName, setUserName] = useState("");
+
   const fetchProfile = async () => {
     const response = await api.get("/profile");
     setProfile(response.data);
-    console.log(response.data.email);
-    // form.setFieldsValue({
-    //   fullname: response.data.firstName,
-    //   email: response.data.email,
-    //   phone: response.data.phone,
-    //   role: response.data.role,
-    // });
-    form.setFieldValue("fullname", response.data.firstName);
-    form.setFieldValue("email", response.data.email);
-    form.setFieldValue("phone", response.data.phone);
-    form.setFieldValue("role", response.data.role);
+    setUserName(response.data.username);
+    form.setFieldsValue({
+      fullname: response.data.firstName,
+      email: response.data.email,
+      phone: response.data.phone,
+      role: response.data.role,
+    });
     setAvatar(response.data.avatar);
   };
 
@@ -30,14 +30,24 @@ export const Profile = () => {
     fetchProfile();
   }, []);
 
+  const handleUpload = async ({ fileList }) => {
+    const url = await uploadFile(fileList[0].originFileObj);
+    setAvatar(url);
+    api.put("/profile", {
+      ...profile,
+      avatar: url,
+    });
+    toast.success("Avatar updated successfully!");
+  };
+
   return (
     <div className="profile">
-      <h1>User Profile</h1>
+      <h1>Profile</h1>
 
       <div className="box">
         <div className="banner">
           <img
-            src="https://images.unsplash.com/photo-1708282604702-99bae7574ff0?q=80&w=1932&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+            src="https://images.unsplash.com/photo-1530103862676-de8c9debad1d?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
             alt=""
           />
         </div>
@@ -47,39 +57,17 @@ export const Profile = () => {
             src={
               avatar
                 ? avatar
-                : "https://t4.ftcdn.net/jpg/04/70/29/97/360_F_470299797_UD0eoVMMSUbHCcNJCdv2t8B2g1GVqYgs.jpg"
+                : "https://media.istockphoto.com/id/1131164548/vi/vec-to/th%E1%BA%BF-th%E1%BA%A7n-5.jpg?s=612x612&w=0&k=20&c=4qLeuiEXy8mR2r_M81wB9-FTSxaV5aoOBnYkGqHZnUw="
             }
           />
-          {/* <Avatar
-            size={150}
-            src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?q=80&w=1780&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-          /> */}
         </div>
         <div className="information">
-          <h4>Your photo</h4>
-          <p>This will be displayed on your profile</p>
-          <Upload
-            showUploadList={false}
-            onChange={async ({ fileList }) => {
-              console.log(fileList);
-              const url = await uploadFile(fileList[0].originFileObj);
-              setAvatar(url);
-            }}
-          >
-            <Button icon={<PlusOutlined />}>Upload</Button>
+          <h4>{userName}</h4>
+          <Upload showUploadList={false} onChange={handleUpload}>
+            <Button icon={<UploadOutlined />} type="default">
+              Update avatar
+            </Button>
           </Upload>
-
-          <Button
-            type="primary"
-            onClick={() => {
-              api.put("/profile", {
-                ...profile,
-                avatar: avatar,
-              });
-            }}
-          >
-            Save
-          </Button>
         </div>
       </div>
 
@@ -91,16 +79,16 @@ export const Profile = () => {
             span: 24,
           }}
         >
-          <Form.Item label="Fullname" name={"fullname"}>
+          <Form.Item label="Full name" name={"fullname"}>
             <Input placeholder="*John Wick" />
           </Form.Item>
-          <Form.Item label="Email address" name={"email"}>
+          <Form.Item label="Email" name={"email"}>
             <Input placeholder="*johnwick@gmail.com" />
           </Form.Item>
-          <Form.Item label="Mobile number" name={"phone"}>
+          <Form.Item label="Phone number" name={"phone"}>
             <Input placeholder="*0919010111" />
           </Form.Item>
-          <Form.Item label="Role" name={"role"}>
+          <Form.Item label="Position" name={"role"}>
             <Input placeholder="*Admin" />
           </Form.Item>
         </Form>
@@ -108,3 +96,5 @@ export const Profile = () => {
     </div>
   );
 };
+
+export default Profile;

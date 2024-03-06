@@ -6,30 +6,28 @@ import PackageList from "./pages/packagelist/packagelist";
 import SignIn from "./pages/signIn/signIn";
 import SignUp from "./pages/signUp/signUp";
 import ForgotPassword from "./pages/forgotPassword/forgotPassword";
-
 import PickDate from "./pages/pickDate/pickDate";
 import { Profile } from "./pages/profile";
 import { ServiceList } from "./pages/serviceList";
 import PickSpot from "./pages/pickSpot/pickSpot";
 import Feedback from "./pages/feedback/feedback";
-
 import OrderCart from "./pages/orderCart";
-
 import { useDispatch, useSelector } from "react-redux";
 import Password from "antd/es/input/Password";
 import axios from "axios";
 import { login, logout } from "./redux/features/authenSlice";
 import Dashboard from "./component/dashboard";
 import { Statistic } from "./pages/statistic";
-
 import FaqsMain from "./pages/faqs/FaqsMain";
 import { Search } from "./pages/search";
 import { ManagePackage } from "./pages/manage-package";
 import { ManageOrder } from "./pages/manage-order";
-import Wallet from "./pages/wallet";
+import Wallet from "./pages/walletCustomer";
+import WalletPH from "./pages/walletPH";
 import Packageregisterlist from "./pages/package-register-list/packageregister";
 import { ManageSchedule } from "./pages/manage-schedule";
-
+import FeedbackList from "./pages/feedbackList/FeedbackList";
+import ManageService from "./pages/manage-service";
 function App() {
   const router = createBrowserRouter([
     {
@@ -124,17 +122,21 @@ function App() {
           element: <ManagePackage />,
         },
         {
+          path: "service",
+          element: <ManageService />,
+        },
+        {
           path: "schedule",
           element: <ManageSchedule />,
         },
-        // {
-        //   path: "wallet",
-        //   element: <Wallet />,
-        // },
-        // {
-        //   path: "feedback",
-        //   element: <Feedback />,
-        // },
+        {
+          path: "wallet",
+          element: <WalletPH />,
+        },
+        {
+          path: "feedbacklist",
+          element: <FeedbackList />,
+        },
         {
           path: "packageregisterlist",
           element: <Packageregisterlist />,
