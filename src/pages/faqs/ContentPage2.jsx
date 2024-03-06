@@ -46,10 +46,14 @@ export default function ContentPage2() {
                   <CardActionArea>
                     <CardMedia
                       component="img"
-                      height="250"
+                      height="150"
                       image={result.img}
                       alt="green iguana"
-                      style={{ borderRadius: "5px" }}
+                      style={{
+                        borderRadius: "5px",
+                        objectFit: "cover",
+                        marginTop: "0px",
+                      }}
                     />
                     <CardContent>
                       <Typography

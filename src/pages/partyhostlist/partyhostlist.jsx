@@ -3,6 +3,11 @@ import { Avatar, List } from "antd";
 import "./partyhostlist.scss";
 import api from "../../config/axios";
 import { Link } from "react-router-dom";
+import AppBar from "@mui/material/AppBar";
+import { Toolbar } from "@mui/material";
+import SearchIcon from "@mui/icons-material/Search";
+import InputBase from "@mui/material/InputBase";
+import { styled } from "@mui/material/styles";
 
 function PartyHost({ name, address, description, img, id }) {
   return (
@@ -33,6 +38,40 @@ function PartyHost({ name, address, description, img, id }) {
     </Link>
   );
 }
+const SearchContainer = styled("div")(({ theme }) => ({
+  position: "relative",
+  borderRadius: "20px",
+  backgroundColor: "#152d32", // Light pink color
+  "&:hover": {
+    backgroundColor: "#152d32", // Light pink color
+  },
+  marginLeft: 0,
+  width: "100%",
+}));
+
+const SearchIconWrapper = styled("div")(({ theme }) => ({
+  padding: theme.spacing(0, 2),
+  height: "100%",
+  position: "absolute",
+  pointerEvents: "none",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+}));
+
+const SearchInput = styled(InputBase)(({ theme }) => ({
+  color: "inherit",
+  padding: theme.spacing(1, 1, 1, 0),
+  paddingLeft: `calc(1em + ${theme.spacing(4)})`,
+  transition: theme.transitions.create("width"),
+  width: "100%",
+  [theme.breakpoints.up("sm")]: {
+    width: "100ch",
+    "&:focus": {
+      width: "50ch",
+    },
+  },
+}));
 
 function PartyHostList() {
   const [hosts, setHosts] = useState([]);
@@ -52,8 +91,40 @@ function PartyHostList() {
 
   return (
     <div className="party-host-list">
+      <AppBar
+        position="static"
+        style={{
+          backgroundColor: "#152d32",
+          borderRadius: "40px",
+          marginBottom: "60px",
+          marginTop: "-15px",
+        }}
+      >
+        {" "}
+        {/* Change background color here */}
+        <Toolbar>
+          {" "}
+          {/* Adding padding to move the search bar downward */}
+          <h1
+            style={{
+              fontSize: "28px",
+              flexGrow: 1,
+              marginRight: "10px",
+              marginBottom: "10px",
+              color: "#f2f2f2",
+            }}
+          ></h1>
+          <SearchContainer>
+            <SearchIconWrapper>
+              <SearchIcon />
+            </SearchIconWrapper>
+            <SearchInput placeholder="Search…" color="white" />
+          </SearchContainer>
+        </Toolbar>
+      </AppBar>
       <h1>Party Hosts</h1>
       <List
+        style={{ marginBottom: "50px", marginTop: "10px" }}
         itemLayout="horizontal"
         dataSource={hosts}
         renderItem={(host) => (

@@ -16,13 +16,16 @@ export const Profile = () => {
   const fetchProfile = async () => {
     const response = await api.get("/profile");
     setProfile(response.data);
+
     setUserName(response.data.username);
+
     form.setFieldsValue({
       fullname: response.data.firstName,
       email: response.data.email,
       phone: response.data.phone,
       role: response.data.role,
     });
+
     setAvatar(response.data.avatar);
   };
 
