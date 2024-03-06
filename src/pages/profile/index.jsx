@@ -13,12 +13,12 @@ export const Profile = () => {
     const response = await api.get("/profile");
     setProfile(response.data);
     console.log(response.data.email);
-    // form.setFieldsValue({
-    //   fullname: response.data.firstName,
-    //   email: response.data.email,
-    //   phone: response.data.phone,
-    //   role: response.data.role,
-    // });
+    form.setFieldsValue({
+      fullname: response.data.firstName,
+      email: response.data.email,
+      phone: response.data.phone,
+      role: response.data.role,
+    });
     form.setFieldValue("fullname", response.data.firstName);
     form.setFieldValue("email", response.data.email);
     form.setFieldValue("phone", response.data.phone);

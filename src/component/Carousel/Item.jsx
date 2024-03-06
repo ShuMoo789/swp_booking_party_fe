@@ -13,7 +13,7 @@ function Item({ item }) {
         backgroundPosition: "center",
         // eslint-disable-next-line react/prop-types
         backgroundImage: `url(${item.image})`,
-        height: { lg: "400px", xs: "200px" },
+        height: { lg: "300px", xs: "200px" },
         marginLeft: "10px",
         marginRight: "10px",
       }}

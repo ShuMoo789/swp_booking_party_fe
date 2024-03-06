@@ -2,16 +2,14 @@ import {
   Box,
   Button,
   CardMedia,
-  // Checkbox,
   Stack,
   TextField,
   Typography,
+  Grid,
 } from "@mui/material";
 import { useFormik } from "formik";
-
 import { Link } from "react-router-dom";
 import * as Yup from "yup";
-
 import images from "../../constant/images";
 import "./signUp.scss";
 
@@ -21,16 +19,19 @@ export default function SignUp() {
       id: 0,
       username: "",
       email: "",
+      firstname: "",
+      lastname: "",
       password: "",
+      phone: "",
+      address: "",
       confirm: "",
-      // checkbox: false,
     },
 
     validationSchema: Yup.object({
       username: Yup.string()
         .required("required!!")
         .min(3, "at least 3 character")
-        .max(20, "max 20 character")
+        .max(200, "max 20 character")
         .matches(
           /^[a-zA-Z0-9]+$/,
           "Username must contain only letters and numbers"
@@ -41,28 +42,44 @@ export default function SignUp() {
       password: Yup.string()
         .required("required!!")
         .min(3, "at least 3 character")
-        .max(20, "max 20 character")
+        .max(200, "max 20 character")
         .matches(
           /^[a-zA-Z0-9]+$/,
           "Username must contain only letters and numbers"
         ),
+      firstname: Yup.string().required("First name is required"),
+      lastname: Yup.string().required("Last name is required"),
+      phone: Yup.string()
+        .matches(/^[0-9]+$/, "Phone number must contain only digits")
+        .min(10, "Phone number must be at least 10 characters")
+        .max(12, "Phone number must not exceed 12 characters")
+        .required("Phone number is required"),
+      address: Yup.string().required("Address is required"),
       confirm: Yup.string()
         .required("required!!")
         .oneOf([Yup.ref("password"), null], "Passwords must match"),
-      // checkbox: Yup.boolean().oneOf(
-      //   [true],
-      //   "The terms and conditions must be accepted."
-      // ),
     }),
   });
 
-  const checkDisabled = (username, email, password, confirm) => {
+  const checkDisabled = (
+    username,
+    email,
+    password,
+    firstname,
+    lastname,
+    phone,
+    address,
+    confirm
+  ) => {
     if (
       username !== "" &&
       email !== "" &&
       password !== "" &&
+      firstname !== "" &&
+      lastname !== "" &&
+      phone !== "" &&
+      address !== "" &&
       confirm !== ""
-      // checkbox
     ) {
       return false;
     } else {
@@ -88,10 +105,12 @@ export default function SignUp() {
           width: "45%",
           paddingRight: "50px",
           marginRight: "-20px",
-          marginTop: "70px",
         }}
       />
-      <Box className="form-signup">
+      <Box
+        className="form-signup"
+        style={{ marginTop: "-65px", maxWidth: "500px", margin: "auto" }}
+      >
         <Stack spacing={2}>
           <Typography textAlign="center" variant="h2" color="#9376E0">
             Sign Up
@@ -111,7 +130,8 @@ export default function SignUp() {
             id="outlined-username-input"
             className="textfield-signup"
             name="username"
-            sx={{ width: "500px" }}
+            sx={{ width: "100%" }}
+            size="small"
             required
             label="User Name"
             type="text"
@@ -126,7 +146,8 @@ export default function SignUp() {
             className="textfield-signup"
             name="email"
             required
-            sx={{ width: "500px" }}
+            sx={{ width: "100%" }}
+            size="small"
             id="outlined-email-input"
             label="Email"
             type="email"
@@ -137,11 +158,92 @@ export default function SignUp() {
             helperText={formik.touched.email && formik.errors.email}
           />
 
+          {/* Grid for First Name and Last Name */}
+          <Grid container>
+            <Grid item xs={6}>
+              <TextField
+                className="textfield-signup"
+                name="firstname"
+                required
+                sx={{ width: "95%" }}
+                size="small"
+                id="outlined-firstname-input"
+                label="First Name"
+                type="text"
+                value={formik.values.firstname}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                error={
+                  formik.touched.firstname && Boolean(formik.errors.firstname)
+                }
+                helperText={formik.touched.firstname && formik.errors.firstname}
+              />
+            </Grid>
+            <Grid item xs={6}>
+              <TextField
+                className="textfield-signup"
+                name="lastname"
+                required
+                sx={{ width: "100%" }}
+                size="small"
+                id="outlined-lastname-input"
+                label="Last Name"
+                type="text"
+                value={formik.values.lastname}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                error={
+                  formik.touched.lastname && Boolean(formik.errors.lastname)
+                }
+                helperText={formik.touched.lastname && formik.errors.lastname}
+              />
+            </Grid>
+          </Grid>
+
+          {/* Grid for Phone and Address */}
+          <Grid container>
+            <Grid item xs={6}>
+              <TextField
+                className="textfield-signup"
+                name="phone"
+                required
+                sx={{ width: "95%" }}
+                size="small"
+                id="outlined-phone-input"
+                label="Phone"
+                type="text"
+                value={formik.values.phone}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                error={formik.touched.phone && Boolean(formik.errors.phone)}
+                helperText={formik.touched.phone && formik.errors.phone}
+              />
+            </Grid>
+            <Grid item xs={6}>
+              <TextField
+                className="textfield-signup"
+                name="address"
+                required
+                sx={{ width: "100%" }}
+                size="small"
+                id="outlined-address-input"
+                label="Address"
+                type="text"
+                value={formik.values.address}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                error={formik.touched.address && Boolean(formik.errors.address)}
+                helperText={formik.touched.address && formik.errors.address}
+              />
+            </Grid>
+          </Grid>
+
           <TextField
             className="textfield-signup"
             name="password"
             required
-            sx={{ width: "500px" }}
+            sx={{ width: "100%" }}
+            size="small"
             id="outlined-password-input"
             label="Password"
             type="password"
@@ -156,9 +258,10 @@ export default function SignUp() {
             className="textfield-signup"
             name="confirm"
             required
-            sx={{ width: "500px" }}
+            sx={{ width: "100%" }}
+            size="small"
             id="outlined-confirm-input"
-            label="confirm password"
+            label="Confirm password"
             type="password"
             value={formik.values.confirm}
             onChange={formik.handleChange}
@@ -167,20 +270,6 @@ export default function SignUp() {
             helperText={formik.touched.confirm && formik.errors.confirm}
           />
 
-          {/* <FormControlLabel
-            name="checkbox"
-            required
-            control={
-              <Checkbox
-                checked={formik.values.checkbox}
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-              />
-            }
-            label="I accept the Terms or Conditions"
-            error={formik.touched.checkbox && formik.errors.checkbox}
-          /> */}
-
           <Button
             className="Register_Button"
             sx={{ backgroundColor: "#626AD1", color: "white" }}
@@ -188,6 +277,10 @@ export default function SignUp() {
               formik.values.username,
               formik.values.email,
               formik.values.password,
+              formik.values.firstname,
+              formik.values.lastname,
+              formik.values.phone,
+              formik.values.address,
               formik.values.confirm
             )}
           >
