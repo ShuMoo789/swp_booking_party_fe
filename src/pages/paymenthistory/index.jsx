@@ -39,7 +39,6 @@ export default function BasicTable() {
         style={{
           marginTop: "60px",
           marginLeft: "10px",
-          marginLeft: "40%",
         }}
       >
         Transaction Details

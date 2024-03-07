@@ -1,14 +1,25 @@
-import React, { useState } from "react";
-import { Form, Input, Tooltip, InputNumber } from "antd";
+import React, { useEffect, useState } from "react";
+import {
+  Form,
+  Input,
+  Tooltip,
+  InputNumber,
+  DatePicker,
+  Select,
+  Radio,
+} from "antd";
 import { InfoCircleOutlined } from "@ant-design/icons";
 import { Col, Image, Row } from "antd/es";
 import { useSelector } from "react-redux";
 import { selectPackage } from "../../redux/features/bookingSlice";
-
-export const InfoToRecive = () => {
+import moment from "moment";
+import dayjs from "dayjs";
+import api from "../../config/axios";
+import { useParams } from "react-router-dom";
+export const InfoToRecive = ({ form, onSubmitInfo }) => {
   return (
     <div>
-      <InfoRecive />
+      <InfoRecive form={form} onSubmitInfo={onSubmitInfo} />
     </div>
   );
 };
@@ -20,18 +31,52 @@ const onChangeText = (e) => {
 const onChangeDate = (date, dateString) => {
   console.log(date, dateString);
 };
-const onChangeNumber = (value) => {
-  console.log("changed", value);
-  
-};
 
-const InfoRecive = () => {
+const InfoRecive = ({ form, onSubmitInfo }) => {
+  const information = useSelector((store) => store.booking.information);
+  const [slot, setSlot] = useState(0);
   const data = useSelector(selectPackage);
+  const params = useParams();
   const dataPackage = data.payload.booking.package;
+  const [schedule, setSchedule] = useState([]);
+  const onChangeNumber = (value) => {
+    setSlot(value);
+    console.log("changed", value);
+  };
+  function disabledPreviousDate(current) {
+    // Can not select days before today
+    return current && current < moment().startOf("day");
+  }
+  const fetchSchedule = async () => {
+    const response = await api.get(`schedule-by-host-id/${params.hostId}`);
+    setSchedule(response.data);
+  };
+
+  useEffect(() => {
+    fetchSchedule();
+  }, []);
+
+  useEffect(() => {
+    const info = { ...information };
+    console.log(info.date);
+    console.log(`${info.date.$D}-${info.date.$M + 1}-${info.date.$y}`);
+    info.date = dayjs(info.date);
+    form.setFieldsValue(info);
+    if (info?.slot) {
+      setSlot(info?.slot);
+    } else {
+      setSlot(0);
+    }
+  }, [information]);
   console.log(data);
   return (
     <div style={{ maxWidth: "1600px" }}>
       <Form
+        onFinish={(values) => {
+          values.slot = slot;
+          onSubmitInfo(values);
+        }}
+        form={form}
         name="basic"
         labelCol={{
           span: 3,
@@ -43,7 +88,16 @@ const InfoRecive = () => {
           marginTop: "30px",
         }}
       >
-        <Form.Item label="Name">
+        <Form.Item
+          label="Name"
+          name={"name"}
+          rules={[
+            {
+              required: true,
+              message: "Please enter name!",
+            },
+          ]}
+        >
           <Input
             placeholder="Ex: Gepard Landau Honkai Star Rail"
             suffix={
@@ -60,7 +114,16 @@ const InfoRecive = () => {
             onChangeText={onChangeText}
           />
         </Form.Item>
-        <Form.Item label="Phone">
+        <Form.Item
+          label="Phone"
+          name="phone"
+          rules={[
+            {
+              required: true,
+              message: "Please enter name!",
+            },
+          ]}
+        >
           <Input
             placeholder="Ex: 0838667899"
             showCount
@@ -68,7 +131,16 @@ const InfoRecive = () => {
             onChangeText={onChangeText}
           />
         </Form.Item>
-        <Form.Item label="Email">
+        <Form.Item
+          label="Email"
+          name="email"
+          rules={[
+            {
+              required: true,
+              message: "Please enter name!",
+            },
+          ]}
+        >
           <Input
             placeholder="Ex: bookingforkidz@online.com"
             showCount
@@ -76,7 +148,16 @@ const InfoRecive = () => {
             onChangeText={onChangeText}
           />
         </Form.Item>
-        <Form.Item label="Additional Notes">
+        <Form.Item
+          label="Additional Notes"
+          name="note"
+          rules={[
+            {
+              required: true,
+              message: "Please enter name!",
+            },
+          ]}
+        >
           <TextArea
             showCount
             maxLength={500}
@@ -84,7 +165,44 @@ const InfoRecive = () => {
             placeholder="Ex: Name of the main character of the party: taylor, Food should not be spicy"
           />
         </Form.Item>
-
+        <Form.Item
+          label="Pick a date"
+          name="date"
+          rules={[
+            {
+              required: true,
+              message: "Please pick your date",
+            },
+          ]}
+        >
+          <DatePicker disabledDate={disabledPreviousDate} />
+        </Form.Item>
+        <Form.Item
+          label="Pick a Time"
+          name={"time"}
+          // name="time"
+          // rules={[
+          //   {
+          //     required: true,
+          //     message: "Please pick your date",
+          //   },
+          // ]}
+        >
+          <Radio.Group
+            onChange={(e) => {
+              form.setFieldValue("timeString", e);
+            }}
+            buttonStyle="solid"
+          >
+            {/* <Radio.Button value="a">Hangzhou</Radio.Button>
+            <Radio.Button value="b">Shanghai</Radio.Button>
+            <Radio.Button value="c">Beijing</Radio.Button>
+            <Radio.Button value="d">Chengdu</Radio.Button> */}
+            {schedule.map((item) => {
+              return <Radio.Button value={item.id}>{item.time}</Radio.Button>;
+            })}
+          </Radio.Group>
+        </Form.Item>
         <Form.Item label="Package">
           <Row gutter={20}>
             <Col span="8">
@@ -99,7 +217,7 @@ const InfoRecive = () => {
             </Col>
             <Col span="16">
               <h1>{dataPackage?.name}</h1>
-              <p>Total Capacity: Slot</p>
+              <p>Total Capacity: {dataPackage?.slot} Slot</p>
               <p>Location: {dataPackage?.venue}</p>
               <p>Description: {dataPackage?.description} </p>
             </Col>
@@ -108,12 +226,12 @@ const InfoRecive = () => {
             <Col span="12">
               <h3>Select Slot Tickets:</h3>
               <InputNumber
+                value={slot}
                 min={1}
-                max={10}
+                max={dataPackage?.slot}
                 defaultValue={1}
-                onChangeNumber={onChangeNumber}
+                onChange={onChangeNumber}
                 style={{ width: "100px", height: "50px", fontSize: "25px" }}
-              
               />
             </Col>
             <Col
@@ -141,7 +259,7 @@ const InfoRecive = () => {
               }}
             >
               <h4>Slot Left</h4>
-              <h1> 40 </h1>
+              <h1> {dataPackage?.slot - slot} </h1>
             </Col>
           </Row>
         </Form.Item>

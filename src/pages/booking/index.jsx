@@ -4,8 +4,21 @@ import { Button, Steps } from "antd/es";
 import { ChooseService } from "./choose-service";
 import { ChoosePackage } from "./choose-package";
 import { InfoToRecive } from "./info-to-recive";
+import { useForm } from "antd/es/form/Form";
+import { useDispatch, useSelector } from "react-redux";
+import { updateInfo } from "../../redux/features/bookingSlice";
+import { ConfirmPage } from "./confirm";
+import api from "../../config/axios";
 export const BookingPage = () => {
   const [current, setCurrent] = useState(0);
+  const booking = useSelector((store) => store.booking);
+  const dispatch = useDispatch();
+  const [form] = useForm();
+  const onSubmitInfo = (values) => {
+    console.log(values);
+    dispatch(updateInfo(values));
+    setCurrent(current + 1);
+  };
   const steps = [
     {
       title: "Choose Package",
@@ -13,7 +26,7 @@ export const BookingPage = () => {
     },
     {
       title: "Info To Recive",
-      content: <InfoToRecive />,
+      content: <InfoToRecive form={form} onSubmitInfo={onSubmitInfo} />,
     },
     {
       title: "Choose Service",
@@ -21,11 +34,16 @@ export const BookingPage = () => {
     },
     {
       title: "Comfirm",
-      content: "Last-content",
+      content: <ConfirmPage />,
     },
   ];
+
   const next = () => {
-    setCurrent(current + 1);
+    if (current === 1) {
+      form.submit();
+    } else {
+      setCurrent(current + 1);
+    }
   };
   const prev = () => {
     setCurrent(current - 1);
@@ -41,6 +59,27 @@ export const BookingPage = () => {
     border: `1px dashed rgb(217, 217, 217)`,
     marginTop: 16,
   };
+  const calcTotal = () => {
+    let total = 0;
+    booking?.services?.forEach((item) => (total += item.quantity * item.price));
+    return total;
+  };
+
+  const handlePaymeny = async () => {
+    const response = await api.post("/create-payment", {
+      totalPrice: calcTotal(),
+      nameReceiver: booking?.information?.name,
+      phone: booking?.information?.phone,
+      email: booking?.information?.email,
+      slot: booking?.information?.slot,
+      additionalNotes: booking?.information?.note,
+      scheduleId: booking?.information?.time,
+      date: booking?.information?.date,
+    });
+    console.log();
+    window.open(response.data);
+  };
+
   return (
     <div className="booking">
       <Steps current={current} items={items} />
@@ -56,10 +95,7 @@ export const BookingPage = () => {
           </Button>
         )}
         {current === steps.length - 1 && (
-          <Button
-            type="primary"
-            onClick={() => message.success("Processing complete!")}
-          >
+          <Button type="primary" onClick={handlePaymeny}>
             Done
           </Button>
         )}

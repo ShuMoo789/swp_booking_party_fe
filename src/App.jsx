@@ -32,6 +32,7 @@ import Wallet from "./pages/wallet";
 import Packageregisterlist from "./pages/package-register-list/packageregister";
 import { ManageSchedule } from "./pages/manage-schedule";
 import { BookingPage } from "./pages/booking";
+import SuccessPage from "./pages/checkout";
 
 function App() {
   const router = createBrowserRouter([
@@ -109,6 +110,10 @@ function App() {
           element: <Wallet />,
         },
       ],
+    },
+    {
+      path: "/success",
+      element: <SuccessPage />,
     },
     {
       path: "login",
