@@ -1,10 +1,8 @@
 import { Box, IconButton } from "@mui/material";
 // import { useSelector } from "react-redux";
-import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 
 import HomePageBody1 from "./HomePageBody1";
 import HomePageBody2 from "./HomePageBody2";
-
 import HomePageBody3 from "./HomePageBody3";
 import HomePageBody4 from "./HomePageBody4";
 import HomePageBody5 from "./HomePageBody5";

@@ -1,7 +1,7 @@
 $color_1: black;
 
 .main_container {
-  background-image: url(../../assets/bg_home1.png);
+  background-image: url(../../assets/background.avif);
   background-position: center;
   background-size: cover;
   background-repeat: repeat;
@@ -10,10 +10,10 @@ $color_1: black;
   justify-content: flex-end;
   flex-wrap: wrap;
   display: flex;
-  margin-top: 70px;
+  margin-top: 60px;
 }
 .image-homepagebody1 {
-  height: 60vh;
+  height: 90vh;
   width: 50vw !important;
   object-fit: contain !important;
 }
@@ -36,7 +36,7 @@ $color_1: black;
     width: 100% !important;
   }
   .main_container {
-    background-image: url(../../assets/bg_home1.png);
+    background-image: url(../../assets/background.avif);
     background-position: center;
     background-size: cover;
     background-repeat: repeat;
