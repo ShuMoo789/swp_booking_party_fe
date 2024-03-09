@@ -13,7 +13,6 @@ import PickSpot from "./pages/pickSpot/pickSpot";
 import Feedback from "./pages/feedback/feedback";
 
 import ServiceUploadDashboard from "./pages/serviceUploadDashboard";
-import OrderCart from "./pages/orderCart";
 import AdminDashboard from "./pages/admindashboard";
 
 import { useDispatch, useSelector } from "react-redux";
@@ -62,10 +61,6 @@ function App() {
         {
           path: "pickdate",
           element: <PickDate />,
-        },
-        {
-          path: "orderCart",
-          element: <OrderCart />,
         },
         {
           path: "pickSpot",

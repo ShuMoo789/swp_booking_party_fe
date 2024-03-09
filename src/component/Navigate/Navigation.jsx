@@ -1,4 +1,3 @@
-
 import {
   Button,
   Grid,
@@ -19,8 +18,6 @@ import "./Navigation.scss";
 
 export default function Navigation() {
   const dispatch = useDispatch();
-
-
 
   const user = useSelector((store) => store.authen);
   const logoutHandler = () => {
@@ -95,10 +92,10 @@ export default function Navigation() {
                 <Button component={Link} to="/" sx={{ fontWeight: "bold" }}>
                   HOME
                 </Button>
-=
+                =
                 <Button
                   component={Link}
-                  to="/search"
+                  to="/partyhostlist"
                   sx={{ fontWeight: "bold" }}
                 >
                   BOOK
@@ -107,7 +104,6 @@ export default function Navigation() {
                   FAQs
                 </Button>
               </Box>
-
             </Grid>
             <Grid item xs={4} sx={{ textAlign: "right" }}>
               {user ? (
@@ -116,11 +112,9 @@ export default function Navigation() {
                     items,
                   }}
                 >
-
                   <Button
                     className="user_info"
                     onClick={(e) => e.preventDefault()}
-
                   >
                     <Space
                       style={{

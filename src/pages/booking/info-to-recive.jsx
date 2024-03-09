@@ -58,8 +58,8 @@ const InfoRecive = ({ form, onSubmitInfo }) => {
 
   useEffect(() => {
     const info = { ...information };
-    console.log(info.date);
-    console.log(`${info.date.$D}-${info.date.$M + 1}-${info.date.$y}`);
+    // console.log(info.date);
+    // console.log(`${info.date.$D}-${info.date.$M + 1}-${info.date.$y}`);
     info.date = dayjs(info.date);
     form.setFieldsValue(info);
     if (info?.slot) {

@@ -7,13 +7,46 @@ import {
   Typography,
   Grid,
 } from "@mui/material";
+import * as React from "react";
+import Radio from "@mui/material/Radio";
+import RadioGroup from "@mui/material/RadioGroup";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import FormControl from "@mui/material/FormControl";
+import Backdrop from "@mui/material/Backdrop";
+import Modal from "@mui/material/Modal";
+import Fade from "@mui/material/Fade";
+import Checkbox from "@mui/material/Checkbox";
 import { useFormik } from "formik";
 import { Link } from "react-router-dom";
 import * as Yup from "yup";
 import images from "../../constant/images";
 import "./signUp.scss";
 
+const style = {
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  width: 400,
+  bgcolor: "background.paper",
+  border: "2px solid #000",
+  boxShadow: 24,
+  p: 4,
+};
+
 export default function SignUp() {
+  //Radio Check
+  const [value, setValue] = React.useState("customer");
+
+  const handleChange = (event) => {
+    setValue(event.target.value);
+  };
+
+  //Modal
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+
   const formik = useFormik({
     initialValues: {
       id: 0,
@@ -24,6 +57,7 @@ export default function SignUp() {
       password: "",
       phone: "",
       address: "",
+      businessname: "",
       confirm: "",
     },
 
@@ -55,6 +89,7 @@ export default function SignUp() {
         .max(12, "Phone number must not exceed 12 characters")
         .required("Phone number is required"),
       address: Yup.string().required("Address is required"),
+      businessname: Yup.string().required("Business name is required"),
       confirm: Yup.string()
         .required("required!!")
         .oneOf([Yup.ref("password"), null], "Passwords must match"),
@@ -69,6 +104,7 @@ export default function SignUp() {
     lastname,
     phone,
     address,
+    businessname,
     confirm
   ) => {
     if (
@@ -79,6 +115,7 @@ export default function SignUp() {
       lastname !== "" &&
       phone !== "" &&
       address !== "" &&
+      businessname !== "" &&
       confirm !== ""
     ) {
       return false;
@@ -86,7 +123,6 @@ export default function SignUp() {
       return true;
     }
   };
-
   return (
     <Box
       className="bg_container-signup"
@@ -141,6 +177,37 @@ export default function SignUp() {
             error={formik.touched.username && Boolean(formik.errors.username)}
             helperText={formik.touched.username && formik.errors.username}
           />
+          <TextField
+            className="textfield-signup"
+            name="password"
+            required
+            sx={{ width: "100%" }}
+            size="small"
+            id="outlined-password-input"
+            label="Password"
+            type="password"
+            value={formik.values.password}
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            error={formik.touched.password && Boolean(formik.errors.password)}
+            helperText={formik.touched.password && formik.errors.password}
+          />
+
+          <TextField
+            className="textfield-signup"
+            name="confirm"
+            required
+            sx={{ width: "100%" }}
+            size="small"
+            id="outlined-confirm-input"
+            label="Confirm password"
+            type="password"
+            value={formik.values.confirm}
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            error={formik.touched.confirm && Boolean(formik.errors.confirm)}
+            helperText={formik.touched.confirm && formik.errors.confirm}
+          />
 
           <TextField
             className="textfield-signup"
@@ -157,7 +224,25 @@ export default function SignUp() {
             error={formik.touched.email && Boolean(formik.errors.email)}
             helperText={formik.touched.email && formik.errors.email}
           />
-
+          <TextField
+            className="textfield-signup"
+            name="businessname"
+            required
+            sx={{ width: "100%" }}
+            size="small"
+            id="outlined-email-input"
+            label="Name of your Business"
+            type="text"
+            value={formik.values.businessname}
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            error={
+              formik.touched.businessname && Boolean(formik.errors.businessname)
+            }
+            helperText={
+              formik.touched.businessname && formik.errors.businessname
+            }
+          />
           {/* Grid for First Name and Last Name */}
           <Grid container>
             <Grid item xs={6}>
@@ -237,39 +322,64 @@ export default function SignUp() {
               />
             </Grid>
           </Grid>
-
-          <TextField
-            className="textfield-signup"
-            name="password"
-            required
-            sx={{ width: "100%" }}
-            size="small"
-            id="outlined-password-input"
-            label="Password"
-            type="password"
-            value={formik.values.password}
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-            error={formik.touched.password && Boolean(formik.errors.password)}
-            helperText={formik.touched.password && formik.errors.password}
-          />
-
-          <TextField
-            className="textfield-signup"
-            name="confirm"
-            required
-            sx={{ width: "100%" }}
-            size="small"
-            id="outlined-confirm-input"
-            label="Confirm password"
-            type="password"
-            value={formik.values.confirm}
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-            error={formik.touched.confirm && Boolean(formik.errors.confirm)}
-            helperText={formik.touched.confirm && formik.errors.confirm}
-          />
-
+          <FormControl>
+            <RadioGroup
+              aria-labelledby="demo-controlled-radio-buttons-group"
+              name="controlled-radio-buttons-group"
+              value={value}
+              onChange={handleChange}
+            >
+              <div>
+                <FormControlLabel
+                  value="customer"
+                  control={<Radio />}
+                  label="Customer"
+                />
+                <FormControlLabel
+                  value="party host"
+                  control={<Radio />}
+                  label="Party Host"
+                />
+              </div>
+              <FormControlLabel
+                onClick={handleOpen}
+                required
+                control={<Checkbox />}
+                label="I agree with all policy about website"
+              />
+              <Modal
+                aria-labelledby="transition-modal-title"
+                aria-describedby="transition-modal-description"
+                open={open}
+                onClose={handleClose}
+                closeAfterTransition
+                slots={{ backdrop: Backdrop }}
+                slotProps={{
+                  backdrop: {
+                    timeout: 500,
+                  },
+                }}
+              >
+                <Fade in={open}>
+                  <Box sx={style}>
+                    <Typography
+                      id="transition-modal-title"
+                      variant="h6"
+                      component="h2"
+                    >
+                      Policy
+                    </Typography>
+                    <Typography
+                      id="transition-modal-description"
+                      sx={{ mt: 2 }}
+                    >
+                      Policy decription
+                    </Typography>
+                  </Box>
+                </Fade>
+              </Modal>
+            </RadioGroup>
+          </FormControl>
           <Button
             className="Register_Button"
             sx={{ backgroundColor: "#626AD1", color: "white" }}
