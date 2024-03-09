@@ -223,9 +223,7 @@ const AdminDashboard = () => {
 
   return (
     <div>
-      <h1 style={{ marginTop: "60px", marginLeft: "10px", marginLeft: "40%" }}>
-        Admin Dashboard
-      </h1>
+      <h1 style={{ marginTop: "60px", marginLeft: "10px" }}>Admin Dashboard</h1>
       <Search
         placeholder="Search"
         onSearch={handleSearch}
