@@ -65,7 +65,7 @@ export default function HomeMain() {
               height: "100%", // Chiều cao của biểu tượng
             }}
           >
-            <KeyboardArrowUpIcon />
+            {/* <KeyboardArrowUpIcon /> */}
           </IconButton>
         </div>
       </main>

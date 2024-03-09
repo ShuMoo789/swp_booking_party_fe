@@ -51,7 +51,6 @@ function App() {
           path: "booking/:hostId",
           element: <BookingPage />,
         },
-
         {
           path: "partyhostlist",
           element: <PartyHostList />,
@@ -72,10 +71,10 @@ function App() {
           path: "pickSpot",
           element: <PickSpot />,
         },
-        {
-          path: "paymenthistory",
-          element: <PaymentHistory />,
-        },
+        // {
+        //   path: "paymenthistory",
+        //   element: <PaymentHistory />,
+        // },
         {
           path: "feedback",
           element: <Feedback />,
@@ -96,10 +95,10 @@ function App() {
           path: "search",
           element: <Search />,
         },
-        {
-          path: "useraccount",
-          element: <UserAccount />,
-        },
+        // {
+        //   path: "useraccount",
+        //   element: <UserAccount />,
+        // },
         {
           path: "partyhostlist",
           element: <PartyHostList />,
