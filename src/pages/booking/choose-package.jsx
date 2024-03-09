@@ -31,7 +31,7 @@ export const ChoosePackage = () => {
   );
 };
 
-const Package = ({ isSelect, data }) => {
+export const Package = ({ isSelect, data }) => {
   const dispatch = useDispatch();
   console.log(isSelect);
   return (
@@ -43,7 +43,14 @@ const Package = ({ isSelect, data }) => {
     >
       <Row gutter={20}>
         <Col span="5">
-          <Image src={data.img} style={{borderRadius:"10px", border:"1px solid #ddd", padding: "5px" }} />
+          <Image
+            src={data.img}
+            style={{
+              borderRadius: "10px",
+              border: "1px solid #ddd",
+              padding: "5px",
+            }}
+          />
         </Col>
         <Col span="19">
           <Row>
@@ -58,12 +65,9 @@ const Package = ({ isSelect, data }) => {
 
           <ul>
             <li>Price per kid: ${data.pricePerChild}</li>
-            <li>name service</li>
-            <li>name service</li>
-            <li>name service</li>
-            <li>name service</li>
-            <li>name service</li>
-            <li>name service</li>
+            {data?.serviceUploads?.map((item) => {
+              return <li>{item.name}</li>;
+            })}
           </ul>
         </Col>
       </Row>

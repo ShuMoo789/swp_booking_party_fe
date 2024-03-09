@@ -13,7 +13,6 @@ import PickSpot from "./pages/pickSpot/pickSpot";
 import Feedback from "./pages/feedback/feedback";
 
 import ServiceUploadDashboard from "./pages/serviceUploadDashboard";
-import OrderCart from "./pages/orderCart";
 import AdminDashboard from "./pages/admindashboard";
 
 import { useDispatch, useSelector } from "react-redux";
@@ -35,6 +34,7 @@ import { ManageSchedule } from "./pages/manage-schedule";
 import FeedbackList from "./pages/feedbackList/FeedbackList";
 import ManageService from "./pages/manage-service";
 import { BookingPage } from "./pages/booking";
+import SuccessPage from "./pages/checkout";
 
 function App() {
   const router = createBrowserRouter([
@@ -50,7 +50,6 @@ function App() {
           path: "booking/:hostId",
           element: <BookingPage />,
         },
-
         {
           path: "partyhostlist",
           element: <PartyHostList />,
@@ -64,17 +63,13 @@ function App() {
           element: <PickDate />,
         },
         {
-          path: "orderCart",
-          element: <OrderCart />,
-        },
-        {
           path: "pickSpot",
           element: <PickSpot />,
         },
-        {
-          path: "paymenthistory",
-          element: <PaymentHistory />,
-        },
+        // {
+        //   path: "paymenthistory",
+        //   element: <PaymentHistory />,
+        // },
         {
           path: "feedback",
           element: <Feedback />,
@@ -95,10 +90,10 @@ function App() {
           path: "search",
           element: <Search />,
         },
-        {
-          path: "useraccount",
-          element: <UserAccount />,
-        },
+        // {
+        //   path: "useraccount",
+        //   element: <UserAccount />,
+        // },
         {
           path: "partyhostlist",
           element: <PartyHostList />,
@@ -120,6 +115,10 @@ function App() {
           element: <Wallet />,
         },
       ],
+    },
+    {
+      path: "/success",
+      element: <SuccessPage />,
     },
     {
       path: "login",

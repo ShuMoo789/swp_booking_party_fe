@@ -11,7 +11,7 @@ import { styled } from "@mui/material/styles";
 
 function PartyHost({ name, address, description, img, id }) {
   return (
-    <Link to={`/packagelist/${id}`}>
+    <Link to={`/booking/${id}`}>
       <List.Item className="party-host">
         <List.Item.Meta
           avatar={
