@@ -19,9 +19,7 @@ import Checkbox from "@mui/material/Checkbox";
 import { useFormik } from "formik";
 import { Link } from "react-router-dom";
 import * as Yup from "yup";
-// Import images from your constant file
 import images from "../../constant/images";
-// Import your CSS file
 import "./signUp.scss";
 
 const style = {
@@ -37,103 +35,17 @@ const style = {
 };
 
 export default function SignUp() {
-  // Radio Check
+  //Radio Check
   const [value, setValue] = React.useState("customer");
-  const [showBusinessName, setShowBusinessName] = React.useState(false);
-  const [showNameFields, setShowNameFields] = React.useState(true);
-  const [policyContent, setPolicyContent] = React.useState("");
-  const [policyAccepted, setPolicyAccepted] = React.useState(false); // State for checkbox
 
   const handleChange = (event) => {
     setValue(event.target.value);
-    if (event.target.value === "customer") {
-      setShowBusinessName(false);
-      setShowNameFields(true);
-    } else if (event.target.value === "party host") {
-      setShowBusinessName(true);
-      setShowNameFields(false);
-    }
   };
 
-  // Modal
+  //Modal
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-
-  const handlePolicyAgreement = () => {
-    if (!policyAccepted) {
-      if (value === "customer") {
-        setPolicyContent(
-          <Box>
-            <Typography sx={{ marginBottom: 2 }}>
-              <span style={{ fontWeight: "bold" }}>
-                1. Account Registration:
-              </span>{" "}
-              Customers must provide accurate information when registering for
-              an account.
-            </Typography>
-            <Typography sx={{ marginBottom: 2 }}>
-              <span style={{ fontWeight: "bold" }}>2. Data Privacy:</span> We
-              prioritize the protection of customer data and only share
-              information with consent or as required by law.
-            </Typography>
-            <Typography sx={{ marginBottom: 2 }}>
-              <span style={{ fontWeight: "bold" }}>3. Communication:</span>{" "}
-              Customers may receive occasional communication and can opt-out of
-              promotional messages.
-            </Typography>
-            <Typography sx={{ marginBottom: 2 }}>
-              <span style={{ fontWeight: "bold" }}>4. Product Usage:</span>{" "}
-              Customers are expected to use our products/services responsibly
-              and within their intended purpose.
-            </Typography>
-            <Typography sx={{ marginBottom: 2 }}>
-              <span style={{ fontWeight: "bold" }}>
-                5. Feedback and Reviews:
-              </span>{" "}
-              We welcome constructive feedback and reviews from customers to
-              improve our offerings.
-            </Typography>
-          </Box>
-        );
-      } else if (value === "party host") {
-        setPolicyContent(
-          <Box>
-            <Typography sx={{ marginBottom: 2 }}>
-              <span style={{ fontWeight: "bold" }}>1. Delivery Policy:</span>{" "}
-              Ensure on-time delivery and meet delivery time requirements.
-            </Typography>
-            <Typography sx={{ marginBottom: 2 }}>
-              <span style={{ fontWeight: "bold" }}>2. Return Policy:</span>{" "}
-              Provides a quick and flexible return process for customers.
-            </Typography>
-            <Typography sx={{ marginBottom: 2 }}>
-              <span style={{ fontWeight: "bold" }}>
-                3. Fair Pricing Policy:
-              </span>{" "}
-              Ensure competitive and transparent prices, no hidden fees.
-            </Typography>
-            <Typography sx={{ marginBottom: 2 }}>
-              <span style={{ fontWeight: "bold" }}>4. Quality Policy:</span>{" "}
-              Ensure that all products meet high quality standards.
-            </Typography>
-            <Typography sx={{ marginBottom: 2 }}>
-              <span style={{ fontWeight: "bold" }}>
-                5. Information Security Policy:
-              </span>{" "}
-              Protect customers' personal information and ensure compliance with
-              data security regulations.
-            </Typography>
-          </Box>
-        );
-      }
-      handleOpen();
-    }
-  };
-
-  const handlePolicyCheckboxChange = (event) => {
-    setPolicyAccepted(event.target.checked);
-  };
 
   const formik = useFormik({
     initialValues: {
@@ -148,23 +60,26 @@ export default function SignUp() {
       businessname: "",
       confirm: "",
     },
+
     validationSchema: Yup.object({
       username: Yup.string()
         .required("required!!")
         .min(3, "at least 3 character")
-        .max(20, "max 20 character")
+        .max(200, "max 20 character")
         .matches(
           /^[a-zA-Z0-9]+$/,
           "Username must contain only letters and numbers"
         ),
-      email: Yup.string().required("required!!").email("Invalid Email!"),
+      email: Yup.string()
+        .required("required!!")
+        .email("This Email is invalid !"),
       password: Yup.string()
         .required("required!!")
         .min(3, "at least 3 character")
-        .max(20, "max 20 character")
+        .max(200, "max 20 character")
         .matches(
           /^[a-zA-Z0-9]+$/,
-          "Password must contain only letters and numbers"
+          "Username must contain only letters and numbers"
         ),
       firstname: Yup.string().required("First name is required"),
       lastname: Yup.string().required("Last name is required"),
@@ -200,17 +115,14 @@ export default function SignUp() {
       lastname !== "" &&
       phone !== "" &&
       address !== "" &&
-      (!showBusinessName || businessname !== "") &&
-      (!showNameFields || (firstname !== "" && lastname !== "")) &&
-      confirm !== "" &&
-      policyAccepted // Kiểm tra checkbox đã được chọn hay không
+      businessname !== "" &&
+      confirm !== ""
     ) {
       return false;
     } else {
       return true;
     }
   };
-
   return (
     <Box
       className="bg_container-signup"
@@ -312,73 +224,66 @@ export default function SignUp() {
             error={formik.touched.email && Boolean(formik.errors.email)}
             helperText={formik.touched.email && formik.errors.email}
           />
-          {showBusinessName && (
-            <TextField
-              className="textfield-signup"
-              name="businessname"
-              required
-              sx={{ width: "100%" }}
-              size="small"
-              id="outlined-email-input"
-              label="Name of your Business"
-              type="text"
-              value={formik.values.businessname}
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              error={
-                formik.touched.businessname &&
-                Boolean(formik.errors.businessname)
-              }
-              helperText={
-                formik.touched.businessname && formik.errors.businessname
-              }
-            />
-          )}
+          <TextField
+            className="textfield-signup"
+            name="businessname"
+            required
+            sx={{ width: "100%" }}
+            size="small"
+            id="outlined-email-input"
+            label="Name of your Business"
+            type="text"
+            value={formik.values.businessname}
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            error={
+              formik.touched.businessname && Boolean(formik.errors.businessname)
+            }
+            helperText={
+              formik.touched.businessname && formik.errors.businessname
+            }
+          />
           {/* Grid for First Name and Last Name */}
-          {showNameFields && (
-            <Grid container>
-              <Grid item xs={6}>
-                <TextField
-                  className="textfield-signup"
-                  name="firstname"
-                  required
-                  sx={{ width: "95%" }}
-                  size="small"
-                  id="outlined-firstname-input"
-                  label="First Name"
-                  type="text"
-                  value={formik.values.firstname}
-                  onChange={formik.handleChange}
-                  onBlur={formik.handleBlur}
-                  error={
-                    formik.touched.firstname && Boolean(formik.errors.firstname)
-                  }
-                  helperText={
-                    formik.touched.firstname && formik.errors.firstname
-                  }
-                />
-              </Grid>
-              <Grid item xs={6}>
-                <TextField
-                  className="textfield-signup"
-                  name="lastname"
-                  required
-                  sx={{ width: "100%" }}
-                  size="small"
-                  id="outlined-lastname-input"
-                  label="Last Name"
-                  type="text"
-                  value={formik.values.lastname}
-                  onChange={formik.handleChange}
-                  onBlur={formik.handleBlur}
-                  error={
-                    formik.touched.lastname && Boolean(formik.errors.lastname)
-                  }
-                  helperText={formik.touched.lastname && formik.errors.lastname}
-                />
-              </Grid>
+          <Grid container>
+            <Grid item xs={6}>
+              <TextField
+                className="textfield-signup"
+                name="firstname"
+                required
+                sx={{ width: "95%" }}
+                size="small"
+                id="outlined-firstname-input"
+                label="First Name"
+                type="text"
+                value={formik.values.firstname}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                error={
+                  formik.touched.firstname && Boolean(formik.errors.firstname)
+                }
+                helperText={formik.touched.firstname && formik.errors.firstname}
+              />
             </Grid>
-          )}
+            <Grid item xs={6}>
+              <TextField
+                className="textfield-signup"
+                name="lastname"
+                required
+                sx={{ width: "100%" }}
+                size="small"
+                id="outlined-lastname-input"
+                label="Last Name"
+                type="text"
+                value={formik.values.lastname}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                error={
+                  formik.touched.lastname && Boolean(formik.errors.lastname)
+                }
+                helperText={formik.touched.lastname && formik.errors.lastname}
+              />
+            </Grid>
+          </Grid>
 
           {/* Grid for Phone and Address */}
           <Grid container>
@@ -437,14 +342,9 @@ export default function SignUp() {
                 />
               </div>
               <FormControlLabel
-                onClick={handlePolicyAgreement}
+                onClick={handleOpen}
                 required
-                control={
-                  <Checkbox
-                    checked={policyAccepted}
-                    onChange={handlePolicyCheckboxChange}
-                  />
-                }
+                control={<Checkbox />}
                 label="I agree with all policy about website"
               />
               <Modal
@@ -453,31 +353,27 @@ export default function SignUp() {
                 open={open}
                 onClose={handleClose}
                 closeAfterTransition
-                BackdropComponent={Backdrop}
-                BackdropProps={{
-                  timeout: 500,
+                slots={{ backdrop: Backdrop }}
+                slotProps={{
+                  backdrop: {
+                    timeout: 500,
+                  },
                 }}
               >
-                <Fade in={open} style={{ width: "40%" }}>
+                <Fade in={open}>
                   <Box sx={style}>
                     <Typography
                       id="transition-modal-title"
-                      variant="h4"
+                      variant="h6"
                       component="h2"
-                      align="center"
-                      marginTop={-2}
-                      marginBottom={5}
-                      sx={{ fontWeight: "bold" }}
                     >
-                      {value === "customer"
-                        ? "Customer Policy"
-                        : "Party Host Policy"}
+                      Policy
                     </Typography>
                     <Typography
                       id="transition-modal-description"
                       sx={{ mt: 2 }}
                     >
-                      {policyContent}
+                      Policy decription
                     </Typography>
                   </Box>
                 </Fade>
@@ -495,7 +391,6 @@ export default function SignUp() {
               formik.values.lastname,
               formik.values.phone,
               formik.values.address,
-              formik.values.businessname,
               formik.values.confirm
             )}
           >

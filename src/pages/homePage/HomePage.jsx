@@ -7,8 +7,6 @@ import HomePageBody3 from "./HomePageBody3";
 import HomePageBody4 from "./HomePageBody4";
 import HomePageBody5 from "./HomePageBody5";
 import { useEffect, useState } from "react";
-import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
-import ScrollToTopOnMount from "../../component/Navigate/BackToTop";
 
 export default function HomeMain() {
   //   const accessToken = useSelector((state) => state.user);
@@ -39,7 +37,6 @@ export default function HomeMain() {
 
   return (
     <Box className="main-container">
-      <ScrollToTopOnMount />
       <main style={{ backgroundColor: "#c7eef2" }}>
         <HomePageBody1 />
         <HomePageBody5 />
@@ -68,7 +65,7 @@ export default function HomeMain() {
               height: "100%", // Chiều cao của biểu tượng
             }}
           >
-            <KeyboardArrowUpIcon />
+            {/* <KeyboardArrowUpIcon /> */}
           </IconButton>
         </div>
       </main>
