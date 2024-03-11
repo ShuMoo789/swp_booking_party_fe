@@ -42,11 +42,19 @@ export default function Navigation() {
     },
     {
       label: (
-        <Button onClick={logoutHandler} style={{ color: "green" }}>
-          Log out
-        </Button>
+        <Link to={"/paymenthistory"} style={{ fontSize: "1rem" }}>
+          Payment History
+        </Link>
       ),
       key: "2",
+    },
+    {
+      label: (
+        <Button onClick={logoutHandler} style={{ color: "green" }}>
+          <Link to={"/login"}>Log out</Link>
+        </Button>
+      ),
+      key: "3",
     },
   ];
   return (

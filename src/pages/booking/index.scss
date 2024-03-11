@@ -12,6 +12,7 @@
   border: solid 5px rgb(238, 236, 236);
   box-shadow: box-shadow;
   transition: transform 0.3s ease-in-out;
+  height: 300px;
 
   &:hover {
     transform: translateY(-8px);

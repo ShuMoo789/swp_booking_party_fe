@@ -75,6 +75,14 @@ export const BookingPage = () => {
       additionalNotes: booking?.information?.note,
       scheduleId: booking?.information?.time,
       date: booking?.information?.date,
+      packageUploadId: booking?.package?.id,
+      services: booking.services.map((item) => {
+        return {
+          id: item.id,
+          quantity: item.quantity,
+          price: item.price,
+        };
+      }),
     });
     console.log();
     window.open(response.data);

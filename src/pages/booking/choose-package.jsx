@@ -22,11 +22,18 @@ export const ChoosePackage = () => {
   }, []);
   return (
     <div className="packages">
-      {packages
-        // .filter((item) => item.packageULStatus != "UNAVAILABLE")
-        .map((item) => (
-          <Package data={item} isSelect={item?.id === selectedPackage?.id} />
-        ))}
+      <Row gutter={12}>
+        {packages
+          // .filter((item) => item.packageULStatus != "UNAVAILABLE")
+          .map((item) => (
+            <Col span={12}>
+              <Package
+                data={item}
+                isSelect={item?.id === selectedPackage?.id}
+              />
+            </Col>
+          ))}
+      </Row>
     </div>
   );
 };

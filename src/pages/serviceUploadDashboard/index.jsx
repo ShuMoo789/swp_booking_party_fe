@@ -175,7 +175,7 @@ const ServiceUploadDashboard = () => {
 
   return (
     <div>
-      <h1 style={{ marginTop: "60px", marginLeft: "10px", marginLeft: "40%" }}>
+      <h1 style={{ marginTop: "60px", marginLeft: "10px" }}>
         Service Dashboard
       </h1>
       <Search
