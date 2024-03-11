@@ -2,14 +2,10 @@ import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import HomeMain from "./pages/homePage/HomePage";
 import { Layout } from "./component/layout";
 import PartyHostList from "./pages/partyhostlist/partyhostlist";
-import PackageList from "./pages/packagelist/packagelist";
 import SignIn from "./pages/signIn/signIn";
 import SignUp from "./pages/signUp/signUp";
 import ForgotPassword from "./pages/forgotPassword/forgotPassword";
-import PickDate from "./pages/pickDate/pickDate";
 import { Profile } from "./pages/profile";
-import { ServiceList } from "./pages/serviceList";
-import PickSpot from "./pages/pickSpot/pickSpot";
 import Feedback from "./pages/feedback/feedback";
 
 import ServiceUploadDashboard from "./pages/serviceUploadDashboard";
@@ -23,7 +19,6 @@ import Dashboard from "./component/dashboard";
 import { Statistic } from "./pages/statistic";
 
 import FaqsMain from "./pages/faqs/FaqsMain";
-import { Search } from "./pages/search";
 import { ManagePackage } from "./pages/manage-package";
 import { ManageOrder } from "./pages/manage-order";
 import Wallet from "./pages/walletCustomer";
@@ -35,6 +30,7 @@ import FeedbackList from "./pages/feedbackList/FeedbackList";
 import ManageService from "./pages/manage-service";
 import { BookingPage } from "./pages/booking";
 import SuccessPage from "./pages/checkout";
+import BasicTable from "./pages/paymentHistory";
 
 function App() {
   const router = createBrowserRouter([
@@ -55,21 +51,9 @@ function App() {
           element: <PartyHostList />,
         },
         {
-          path: "packagelist/:id",
-          element: <PackageList />,
+          path: "paymenthistory",
+          element: <BasicTable />,
         },
-        {
-          path: "pickdate",
-          element: <PickDate />,
-        },
-        {
-          path: "pickSpot",
-          element: <PickSpot />,
-        },
-        // {
-        //   path: "paymenthistory",
-        //   element: <PaymentHistory />,
-        // },
         {
           path: "feedback",
           element: <Feedback />,
@@ -86,10 +70,6 @@ function App() {
           path: "serviceuploaddashboard",
           element: <ServiceUploadDashboard />,
         },
-        {
-          path: "search",
-          element: <Search />,
-        },
         // {
         //   path: "useraccount",
         //   element: <UserAccount />,
@@ -97,14 +77,6 @@ function App() {
         {
           path: "partyhostlist",
           element: <PartyHostList />,
-        },
-        {
-          path: "packagelist",
-          element: <PackageList />,
-        },
-        {
-          path: "servicelist",
-          element: <ServiceList />,
         },
         {
           path: "faqs",
