@@ -7,7 +7,7 @@ export default function Home1() {
     <div className="main_container" id="#">
       <Box
         className="homepagebody1__right-site"
-        sx={{ width: "650px", position: "relative", top: "-70px" }}
+        sx={{ width: "650px", position: "relative", marginTop: "-300px" }}
       >
         <Stack spacing={4}>
           <Typography
@@ -25,6 +25,7 @@ export default function Home1() {
               backgroundColor: "rgba(250, 230, 250, 0.5)",
               borderRadius: "10px",
               padding: "10px",
+              color: "black",
             }}
           >
             Elevate the joy for your little one's birthday extravaganza or

@@ -100,7 +100,7 @@ export default function Navigation() {
                 <Button component={Link} to="/" sx={{ fontWeight: "bold" }}>
                   HOME
                 </Button>
-                =
+
                 <Button
                   component={Link}
                   to="/partyhostlist"

@@ -8,6 +8,7 @@ import { Toolbar } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import InputBase from "@mui/material/InputBase";
 import { styled } from "@mui/material/styles";
+import ScrollToTopOnMount from "../../component/Navigate/BackToTop";
 
 function PartyHost({ name, address, description, img, id }) {
   return (
@@ -91,6 +92,7 @@ function PartyHostList() {
 
   return (
     <div className="party-host-list">
+      <ScrollToTopOnMount />
       <AppBar
         position="static"
         style={{
