@@ -3,6 +3,7 @@ import ContentPage1 from "./ContentPage1";
 import ContentPage2 from "./ContentPage2";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import { useState, useEffect } from "react";
+import ScrollToTopOnMount from "../../component/Navigate/BackToTop";
 
 function FaqsMain() {
   const [showBackToTop, setShowBackToTop] = useState(false);
@@ -31,6 +32,7 @@ function FaqsMain() {
 
   return (
     <Box className="main-container">
+      <ScrollToTopOnMount />
       <main style={{ backgroundColor: "#c7eef2" }}>
         <div>
           <Typography
