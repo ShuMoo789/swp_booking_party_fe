@@ -33,14 +33,14 @@ function FaqsMain() {
   return (
     <Box className="main-container">
       <ScrollToTopOnMount />
-      <main style={{ backgroundColor: "#c7eef2" }}>
+      <main style={{ backgroundColor: "#fae6fa" }}>
         <div>
           <Typography
             style={{
               fontSize: "60px",
               textAlign: "center",
               fontWeight: "bolder",
-              color: "goldenrod",
+              color: "gold",
               paddingBottom: "20px",
               paddingTop: "20px",
               marginTop: "65px",

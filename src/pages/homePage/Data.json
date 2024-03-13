@@ -1,35 +1,38 @@
 [
   {
     "id": 1,
-    "title": "Sign Online Waiver",
-    "des": "Everyone participating in our activities at The Big Box must sign a waiver online. Waivers only need to be filled out once a year and are saved to your name and email address. Guardian must sign the waiver for 18 years & under.",
-    "img": "./img/faq1.jpg",
-    "link": "/search"
+    "title": "Sign Up Online Now",
+    "des": "Discover convenience and flexibility by signing up on our website today! Enjoy exclusive benefits like easy order management and event updates. Join now for special member-only experiences!",
+    "img": "./img/register.avif",
+    "link": "/register"
   },
   {
     "id": 2,
-    "title": "Plan Your Adventure",
-    "des": "Decide what activities your kids would love and choose from our exclusive combos which combine all the activities in The Big Box for a great price! We also offer a pay-for-what-you-play model so you can pick and choose options on your budget.",
-    "img": "./img/faq2.jpg",
-    "link": ""
+    "title": "View Party Host List",
+    "des": "Browsing our list of party hosts allows you to review crucial details like experience, customer feedback, and services offered, helping you choose the perfect host for your party needs.",
+    "img": "./img/partyhost.png",
+    "link": "/partyhostlist"
   },
   {
     "id": 3,
-    "title": "Combo & Play!",
-    "des": "The Big Box offers 55,000 square feet of Entertainment Extravaganza including soft-play, inflatable, VR, Bumper Cars, Arcade, and Aerial Obstacle course. Once you are ready, you can purchase passes online on in-store. Let the Fun Begin!",
-    "img": "./img/faq3.jpg"
+    "title": "View Package List",
+    "des": "Once you've selected a party host, the next step is to explore their range of service packages. This crucial step allows you to grasp the various benefits and incentives provided by the host, enabling you to choose the package that aligns perfectly with your party's needs and desires.",
+    "img": "./img/package.jpg",
+    "link": "/partyhostlist"
   },
   {
     "id": 4,
-    "title": "Our Hours",
-    "des": "We are open every day from 9AM to 9PM. See hetail Hours for all services and Statutory Holidays.",
-    "img": "./img/faq4.jpg",
-    "link": ""
+    "title": "View Service List",
+    "des": "After selecting a package, the next step is to select the specific list of services in that package. This allows you to tweak and adjust specific party elements to ensure that every requirement is met and your party turns out to be perfect.",
+    "img": "./img/service.avif",
+    "link": "/partyhostlist"
   },
   {
     "id": 5,
-    "title": "The Bite Box",
-    "des": "Take a break and grab a drink & a bite at The Bite Box. Our Cafe has a delicious selection of Pizza, Hot Dogs, Chicken Tenders, Poutine, Fries, and much more.",
-    "img": "./img/faq5.jpg"
+    "title": "Confirm & Payment",
+    "des": "Once you have selected the required services, the next step is payment. This process includes order confirmation and payment of the corresponding amount. This is the final step in the ordering process, ensuring every transaction is completed easily and securely.",
+    "img": "./img/faq4.jpg",
+    "link": "/partyhostlist"
   }
+  
 ]

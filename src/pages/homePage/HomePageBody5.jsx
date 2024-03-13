@@ -15,7 +15,7 @@ export default function HomePageBody5() {
   return (
     <div
       style={{
-        backgroundColor: "goldenrod",
+        backgroundColor: "#fae6fa",
         paddingBottom: "40px",
         paddingTop: "30px",
       }}
@@ -25,6 +25,7 @@ export default function HomePageBody5() {
         variant="h4"
         align="center"
         style={{
+          color: "black",
           marginBottom: "15px",
           fontWeight: "bold",
         }}
@@ -35,13 +36,16 @@ export default function HomePageBody5() {
         fontSize={17}
         align="center"
         style={{
-          marginTop: "10px",
+          marginTop: "20px",
           marginBottom: "20px",
+          marginLeft: "200px",
+          marginRight: "200px",
         }}
       >
-        No pre-booking is required to have fun at The Booking Party For Kids.
-        Visit us anytime during operation hours and buy tickets in-store. You
-        can also purchase tickets online now!
+        We provide detailed and clear instructions on ordering steps for users.
+        From choosing a service to payment and order confirmation, this guide
+        makes it easy for anyone to navigate and complete the ordering process
+        in a coherent and convenient way.
       </Typography>
 
       <Grid container spacing={2} justifyContent="center">
@@ -62,16 +66,24 @@ export default function HomePageBody5() {
               to={result.link}
               style={{ textDecoration: "none", width: "100%" }}
             >
-              <Card sx={{ minWidth: 280, height: "100%" }}>
+              <Card
+                sx={{
+                  minWidth: 280,
+                  height: "100%",
+                  backgroundColor: "cornsilk",
+                  marginBottom: "10px",
+                }}
+              >
                 <CardActionArea>
                   <CardMedia
                     component="img"
                     image={result.img}
                     alt="green iguana"
                     style={{
-                      borderRadius: "5px",
                       objectFit: "cover",
-                      marginTop: "0px",
+                      margin: "0",
+                      height: "200px",
+                      width: "100%",
                     }}
                   />
                   <CardContent>

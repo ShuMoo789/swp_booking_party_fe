@@ -9,7 +9,11 @@ function Home2() {
     <div
       className="bg_homepagebody2"
       id="work-evironment"
-      style={{ backgroundColor: "#CDCDB4" }}
+      style={{
+        backgroundColor: "#fae6fa",
+        paddingTop: "50px",
+        paddingBottom: "70px",
+      }}
     >
       <Typography
         className="title-homepagebody2"

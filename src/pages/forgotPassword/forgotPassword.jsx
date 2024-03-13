@@ -41,7 +41,7 @@ const ForgotPassword = () => {
     <Box
       className="bg_container-fg"
       style={{
-        backgroundImage: `url(${images.login_bg2})`,
+        backgroundImage: `url(${images.background})`,
         backgroundSize: "cover",
         backgroundPosition: "center",
       }}
@@ -56,8 +56,8 @@ const ForgotPassword = () => {
                 boxShadow: "0 0 10px rgba(0, 0, 0, 0.2)", // Đổ bóng cho form
                 display: "flex",
                 justifyContent: "center",
-                width: "800px",
-                height: "400px",
+                width: "600px",
+                height: "300px",
                 margin: "auto",
               }}
             >
@@ -134,7 +134,7 @@ const ForgotPassword = () => {
                   >
                     {email}
                   </a>
-                  . Please check your mail and give us your confirm code
+                  . Please check your mail and enter your confirm code
                 </Typography>
                 <TextField
                   type="text"

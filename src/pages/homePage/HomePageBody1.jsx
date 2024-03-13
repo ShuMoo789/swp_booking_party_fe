@@ -7,7 +7,7 @@ export default function Home1() {
     <div className="main_container" id="#">
       <Box
         className="homepagebody1__right-site"
-        sx={{ width: "650px", position: "relative", marginTop: "-300px" }}
+        sx={{ width: "550px", position: "relative", marginTop: "-150px" }}
       >
         <Stack spacing={4}>
           <Typography
@@ -35,7 +35,7 @@ export default function Home1() {
         </Stack>
       </Box>
 
-      <Box sx={{ position: "relative", top: "-40px", marginRight:"100px"}}>
+      <Box sx={{ position: "relative", top: "-40px", marginRight: "100px" }}>
         <CardMedia
           className="image-homepagebody1"
           component="img"

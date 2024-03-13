@@ -1,37 +1,44 @@
-import React, { useState } from "react";
-import { Button, Modal, Row, Table } from "antd";
+import React, { useState, useEffect } from "react";
+import { Button, Modal, Table, Empty } from "antd";
+import api from "../../config/axios";
 import { toast } from "react-toastify";
 
 export const ManageOrder = () => {
   const [orders, setOrders] = useState([]);
-  const [previewOpen, setPreviewOpen] = useState(false);
+  const [previewVisible, setPreviewVisible] = useState(false);
   const [previewImage, setPreviewImage] = useState("");
   const [previewTitle, setPreviewTitle] = useState("");
 
-  const handleCancel = () => {
-    setPreviewOpen(false);
-    setPreviewImage("");
-  };
+  useEffect(() => {
+    fetchOrders();
+  }, []);
 
-  const handlePlaceOrder = async () => {
+  const fetchOrders = async () => {
     try {
-      // Gửi yêu cầu đặt hàng đến máy chủ và nhận lại đơn hàng đã đặt
-      const response = await api.post("/place-order", {
-        /* Thông tin đặt hàng */
-      });
-      const newOrder = response.data;
-
-      // Thêm đơn hàng mới vào danh sách đơn hàng
-      setOrders([...orders, newOrder]);
-
-      toast.success("Order placed successfully!");
+      const response = await api.get("/orders");
+      setOrders(response.data);
     } catch (error) {
-      console.error("Error placing order:", error);
-      toast.error("Failed to place order. Please try again later.");
+      console.error("Error fetching orders:", error);
     }
   };
 
+  const handlePreview = (image, title) => {
+    setPreviewImage(image);
+    setPreviewTitle(title);
+    setPreviewVisible(true);
+  };
+
   const columns = [
+    {
+      title: "Action",
+      dataIndex: "action",
+      key: "action",
+      render: (_, record) => (
+        <Button onClick={() => handlePreview(record.image, record.title)}>
+          Preview
+        </Button>
+      ),
+    },
     {
       title: "Create At",
       dataIndex: "createdAt",
@@ -47,17 +54,25 @@ export const ManageOrder = () => {
       dataIndex: "totalPrice",
       key: "totalPrice",
     },
+    {
+      title: "Action",
+      dataIndex: "action",
+      key: "action",
+      render: (_, record) => (
+        <Button onClick={() => handleAcceptOrder(record)}>Accept</Button>
+      ),
+    },
   ];
 
   return (
     <div>
       <h2>Manage Orders</h2>
       <div style={{ padding: 20 }}>
-        <Table dataSource={orders} columns={columns} />
-
-        <Modal title={previewTitle} onCancel={handleCancel} footer={null}>
-          <img src={previewImage} alt="Preview" style={{ width: "100%" }} />
-        </Modal>
+        {orders.length > 0 ? (
+          <Table dataSource={orders} columns={columns} />
+        ) : (
+          <Empty description="No orders" />
+        )}
       </div>
     </div>
   );
