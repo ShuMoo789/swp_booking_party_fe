@@ -22,7 +22,6 @@ import api from "../../config/axios";
 import { toast } from "react-toastify";
 import { data } from "../statistic";
 
-
 export const ManagePackage = () => {
   const [packages, setPakages] = useState([]);
   const [showModalAdd, setShowModalAdd] = useState(false);
@@ -117,7 +116,7 @@ export const ManagePackage = () => {
     setShowModalAdd(false);
   };
   const onChange = (value) => {
-    console.log('changed', value);
+    console.log("changed", value);
   };
 
   return (
@@ -218,7 +217,11 @@ export const ManagePackage = () => {
                     },
                   ]}
                 >
-                  <InputNumber style={{width:"100%"}} defaultValue={1} onChange={onChange} />
+                  <InputNumber
+                    style={{ width: "100%" }}
+                    defaultValue={1}
+                    onChange={onChange}
+                  />
                 </Form.Item>
               </Col>
             </Row>
@@ -280,7 +283,7 @@ export const ManagePackage = () => {
               rules={[
                 {
                   required: true,
-                  message: "Please enten the description!",
+                  message: "Please enter the description!",
                 },
               ]}
             >
@@ -340,15 +343,15 @@ function ServiceList({ list, packages }) {
       quantity: 1,
       description: "good",
       price: 200,
-      status: "x",
+      status: "available",
     },
     {
       key: "2",
       name: "service 2",
-      quantity: 1,
+      quantity: 2,
       description: "good",
       price: 200,
-      status: "x",
+      status: "unavailable",
     },
   ];
 

@@ -3,7 +3,7 @@ import "./index.scss";
 import { Button, Steps } from "antd/es";
 import { ChooseService } from "./choose-service";
 import { ChoosePackage } from "./choose-package";
-import { InfoToRecive } from "./info-to-recive";
+import { InfoToReceive } from "./info-to-receive";
 import { useForm } from "antd/es/form/Form";
 import { useDispatch, useSelector } from "react-redux";
 import { reset, updateInfo } from "../../redux/features/bookingSlice";
@@ -25,8 +25,8 @@ export const BookingPage = () => {
       content: <ChoosePackage />,
     },
     {
-      title: "Info To Recive",
-      content: <InfoToRecive form={form} onSubmitInfo={onSubmitInfo} />,
+      title: "Info To Receive",
+      content: <InfoToReceive form={form} onSubmitInfo={onSubmitInfo} />,
     },
     {
       title: "Choose Service",
@@ -61,7 +61,10 @@ export const BookingPage = () => {
   };
   const calcTotal = () => {
     let total = 0;
-    booking?.services?.forEach((item) => (total += item.quantity * item.price + booking.package.priceTotal));
+    booking?.services?.forEach(
+      (item) =>
+        (total += item.quantity * item.price + booking.package.priceTotal)
+    );
     return total;
   };
 
@@ -84,7 +87,7 @@ export const BookingPage = () => {
         };
       }),
     });
-    dispatch(reset())
+    dispatch(reset());
     window.open(response.data, "_self");
   };
 

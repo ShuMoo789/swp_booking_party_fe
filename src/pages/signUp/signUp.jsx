@@ -150,34 +150,41 @@ export default function SignUp() {
     },
     validationSchema: Yup.object({
       username: Yup.string()
-        .required("required!!")
-        .min(3, "at least 3 character")
-        .max(20, "max 20 character")
+        .required("Please enter your username.")
+        .min(3, "The user name field requires a minimum of 3 characters.")
+        .max(20, "The user name field requires a maximum of 20 characters.")
         .matches(
           /^[a-zA-Z0-9]+$/,
-          "Username must contain only letters and numbers"
+          "The username must contain only letters and numbers."
         ),
-      email: Yup.string().required("required!!").email("Invalid Email!"),
+      email: Yup.string()
+        .required("Please enter your email.")
+        .email("The email is invalid. Please try again."),
       password: Yup.string()
-        .required("required!!")
-        .min(3, "at least 3 character")
-        .max(20, "max 20 character")
+        .required("Please enter your password.")
+        .min(3, "The email field requires a minimum of 3 characters.")
+        .max(20, "The email field requires a maximum of 20 characters.")
         .matches(
           /^[a-zA-Z0-9]+$/,
-          "Password must contain only letters and numbers"
+          "The password must contain only letters and numbers."
         ),
-      firstname: Yup.string().required("First name is required"),
-      lastname: Yup.string().required("Last name is required"),
+      firstname: Yup.string().required("Please enter your firstname."),
+      lastname: Yup.string().required("Please enter your lastname."),
       phone: Yup.string()
-        .matches(/^[0-9]+$/, "Phone number must contain only digits")
-        .min(10, "Phone number must be at least 10 characters")
-        .max(12, "Phone number must not exceed 12 characters")
-        .required("Phone number is required"),
-      address: Yup.string().required("Address is required"),
-      businessname: Yup.string().required("Business name is required"),
+        .matches(/^[0-9]+$/, "The phone number must contain only digits.")
+        .min(10, "Phone number must be at least 10 digits.")
+        .max(12, "Phone number must not exceed 12 digits.")
+        .required("Please enter your phone number."),
+      address: Yup.string().required("Please enter your address."),
+      businessname: Yup.string().required(
+        "Please enter the name of your business."
+      ),
       confirm: Yup.string()
-        .required("required!!")
-        .oneOf([Yup.ref("password"), null], "Passwords must match"),
+        .required("Please confirm your password.")
+        .oneOf(
+          [Yup.ref("password"), null],
+          "The confirmed password must match the original password."
+        ),
     }),
   });
 
@@ -215,22 +222,22 @@ export default function SignUp() {
     <Box
       className="bg_container-signup"
       style={{
-        backgroundImage: `url(${images.login_bg2})`,
+        backgroundImage: `url(${images.background})`,
         backgroundSize: "cover",
         backgroundPosition: "center",
       }}
     >
-      <CardMedia
+      {/* <CardMedia
         className="image-signup"
         component="img"
         src={images.cake}
         alt="images"
         style={{
-          width: "45%",
+          width: "25%",
           paddingRight: "50px",
           marginRight: "-20px",
         }}
-      />
+      /> */}
       <Box
         className="form-signup"
         style={{ marginTop: "-65px", maxWidth: "500px", margin: "auto" }}
@@ -241,12 +248,12 @@ export default function SignUp() {
           </Typography>
 
           <Typography textAlign="center">
-            Have an account ?{" "}
+            Already have an account?{" "}
             <Link
               to="/login"
               style={{ color: "#0079FF", textDecoration: "none" }}
             >
-              Lets Login !
+              Let's Login!
             </Link>{" "}
           </Typography>
 
@@ -445,7 +452,7 @@ export default function SignUp() {
                     onChange={handlePolicyCheckboxChange}
                   />
                 }
-                label="I agree with all policy about website"
+                label="I agree to all website terms and policies."
               />
               <Modal
                 aria-labelledby="transition-modal-title"
@@ -470,8 +477,8 @@ export default function SignUp() {
                       sx={{ fontWeight: "bold" }}
                     >
                       {value === "customer"
-                        ? "Customer Policy"
-                        : "Party Host Policy"}
+                        ? "Customer Policies"
+                        : "Party Host Policies"}
                     </Typography>
                     <Typography
                       id="transition-modal-description"

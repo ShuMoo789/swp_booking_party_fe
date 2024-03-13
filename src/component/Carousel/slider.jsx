@@ -21,4 +21,12 @@ export const dataImg = [
     id: 5,
     image: images.slide_img5,
   },
+  {
+    id: 6,
+    image: images.slide_img6,
+  },
+  {
+    id: 7,
+    image: images.slide_img7,
+  },
 ];

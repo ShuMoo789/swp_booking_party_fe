@@ -11,7 +11,7 @@ export default function HomePageBody4() {
         flexWrap: "wrap",
         alignItems: "center",
         justifyContent: "space-around",
-        background: "#FFE4B5",
+        background: "#EF96C5",
         paddingBottom: "20px",
         paddingTop: "20px",
       }}
@@ -21,9 +21,9 @@ export default function HomePageBody4() {
         <CardMedia
           className="image-homepagebody3"
           component="img"
-          src={images.gift_card}
+          src={images.giftcard}
           alt="images"
-          style={{ height: "30rem", width: "40rem", paddingRight: "-20px" }}
+          style={{ height: "25rem", width: "40rem", paddingRight: "-20px" }}
         />
       </Box>
       <Box className="left-homepagebody4" sx={{ width: 500 }}>
@@ -33,7 +33,8 @@ export default function HomePageBody4() {
               fontWeight: "bolder",
               fontSize: 40,
               textAlign: "left",
-              paddingBottom: "20px",
+              paddingBottom: "10px",
+              color: "black",
             }}
           >
             GIFT CARDS
