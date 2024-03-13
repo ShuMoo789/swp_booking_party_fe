@@ -96,6 +96,18 @@ const ManageService = () => {
           </Form.Item>
 
           <Form.Item
+            label="Price of the service"
+            name={"price"}
+            rules={[
+              {
+                required: true,
+                message: "Please enter price of the service!",
+              },
+            ]}
+          >
+            <Input suffix="$" />
+          </Form.Item>
+          <Form.Item
             label="Description"
             name={"description"}
             rules={[

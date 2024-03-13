@@ -1,10 +1,12 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./index.scss"; // Import your SCSS file for styling
 import "./ordertable.scss"; // Import your SCSS file for styling
+import api from "../../config/axios";
+import { formatDistance } from "date-fns";
 
-const Wallet = () => {
+const Wallet = ({ data }) => {
   const [balance, setBalance] = useState(100); // Initial balance
-
+  console.log(data);
   // Function to handle adding money
   const addMoney = () => {
     // Placeholder logic for adding money
@@ -17,7 +19,7 @@ const Wallet = () => {
     <div className="wallet-container">
       <div className="balance-container">
         <h1>Account Balance</h1>
-        <div className="balance">${balance.toFixed(2)}</div>
+        <div className="balance">${data?.balance?.toFixed(2)}</div>
       </div>
       <div className="button-container">
         <button className="add-money-btn" onClick={addMoney}>
@@ -29,9 +31,26 @@ const Wallet = () => {
 };
 
 const App = () => {
+  const [wallet, setWallet] = useState();
+  const [transaction, setTransactions] = useState([]);
+  const fetchWallet = async () => {
+    const response = await api.get("wallet");
+    setWallet(response.data);
+  };
+
+  const fetchTransaction = async () => {
+    const response = await api.get("transaction");
+    setTransactions(response.data);
+  };
+
+  useEffect(() => {
+    fetchWallet();
+    fetchTransaction();
+  }, []);
+
   return (
     <div>
-      <Wallet />
+      <Wallet data={wallet} />
       <h2 style={{ marginTop: "20px", marginLeft: "20px" }}>
         All Transaction Details
       </h2>
@@ -52,54 +71,33 @@ const App = () => {
                     </tr>
                   </thead>
                   <tbody className="table-body">
-                    <tr className="cell-1">
-                      <td>#SO-13487</td>
-                      <td>Paypal</td>
-                      <td>
-                        <span className="badge success">Success</span>
-                      </td>
-                      <td>$2674.00</td>
-                      <td>Today</td>
-                      <td>
-                        <i className="fa fa-ellipsis-h text-black-50"></i>
-                      </td>
-                    </tr>
-                    <tr className="cell-1">
-                      <td>#SO-13453</td>
-                      <td>Momo</td>
-                      <td>
-                        <span className="badge success">Success</span>
-                      </td>
-                      <td>$3454.00</td>
-                      <td>Yesterday</td>
-                      <td>
-                        <i className="fa fa-ellipsis-h text-black-50"></i>
-                      </td>
-                    </tr>
-                    <tr className="cell-1">
-                      <td>#SO-13498</td>
-                      <td>GooglePay</td>
-                      <td>
-                        <span className="badge failed">Failed</span>
-                      </td>
-                      <td>$6274.00</td>
-                      <td>May 12, 2020</td>
-                      <td>
-                        <i className="fa fa-ellipsis-h text-black-50"></i>
-                      </td>
-                    </tr>
-                    <tr className="cell-1">
-                      <td>#SO-16499</td>
-                      <td>ApplePay</td>
-                      <td>
-                        <span className="badge pending">Pending</span>
-                      </td>
-                      <td>$6375.00</td>
-                      <td>May 11, 2020</td>
-                      <td>
-                        <i className="fa fa-ellipsis-h text-black-50"></i>
-                      </td>
-                    </tr>
+                    {transaction
+                      .sort(
+                        (item1, item2) =>
+                          new Date(item2.createAt) - new Date(item1.createAt)
+                      )
+                      .map((item) => {
+                        return (
+                          <tr className="cell-1">
+                            <td>{item.ordered.id}</td>
+                            <td>VN PAY</td>
+                            <td>
+                              <span className="badge success">Success</span>
+                            </td>
+                            <td>${item.moneyValue}</td>
+                            <td>
+                              {formatDistance(
+                                new Date(item.createAt),
+                                new Date(),
+                                { addSuffix: true }
+                              )}
+                            </td>
+                            <td>
+                              <i className="fa fa-ellipsis-h text-black-50"></i>
+                            </td>
+                          </tr>
+                        );
+                      })}
                   </tbody>
                 </table>
               </div>

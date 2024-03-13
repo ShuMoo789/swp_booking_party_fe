@@ -130,7 +130,7 @@ function App() {
         },
         {
           path: "wallet",
-          element: <WalletPH />,
+          element: <Wallet />,
         },
         {
           path: "feedbacklist",

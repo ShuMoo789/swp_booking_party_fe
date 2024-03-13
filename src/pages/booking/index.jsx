@@ -6,7 +6,7 @@ import { ChoosePackage } from "./choose-package";
 import { InfoToRecive } from "./info-to-recive";
 import { useForm } from "antd/es/form/Form";
 import { useDispatch, useSelector } from "react-redux";
-import { updateInfo } from "../../redux/features/bookingSlice";
+import { reset, updateInfo } from "../../redux/features/bookingSlice";
 import { ConfirmPage } from "./confirm";
 import api from "../../config/axios";
 export const BookingPage = () => {
@@ -61,7 +61,7 @@ export const BookingPage = () => {
   };
   const calcTotal = () => {
     let total = 0;
-    booking?.services?.forEach((item) => (total += item.quantity * item.price));
+    booking?.services?.forEach((item) => (total += item.quantity * item.price + booking.package.priceTotal));
     return total;
   };
 
@@ -84,8 +84,8 @@ export const BookingPage = () => {
         };
       }),
     });
-    console.log();
-    window.open(response.data);
+    dispatch(reset())
+    window.open(response.data, "_self");
   };
 
   return (

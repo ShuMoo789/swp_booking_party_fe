@@ -22,7 +22,9 @@ export const bookingSlice = createSlice({
         state.services = [];
       }
 
-      const index = state.services.findIndex((item) => item.id === action.payload.id);
+      const index = state.services.findIndex(
+        (item) => item.id === action.payload.id
+      );
       console.log(index);
 
       if (index >= 0) {
@@ -37,10 +39,19 @@ export const bookingSlice = createSlice({
     deleteService: (state, action) => {
       state.services.splice(action.payload, 1);
     },
+    reset: (state, action) => {
+      return initialState;
+    },
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { selectPackage, updateInfo, selectService, deleteService } = bookingSlice.actions;
+export const {
+  reset,
+  selectPackage,
+  updateInfo,
+  selectService,
+  deleteService,
+} = bookingSlice.actions;
 
 export default bookingSlice.reducer;
