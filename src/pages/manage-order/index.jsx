@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Button, Modal, Row, Table } from "antd";
 import { toast } from "react-toastify";
-
+import api from "../../config/axios";
+import { formatDistance } from "date-fns";
 export const ManageOrder = () => {
   const [orders, setOrders] = useState([]);
   const [previewOpen, setPreviewOpen] = useState(false);
@@ -13,39 +14,54 @@ export const ManageOrder = () => {
     setPreviewImage("");
   };
 
-  const handlePlaceOrder = async () => {
-    try {
-      // Gửi yêu cầu đặt hàng đến máy chủ và nhận lại đơn hàng đã đặt
-      const response = await api.post("/place-order", {
-        /* Thông tin đặt hàng */
-      });
-      const newOrder = response.data;
-
-      // Thêm đơn hàng mới vào danh sách đơn hàng
-      setOrders([...orders, newOrder]);
-
-      toast.success("Order placed successfully!");
-    } catch (error) {
-      console.error("Error placing order:", error);
-      toast.error("Failed to place order. Please try again later.");
-    }
+  const fetchOrder = async () => {
+    const response = await api.get("/order-of-host");
+    setOrders(response.data);
   };
+
+  useEffect(() => {
+    fetchOrder();
+  }, []);
 
   const columns = [
     {
       title: "Create At",
-      dataIndex: "createdAt",
-      key: "createdAt",
+      dataIndex: "createAt",
+      key: "createAt",
+      render: (value) =>
+        formatDistance(new Date(value), new Date(), { addSuffix: true }),
     },
     {
       title: "Status",
-      dataIndex: "status",
-      key: "status",
+      dataIndex: "orderedStatus",
+      key: "orderedStatus",
     },
     {
       title: "Total Price",
       dataIndex: "totalPrice",
       key: "totalPrice",
+    },
+    {
+      title: "Action",
+      dataIndex: "id",
+      key: "id",
+      render: (value, record) => {
+        return (
+          <>
+            {record.orderedStatus === "PAID" && (
+              <Button
+                type="primary"
+                onClick={async () => {
+                  await api.patch(`/complete/${value}`);
+                  fetchOrder();
+                }}
+              >
+                Finish
+              </Button>
+            )}
+          </>
+        );
+      },
     },
   ];
 

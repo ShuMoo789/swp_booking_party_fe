@@ -3,6 +3,8 @@ import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import { Box, Paper, Stack } from "@mui/material";
+import { useFormik } from "formik";
+import * as Yup from "yup";
 
 import "./forgotPassword.scss";
 import images from "../../constant/images";
@@ -36,6 +38,28 @@ const ForgotPassword = () => {
   const handleBack = () => {
     setStep(step - 1);
   };
+
+  const formik = useFormik({
+    initialValues: {
+      id: 0,
+      password: "",
+      confirm: "",
+    },
+    validationSchema: Yup.object({
+      password: Yup.string()
+        .required("required!!")
+        .min(3, "at least 3 character")
+        .max(20, "max 20 character")
+        .matches(
+          /^[a-zA-Z0-9]+$/,
+          "Password must contain only letters and numbers"
+        ),
+
+      confirm: Yup.string()
+        .required("required!!")
+        .oneOf([Yup.ref("password"), null], "Passwords must match"),
+    }),
+  });
 
   return (
     <Box
@@ -194,11 +218,16 @@ const ForgotPassword = () => {
                   name="password"
                   required
                   sx={{ width: "500px" }}
-                  value={password}
                   id="outlined-password-input"
                   label="Password"
-                  onChange={(e) => setPassword(e.target.value)}
                   type="password"
+                  value={formik.values.password}
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  error={
+                    formik.touched.password && Boolean(formik.errors.password)
+                  }
+                  helperText={formik.touched.password && formik.errors.password}
                 />
 
                 <TextField
@@ -209,6 +238,13 @@ const ForgotPassword = () => {
                   id="outlined-password-input"
                   label="Confirm Password"
                   type="password"
+                  value={formik.values.confirm}
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  error={
+                    formik.touched.confirm && Boolean(formik.errors.confirm)
+                  }
+                  helperText={formik.touched.confirm && formik.errors.confirm}
                 />
                 {/* Hiển thị thông báo xác nhận email ở đây */}
                 <Stack

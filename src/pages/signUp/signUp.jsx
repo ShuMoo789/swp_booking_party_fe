@@ -20,10 +20,12 @@ import { useFormik } from "formik";
 import { Link } from "react-router-dom";
 import * as Yup from "yup";
 // Import images from your constant file
+import { toast } from "react-toastify";
+
 import images from "../../constant/images";
 // Import your CSS file
 import "./signUp.scss";
-
+import api from "../../config/axios";
 const style = {
   position: "absolute",
   top: "50%",
@@ -49,9 +51,11 @@ export default function SignUp() {
     if (event.target.value === "customer") {
       setShowBusinessName(false);
       setShowNameFields(true);
+      formik.setFieldValue("role", "CUSTOMER");
     } else if (event.target.value === "party host") {
       setShowBusinessName(true);
       setShowNameFields(false);
+      formik.setFieldValue("role", "PARTY_HOST");
     }
   };
 
@@ -146,6 +150,8 @@ export default function SignUp() {
       phone: "",
       address: "",
       businessname: "",
+      information: "",
+      role: "CUSTOMER",
       confirm: "",
     },
     validationSchema: Yup.object({
@@ -175,6 +181,10 @@ export default function SignUp() {
         .required("Phone number is required"),
       address: Yup.string().required("Address is required"),
       businessname: Yup.string().required("Business name is required"),
+      information: Yup.string().required(
+        "Please enter your business short description"
+      ),
+
       confirm: Yup.string()
         .required("required!!")
         .oneOf([Yup.ref("password"), null], "Passwords must match"),
@@ -190,6 +200,7 @@ export default function SignUp() {
     phone,
     address,
     businessname,
+    information,
     confirm
   ) => {
     if (
@@ -200,6 +211,7 @@ export default function SignUp() {
       lastname !== "" &&
       phone !== "" &&
       address !== "" &&
+      information !== "" &&
       (!showBusinessName || businessname !== "") &&
       (!showNameFields || (firstname !== "" && lastname !== "")) &&
       confirm !== "" &&
@@ -210,7 +222,28 @@ export default function SignUp() {
       return true;
     }
   };
-
+  const handleRegister = async () => {
+    console.log(formik.values);
+    try {
+      const response = await api.post("/authentication/register", {
+        username: formik.values.username,
+        password: formik.values.password,
+        firstName: formik.values.firstname,
+        lastName: formik.values.lastname,
+        email: formik.values.email,
+        phone: formik.values.phone,
+        information: formik.values.information,
+        role: formik.values.role,
+        address: formik.values.address,
+      });
+      console.log(response);
+      toast.success("Please Verify your email!!");
+    } catch (e) {
+      console.log(e.response);
+      toast.error("Đăng ký không thành công !!!");
+      // alert(e.response.data);
+    }
+  };
   return (
     <Box
       className="bg_container-signup"
@@ -313,26 +346,52 @@ export default function SignUp() {
             helperText={formik.touched.email && formik.errors.email}
           />
           {showBusinessName && (
-            <TextField
-              className="textfield-signup"
-              name="businessname"
-              required
-              sx={{ width: "100%" }}
-              size="small"
-              id="outlined-email-input"
-              label="Name of your Business"
-              type="text"
-              value={formik.values.businessname}
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              error={
-                formik.touched.businessname &&
-                Boolean(formik.errors.businessname)
-              }
-              helperText={
-                formik.touched.businessname && formik.errors.businessname
-              }
-            />
+            <Grid container>
+              <Grid item xs={12}>
+                <TextField
+                  className="textfield-signup"
+                  name="businessname"
+                  required
+                  sx={{ width: "100%" }}
+                  size="small"
+                  id="outlined-email-input"
+                  label="Name of your Business"
+                  type="text"
+                  value={formik.values.businessname}
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  error={
+                    formik.touched.businessname &&
+                    Boolean(formik.errors.businessname)
+                  }
+                  helperText={
+                    formik.touched.businessname && formik.errors.businessname
+                  }
+                />
+              </Grid>
+              <Grid item xs={12} sx={{ mt: 2 }}>
+                <TextField
+                  className="textfield-signup"
+                  name="information"
+                  required
+                  sx={{ width: "100%" }}
+                  size="small"
+                  id="outlined-email-input"
+                  label="Short description of your business"
+                  type="text"
+                  value={formik.values.information}
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  error={
+                    formik.touched.information &&
+                    Boolean(formik.errors.information)
+                  }
+                  helperText={
+                    formik.touched.information && formik.errors.information
+                  }
+                />
+              </Grid>
+            </Grid>
           )}
           {/* Grid for First Name and Last Name */}
           {showNameFields && (
@@ -487,6 +546,7 @@ export default function SignUp() {
           <Button
             className="Register_Button"
             sx={{ backgroundColor: "#626AD1", color: "white" }}
+            onClick={handleRegister}
             disabled={checkDisabled(
               formik.values.username,
               formik.values.email,
@@ -496,6 +556,7 @@ export default function SignUp() {
               formik.values.phone,
               formik.values.address,
               formik.values.businessname,
+
               formik.values.confirm
             )}
           >

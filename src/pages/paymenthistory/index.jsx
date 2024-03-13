@@ -1,33 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { Space, Table, Tag, Button} from "antd";
+import { Space, Table, Tag, Button, Form, Modal, Rate, Input } from "antd";
 import api from "../../config/axios";
 import dayjs from "dayjs";
 
-const data = [
-  {
-    key: "1",
-    name: "John Brown",
-    age: 32,
-    address: "New York No. 1 Lake Park",
-    tags: ["nice", "developer"],
-  },
-  {
-    key: "2",
-    name: "Jim Green",
-    age: 42,
-    address: "London No. 1 Lake Park",
-    tags: ["loser"],
-  },
-  {
-    key: "3",
-    name: "Joe Black",
-    age: 32,
-    address: "Sydney No. 1 Lake Park",
-    tags: ["cool", "teacher"],
-  },
-];
 const paymentHistory = () => {
   const [orders, setOrders] = useState("");
+  const [form] = Form.useForm();
+  const [showModal, setShowModal] = useState(false);
   const columns = [
     {
       title: "Package Name",
@@ -94,8 +73,25 @@ const paymentHistory = () => {
       key: "action",
       render: (_, record) => (
         <Space size="middle">
-          <Button style={{color:"white", backgroundColor:"orange"}}>Delete</Button>
-          <Button style={{color:"white", backgroundColor:"orange"}}>Update</Button>
+          {record.orderedStatus === "COMPLETED" ? (
+            <Button
+              type="primary"
+              onClick={() => {
+                setShowModal(true);
+              }}
+            >
+              Feedback
+            </Button>
+          ) : (
+            <>
+              <Button style={{ color: "white", backgroundColor: "orange" }}>
+                Delete
+              </Button>
+              <Button style={{ color: "white", backgroundColor: "orange" }}>
+                Update
+              </Button>
+            </>
+          )}
         </Space>
       ),
     },
@@ -108,8 +104,49 @@ const paymentHistory = () => {
     console.log(reponse.data);
     setOrders(reponse.data);
   };
+  const handleFeedback = async (values) => {
+    console.log(values);
+    const response = await api.post("/create-feedback", {
+      updateAt: values.updateAt,
+      description: values.feedback,
+      rating: values.rating,
+    });
+  };
+
   return (
-    <Table style={{ margin: "100px" }} columns={columns} dataSource={orders} />
+    <>
+      <Table
+        style={{ margin: "100px" }}
+        columns={columns}
+        dataSource={orders}
+      />
+      <Modal
+        title="Feedback"
+        open={showModal}
+        onOk={() => form.submit()}
+        onCancel={() => {
+          form.resetFields();
+          setShowModal(false);
+        }}
+      >
+        <Form form={form} layout="vertical" onFinish={handleFeedback}>
+          <Form.Item
+            name="rating"
+            label="Rate your experience:"
+            rules={[{ required: true, message: "Please rate your experience" }]}
+          >
+            <Rate />
+          </Form.Item>
+          <Form.Item
+            name="feedback"
+            label="Feedback:"
+            rules={[{ required: true, message: "Please provide feedback" }]}
+          >
+            <Input.TextArea rows={4} />
+          </Form.Item>
+        </Form>
+      </Modal>
+    </>
   );
 };
 export default paymentHistory;

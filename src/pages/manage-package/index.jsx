@@ -22,7 +22,6 @@ import api from "../../config/axios";
 import { toast } from "react-toastify";
 import { data } from "../statistic";
 
-
 export const ManagePackage = () => {
   const [packages, setPakages] = useState([]);
   const [showModalAdd, setShowModalAdd] = useState(false);
@@ -117,7 +116,7 @@ export const ManagePackage = () => {
     setShowModalAdd(false);
   };
   const onChange = (value) => {
-    console.log('changed', value);
+    console.log("changed", value);
   };
 
   return (
@@ -218,7 +217,11 @@ export const ManagePackage = () => {
                     },
                   ]}
                 >
-                  <InputNumber style={{width:"100%"}} defaultValue={1} onChange={onChange} />
+                  <InputNumber
+                    style={{ width: "100%" }}
+                    defaultValue={1}
+                    onChange={onChange}
+                  />
                 </Form.Item>
               </Col>
             </Row>
