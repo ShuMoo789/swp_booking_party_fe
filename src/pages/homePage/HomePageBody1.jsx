@@ -35,7 +35,7 @@ export default function Home1() {
         </Stack>
       </Box>
 
-      <Box sx={{ position: "relative", top: "-40px" }}>
+      <Box sx={{ position: "relative", top: "-40px", marginRight:"100px"}}>
         <CardMedia
           className="image-homepagebody1"
           component="img"

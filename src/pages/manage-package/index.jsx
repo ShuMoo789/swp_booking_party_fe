@@ -22,6 +22,7 @@ import api from "../../config/axios";
 import { toast } from "react-toastify";
 import { data } from "../statistic";
 
+
 export const ManagePackage = () => {
   const [packages, setPakages] = useState([]);
   const [showModalAdd, setShowModalAdd] = useState(false);
@@ -115,6 +116,9 @@ export const ManagePackage = () => {
     form.resetFields();
     setShowModalAdd(false);
   };
+  const onChange = (value) => {
+    console.log('changed', value);
+  };
 
   return (
     <div>
@@ -170,7 +174,22 @@ export const ManagePackage = () => {
             >
               <Input />
             </Form.Item>
-
+            <Row gutter={12}>
+              <Col span={24}>
+                <Form.Item
+                  label="Venue"
+                  name={"venue"}
+                  rules={[
+                    {
+                      required: true,
+                      message: "Please enter venue!",
+                    },
+                  ]}
+                >
+                  <Input />
+                </Form.Item>
+              </Col>
+            </Row>
             <Row gutter={12}>
               <Col span={12}>
                 {" "}
@@ -190,16 +209,16 @@ export const ManagePackage = () => {
               <Col span={12}>
                 {" "}
                 <Form.Item
-                  label="Venue"
-                  name={"venue"}
+                  label="Slot"
+                  name={"slot"}
                   rules={[
                     {
                       required: true,
-                      message: "Please enter venue!",
+                      message: "Please enter Slot!",
                     },
                   ]}
                 >
-                  <Input />
+                  <InputNumber style={{width:"100%"}} defaultValue={1} onChange={onChange} />
                 </Form.Item>
               </Col>
             </Row>
@@ -267,7 +286,7 @@ export const ManagePackage = () => {
             >
               <TextArea rows={5} />
             </Form.Item>
-            <Form.Item label="Image" name={"img"}>
+            <Form.Item label="Image about your service" name={"img"}>
               <Upload
                 action="https://run.mocky.io/v3/435e224c-44fb-4773-9faf-380c5e6a2188"
                 listType="picture-card"

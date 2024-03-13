@@ -70,7 +70,7 @@ const InfoRecive = ({ form, onSubmitInfo }) => {
   }, [information]);
   console.log(data);
   return (
-    <div style={{ maxWidth: "1600px" }}>
+    <div style={{ maxWidth: "1600px", padding: 20 }}>
       <Form
         onFinish={(values) => {
           values.slot = slot;
@@ -88,181 +88,189 @@ const InfoRecive = ({ form, onSubmitInfo }) => {
           marginTop: "30px",
         }}
       >
-        <Form.Item
-          label="Name"
-          name={"name"}
-          rules={[
-            {
-              required: true,
-              message: "Please enter name!",
-            },
-          ]}
-        >
-          <Input
-            placeholder="Ex: Gepard Landau Honkai Star Rail"
-            suffix={
-              <Tooltip title="The name of the person checking in to host the party">
-                <InfoCircleOutlined
-                  style={{
-                    color: "rgba(0,0,0,.45)",
-                  }}
-                />
-              </Tooltip>
-            }
-            showCount
-            maxLength={100}
-            onChangeText={onChangeText}
-          />
-        </Form.Item>
-        <Form.Item
-          label="Phone"
-          name="phone"
-          rules={[
-            {
-              required: true,
-              message: "Please enter name!",
-            },
-          ]}
-        >
-          <Input
-            placeholder="Ex: 0838667899"
-            showCount
-            maxLength={10}
-            onChangeText={onChangeText}
-          />
-        </Form.Item>
-        <Form.Item
-          label="Email"
-          name="email"
-          rules={[
-            {
-              required: true,
-              message: "Please enter name!",
-            },
-          ]}
-        >
-          <Input
-            placeholder="Ex: bookingforkidz@online.com"
-            showCount
-            maxLength={100}
-            onChangeText={onChangeText}
-          />
-        </Form.Item>
-        <Form.Item
-          label="Additional Notes"
-          name="note"
-          rules={[
-            {
-              required: true,
-              message: "Please enter name!",
-            },
-          ]}
-        >
-          <TextArea
-            showCount
-            maxLength={500}
-            onChangeText={onChangeText}
-            placeholder="Ex: Name of the main character of the party: taylor, Food should not be spicy"
-          />
-        </Form.Item>
-        <Form.Item
-          label="Pick a date"
-          name="date"
-          rules={[
-            {
-              required: true,
-              message: "Please pick your date",
-            },
-          ]}
-        >
-          <DatePicker disabledDate={disabledPreviousDate} />
-        </Form.Item>
-        <Form.Item
-          label="Pick a Time"
-          name={"time"}
-          // name="time"
-          // rules={[
-          //   {
-          //     required: true,
-          //     message: "Please pick your date",
-          //   },
-          // ]}
-        >
-          <Radio.Group
-            onChange={(e) => {
-              form.setFieldValue("timeString", e);
-            }}
-            buttonStyle="solid"
-          >
-            {/* <Radio.Button value="a">Hangzhou</Radio.Button>
+        <Row>
+          <Col span={12}>
+            <Form.Item
+              label="Name"
+              name={"name"}
+              rules={[
+                {
+                  required: true,
+                  message: "Please enter name!",
+                },
+              ]}
+            >
+              <Input
+                placeholder="Ex: Gepard Landau Honkai Star Rail"
+                suffix={
+                  <Tooltip title="The name of the person checking in to host the party">
+                    <InfoCircleOutlined
+                      style={{
+                        color: "rgba(0,0,0,.45)",
+                      }}
+                    />
+                  </Tooltip>
+                }
+                showCount
+                maxLength={100}
+                onChangeText={onChangeText}
+              />
+            </Form.Item>
+            <Form.Item
+              label="Phone"
+              name="phone"
+              rules={[
+                {
+                  required: true,
+                  message: "Please enter name!",
+                },
+              ]}
+            >
+              <Input
+                placeholder="Ex: 0838667899"
+                showCount
+                maxLength={10}
+                onChangeText={onChangeText}
+              />
+            </Form.Item>
+            <Form.Item
+              label="Email"
+              name="email"
+              rules={[
+                {
+                  required: true,
+                  message: "Please enter name!",
+                },
+              ]}
+            >
+              <Input
+                placeholder="Ex: bookingforkidz@online.com"
+                showCount
+                maxLength={100}
+                onChangeText={onChangeText}
+              />
+            </Form.Item>
+            <Form.Item
+              label="Additional Notes"
+              name="note"
+              rules={[
+                {
+                  required: true,
+                  message: "Please enter name!",
+                },
+              ]}
+            >
+              <TextArea
+                showCount
+                maxLength={500}
+                onChangeText={onChangeText}
+                placeholder="Ex: Name of the main character of the party: taylor, Food should not be spicy"
+              />
+            </Form.Item>
+            <Form.Item
+              label="Pick a date"
+              name="date"
+              rules={[
+                {
+                  required: true,
+                  message: "Please pick your date",
+                },
+              ]}
+            >
+              <DatePicker disabledDate={disabledPreviousDate} />
+            </Form.Item>
+            <Form.Item
+              label="Pick a Time"
+              name={"time"}
+              // name="time"
+              // rules={[
+              //   {
+              //     required: true,
+              //     message: "Please pick your date",
+              //   },
+              // ]}
+            >
+              <Radio.Group
+                onChange={(e) => {
+                  form.setFieldValue("timeString", e);
+                }}
+                buttonStyle="solid"
+              >
+                {/* <Radio.Button value="a">Hangzhou</Radio.Button>
             <Radio.Button value="b">Shanghai</Radio.Button>
             <Radio.Button value="c">Beijing</Radio.Button>
             <Radio.Button value="d">Chengdu</Radio.Button> */}
-            {schedule.map((item) => {
-              return <Radio.Button value={item.id}>{item.time}</Radio.Button>;
-            })}
-          </Radio.Group>
-        </Form.Item>
-        <Form.Item label="Package">
-          <Row gutter={20}>
-            <Col span="8">
-              <Image
-                src={dataPackage?.img}
-                style={{
-                  borderRadius: "10px",
-                  border: "1px solid #ddd",
-                  padding: "5px",
-                }}
-              />
-            </Col>
-            <Col span="16">
-              <h1>{dataPackage?.name}</h1>
-              <p>Total Capacity: {dataPackage?.slot} Slot</p>
-              <p>Location: {dataPackage?.venue}</p>
-              <p>Description: {dataPackage?.description} </p>
-            </Col>
-          </Row>
-          <Row>
-            <Col span="12">
-              <h3>Select Slot Tickets:</h3>
-              <InputNumber
-                value={slot}
-                min={1}
-                max={dataPackage?.slot}
-                defaultValue={1}
-                onChange={onChangeNumber}
-                style={{ width: "100px", height: "50px", fontSize: "25px" }}
-              />
-            </Col>
-            <Col
-              span="5"
-              style={{
-                borderRadius: "10px",
-                border: "1px solid #ddd",
-                padding: "5px",
-                textAlign: "center",
-                fontWeight: "2px",
-                margin: "0 20px",
-              }}
-            >
-              <h4>Total Price</h4>
-              <h1> ${dataPackage?.priceTotal} </h1>
-            </Col>
-            <Col
-              span="5"
-              style={{
-                borderRadius: "10px",
-                border: "1px solid #ddd",
-                padding: "5px",
-                textAlign: "center",
-                fontWeight: "2px",
-              }}
-            >
-              <h4>Slot Left</h4>
-              <h1> {dataPackage?.slot - slot} </h1>
-            </Col>
-          </Row>
-        </Form.Item>
+                {schedule.map((item) => {
+                  return (
+                    <Radio.Button value={item.id}>{item.time}</Radio.Button>
+                  );
+                })}
+              </Radio.Group>
+            </Form.Item>
+          </Col>
+          <Col span={12}>
+            <Form.Item label="Package">
+              <Row gutter={20}>
+                <Col span="8">
+                  <Image
+                    src={dataPackage?.img}
+                    style={{
+                      borderRadius: "10px",
+                      border: "1px solid #ddd",
+                      padding: "5px",
+                    }}
+                  />
+                </Col>
+                <Col span="16">
+                  <h1>{dataPackage?.name}</h1>
+                  <p>Total Capacity: {dataPackage?.slot} Slot</p>
+                  <p>Location: {dataPackage?.venue}</p>
+                  <p>Description: {dataPackage?.description} </p>
+                </Col>
+              </Row>
+              <Row>
+                <Col span="12">
+                  <h3>Select Slot Tickets:</h3>
+                  <InputNumber
+                    value={slot}
+                    min={1}
+                    max={dataPackage?.slot}
+                    defaultValue={1}
+                    onChange={onChangeNumber}
+                    style={{ width: "100px", height: "50px", fontSize: "25px" }}
+                  />
+                </Col>
+                <Col
+                  span="5"
+                  style={{
+                    borderRadius: "10px",
+                    border: "1px solid #ddd",
+                    padding: "5px",
+                    textAlign: "center",
+                    fontWeight: "2px",
+                    margin: "0 20px",
+                  }}
+                >
+                  <h4>Total Price</h4>
+                  <h1> ${dataPackage?.priceTotal} </h1>
+                </Col>
+                <Col
+                  span="5"
+                  style={{
+                    borderRadius: "10px",
+                    border: "1px solid #ddd",
+                    padding: "5px",
+                    textAlign: "center",
+                    fontWeight: "2px",
+                  }}
+                >
+                  <h4>Slot Left</h4>
+                  <h1> {dataPackage?.slot - slot} </h1>
+                </Col>
+              </Row>
+            </Form.Item>
+          </Col>
+        </Row>
       </Form>
     </div>
   );

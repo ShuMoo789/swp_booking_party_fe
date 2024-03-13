@@ -56,7 +56,7 @@ const Service = () => {
 
   const calcTotal = () => {
     let total = 0;
-    booking?.services?.forEach((item) => (total += item.quantity * item.price));
+    booking?.services?.forEach((item) => (total += item.quantity * item.price + booking.package.priceTotal));
     return total;
   };
 
@@ -119,30 +119,6 @@ const Service = () => {
         </div>
         <div className="choose-service__right">
           <h1>Summary</h1>
-          {/* <Row align={"middle"}>
-            {booking?.services?.map((item) => {
-              return (
-                <>
-                  <Col span={16}>{item.name}</Col>
-                  <Col span={4}>{item.quantity}</Col>
-                  <Col span={4}>
-                    <Button danger>
-                      <DeleteOutlined />
-                    </Button>
-                  </Col>
-                </>
-              );
-            })}
-            <hr />
-            {booking?.services?.length > 0 ? (
-              <>
-                <Col span={20}>Total</Col>
-                <Col span={4}>${calcTotal()}</Col>
-              </>
-            ) : (
-              ""
-            )}
-          </Row> */}
 
           <table>
             <thead>

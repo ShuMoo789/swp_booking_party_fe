@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Space, Table, Tag } from "antd";
+import { Space, Table, Tag, Button} from "antd";
 import api from "../../config/axios";
 import dayjs from "dayjs";
 
@@ -33,12 +33,13 @@ const paymentHistory = () => {
       title: "Package Name",
       dataIndex: "name",
       key: "name",
-      render: (text) => <a>{text}</a>,
+      render: (text, record) => <a>{record.apackage.name}</a>,
     },
     {
       title: "Address",
-      dataIndex: "address",
-      key: "address",
+      dataIndex: "venue",
+      key: "venue",
+      render: (text, record) => <a>{record.apackage.venue}</a>,
     },
     {
       title: "Day",
@@ -49,11 +50,11 @@ const paymentHistory = () => {
       },
     },
     {
-      title: "Time",
+      title: "Check-in time",
       dataIndex: "schedule",
       key: "schedule",
       render: (value) => {
-        return <>{value.time.substring(0, 5)}</>;
+        return <>{value?.time.substring(0, 5)}</>;
       },
     },
     {
@@ -93,7 +94,8 @@ const paymentHistory = () => {
       key: "action",
       render: (_, record) => (
         <Space size="middle">
-          <a>Invite {record.name}</a>
+          <Button style={{color:"white", backgroundColor:"orange"}}>Delete</Button>
+          <Button style={{color:"white", backgroundColor:"orange"}}>Update</Button>
         </Space>
       ),
     },
@@ -102,7 +104,7 @@ const paymentHistory = () => {
     fetchOrders();
   }, []);
   const fetchOrders = async () => {
-    const reponse = await api.get("/orderHistory");
+    const reponse = await api.get("/order-history");
     console.log(reponse.data);
     setOrders(reponse.data);
   };
