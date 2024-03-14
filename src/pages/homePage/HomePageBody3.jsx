@@ -20,7 +20,7 @@ export default function HomePageBody3() {
         flexWrap: "wrap",
         alignItems: "center",
         justifyContent: "space-around",
-        background: "#F5F5F5",
+        background: "#fae6fa",
         paddingBottom: "20px",
         paddingTop: "20px",
       }}
@@ -34,6 +34,7 @@ export default function HomePageBody3() {
               fontSize: 38,
               textAlign: "left",
               paddingBottom: "20px",
+              paddingRight: "20px",
             }}
           >
             It is our pleasure to exchange information with you!
@@ -82,7 +83,7 @@ export default function HomePageBody3() {
         <Stack spacing={3}>
           <Typography
             className="contact-title"
-            sx={{ fontWeight: "bolder", fontSize: 38 }}
+            sx={{ fontWeight: "bolder", fontSize: 38, color: "black" }}
           >
             Contact Us
           </Typography>

@@ -31,13 +31,13 @@ export default function SignIn() {
 
     validationSchema: Yup.object({
       username: Yup.string()
-        .required("required!!")
-        .min(3, "at least 3 character")
-        .max(20, "max 20 character"),
+        .required("Please enter your username.")
+        .min(3, "The user name field requires a minimum of 3 characters.")
+        .max(20, "The user name field requires a maximum of 20 characters."),
       password: Yup.string()
-        .required("required!!")
-        .min(1, "at least 3 character")
-        .max(20, "max 20 character"),
+        .required("Please enter your password.")
+        .min(1, "The password field requires a minimum of 3 characters.")
+        .max(20, "The password field requires a maximum of 20 characters."),
     }),
   });
 
@@ -67,18 +67,19 @@ export default function SignIn() {
     <Box
       className="bg_container-signin"
       style={{
-        backgroundImage: `url(${images.login_bg2})`,
+        backgroundImage: `url(${images.background})`,
         backgroundSize: "cover",
         backgroundPosition: "center",
       }}
     >
-      <CardMedia
+      {/* <CardMedia
         className="image-signin"
         component="img"
         src={images.cake}
-        style={{ width: "40%" }}
+        style={{ width: "25%", marginBottom: "-270px" }}
         alt="images"
-      />
+      /> */}
+
       <Box className="form-signin">
         <Stack spacing={5}>
           <Typography textAlign="center" variant="h2" color="goldenrod">
@@ -123,7 +124,7 @@ export default function SignIn() {
           </Button>
           <Stack spacing={1}>
             <Typography textAlign="center" sx={{ color: "#526D82" }}>
-              Dont have an account?{" "}
+              Don't have an account?{" "}
               <Link
                 to="/register"
                 style={{ color: "#0079FF", textDecoration: "none" }}
@@ -137,13 +138,13 @@ export default function SignIn() {
                 to="/resetpassword"
                 style={{ color: "#0079FF", textDecoration: "none" }}
               >
-                Click here to find your password
+                Click here to find your password!
               </Link>
             </Typography>
             <Typography textAlign="center" sx={{ color: "#526D82" }}>
               Wanna back to homepage!{" "}
               <Link to="/" style={{ color: "#0079FF", textDecoration: "none" }}>
-                Lets Go
+                Let's Go!
               </Link>
             </Typography>
           </Stack>

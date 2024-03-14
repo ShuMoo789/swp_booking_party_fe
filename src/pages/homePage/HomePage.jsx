@@ -1,6 +1,5 @@
 import { Box, IconButton } from "@mui/material";
 // import { useSelector } from "react-redux";
-
 import HomePageBody1 from "./HomePageBody1";
 import HomePageBody2 from "./HomePageBody2";
 import HomePageBody3 from "./HomePageBody3";
@@ -44,8 +43,8 @@ export default function HomeMain() {
         <HomePageBody1 />
         <HomePageBody5 />
         <HomePageBody2 />
-        <HomePageBody3 />
         <HomePageBody4 />
+        <HomePageBody3 />
 
         {/* Back to Top Button */}
         <div

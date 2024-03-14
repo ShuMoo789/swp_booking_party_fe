@@ -119,6 +119,16 @@ const ManageService = () => {
           >
             <Input.TextArea rows={5} />
           </Form.Item>
+          <Form.Item
+            label="Quantity"
+            name={"name"}
+            rules={[
+              {
+                required: true,
+                message: "Please enter quantity of the service!",
+              },
+            ]}
+          ></Form.Item>
         </Form>
       </Modal>
     </div>

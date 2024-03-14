@@ -86,7 +86,7 @@ export default function Navigation() {
                       color: "#AF6480",
                     }}
                   >
-                    LittleStars
+                    Booking Party For Kids
                   </Typography>
                 </Grid>
               </Grid>
@@ -139,7 +139,14 @@ export default function Navigation() {
                 </Dropdown>
               ) : (
                 <Button>
-                  <Link to="/login" style={{ textDecoration: "none" }}>
+                  <Link
+                    to="/login"
+                    style={{
+                      textDecoration: "none",
+                      fontWeight: "bold",
+                      color: "gold",
+                    }}
+                  >
                     Log In
                   </Link>
                 </Button>

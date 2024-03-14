@@ -1,18 +1,21 @@
 import React, { useState, useEffect } from "react";
-import { Button, Modal, Row, Table } from "antd";
+
+import { Button, Modal, Table, Empty} from "antd";
+import api from "../../config/axios";
+
 import { toast } from "react-toastify";
 import api from "../../config/axios";
 import { formatDistance } from "date-fns";
 export const ManageOrder = () => {
   const [orders, setOrders] = useState([]);
-  const [previewOpen, setPreviewOpen] = useState(false);
+  const [previewVisible, setPreviewVisible] = useState(false);
   const [previewImage, setPreviewImage] = useState("");
   const [previewTitle, setPreviewTitle] = useState("");
 
-  const handleCancel = () => {
-    setPreviewOpen(false);
-    setPreviewImage("");
-  };
+  useEffect(() => {
+    fetchOrders();
+  }, []);
+
 
   const fetchOrder = async () => {
     const response = await api.get("/order-of-host");
@@ -23,7 +26,33 @@ export const ManageOrder = () => {
     fetchOrder();
   }, []);
 
+//   const fetchOrders = async () => {
+//     try {
+//       const response = await api.get("/orders");
+//       setOrders(response.data);
+//     } catch (error) {
+//       console.error("Error fetching orders:", error);
+//     }
+//   };
+
+//   const handlePreview = (image, title) => {
+//     setPreviewImage(image);
+//     setPreviewTitle(title);
+//     setPreviewVisible(true);
+//   };
+
+
   const columns = [
+    {
+      title: "Action",
+      dataIndex: "action",
+      key: "action",
+      render: (_, record) => (
+        <Button onClick={() => handlePreview(record.image, record.title)}>
+          Preview
+        </Button>
+      ),
+    },
     {
       title: "Create At",
       dataIndex: "createAt",
@@ -43,6 +72,7 @@ export const ManageOrder = () => {
     },
     {
       title: "Action",
+
       dataIndex: "id",
       key: "id",
       render: (value, record) => {
@@ -62,6 +92,13 @@ export const ManageOrder = () => {
           </>
         );
       },
+
+//       dataIndex: "action",
+//       key: "action",
+//       render: (_, record) => (
+//         <Button onClick={() => handleAcceptOrder(record)}>Accept</Button>
+//       ),
+
     },
   ];
 
@@ -69,11 +106,11 @@ export const ManageOrder = () => {
     <div>
       <h2>Manage Orders</h2>
       <div style={{ padding: 20 }}>
-        <Table dataSource={orders} columns={columns} />
-
-        <Modal title={previewTitle} onCancel={handleCancel} footer={null}>
-          <img src={previewImage} alt="Preview" style={{ width: "100%" }} />
-        </Modal>
+        {orders.length > 0 ? (
+          <Table dataSource={orders} columns={columns} />
+        ) : (
+          <Empty description="No orders" />
+        )}
       </div>
     </div>
   );

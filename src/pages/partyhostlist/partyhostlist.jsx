@@ -42,9 +42,9 @@ function PartyHost({ name, address, description, img, id }) {
 const SearchContainer = styled("div")(({ theme }) => ({
   position: "relative",
   borderRadius: "20px",
-  backgroundColor: "#152d32", // Light pink color
+  backgroundColor: "#152d32",
   "&:hover": {
-    backgroundColor: "#152d32", // Light pink color
+    backgroundColor: "#152d32",
   },
   marginLeft: 0,
   width: "100%",

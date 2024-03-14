@@ -30,7 +30,7 @@ import FeedbackList from "./pages/feedbackList/FeedbackList";
 import ManageService from "./pages/manage-service";
 import { BookingPage } from "./pages/booking";
 import SuccessPage from "./pages/checkout";
-import BasicTable from "./pages/paymentHistory";
+import BasicTable from "./pages/paymenthistory";
 
 function App() {
   const router = createBrowserRouter([
