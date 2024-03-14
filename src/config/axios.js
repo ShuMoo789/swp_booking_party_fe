@@ -1,5 +1,5 @@
 import axios from "axios";
-// const baseUrl = 'http://partykidzbooking.online:8081/';
+// const baseUrl = "http://partykidzbooking.online:8081/";
 const baseUrl = "http://localhost:8081/";
 
 const config = {
