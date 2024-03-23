@@ -175,10 +175,6 @@ export default function SignUp() {
       firstname: Yup.string().required("First name is required"),
       lastname: Yup.string().required("Last name is required"),
       phone: Yup.string()
-<<<<<<< Updated upstream
-
-=======
->>>>>>> Stashed changes
         .matches(/^[0-9]+$/, "Phone number must contain only digits")
         .min(10, "Phone number must be at least 10 characters")
         .max(12, "Phone number must not exceed 12 characters")
@@ -189,19 +185,6 @@ export default function SignUp() {
         "Please enter your business short description"
       ),
 
-<<<<<<< Updated upstream
-
-//         .matches(/^[0-9]+$/, "The phone number must contain only digits.")
-//         .min(10, "Phone number must be at least 10 digits.")
-//         .max(12, "Phone number must not exceed 12 digits.")
-//         .required("Please enter your phone number."),
-//       address: Yup.string().required("Please enter your address."),
-//       businessname: Yup.string().required(
-//         "Please enter the name of your business."
-//       ),
-
-=======
->>>>>>> Stashed changes
       confirm: Yup.string()
         .required("required!!")
         .oneOf([Yup.ref("password"), null], "Passwords must match"),
@@ -255,10 +238,7 @@ export default function SignUp() {
       });
       console.log(response);
       toast.success("Please Verify your email!!");
-<<<<<<< Updated upstream
-=======
       navigate("/login");
->>>>>>> Stashed changes
     } catch (e) {
       console.log(e.response);
       toast.error("Đăng ký không thành công !!!");

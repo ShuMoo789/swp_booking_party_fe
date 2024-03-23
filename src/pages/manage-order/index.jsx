@@ -2,15 +2,10 @@ import React, { useState, useEffect } from "react";
 
 import { Button, Modal, Table, Empty } from "antd";
 import api from "../../config/axios";
-<<<<<<< Updated upstream
-=======
 import { toast } from "react-toastify";
 import { formatDistance } from "date-fns";
 import dayjs from "dayjs";
->>>>>>> Stashed changes
 
-import { toast } from "react-toastify";
-import { formatDistance } from "date-fns";
 export const ManageOrder = () => {
   const [orders, setOrders] = useState([]);
   const [previewVisible, setPreviewVisible] = useState(false);
@@ -22,11 +17,6 @@ export const ManageOrder = () => {
     fetchOrders();
   }, []);
 
-<<<<<<< Updated upstream
-  const fetchOrder = async () => {
-    const response = await api.get("/order-of-host");
-    setOrders(response.data);
-=======
   const fetchOrders = async () => {
     try {
       const response = await api.get("/order-of-host");
@@ -34,7 +24,6 @@ export const ManageOrder = () => {
     } catch (error) {
       console.error("Error fetching orders:", error);
     }
->>>>>>> Stashed changes
   };
 
   useEffect(() => {
@@ -91,41 +80,12 @@ export const ManageOrder = () => {
     },
     {
       title: "Action",
-<<<<<<< Updated upstream
-
-      dataIndex: "id",
-      key: "id",
-      render: (value, record) => {
-        return (
-          <>
-            {record.orderedStatus === "PAID" && (
-              <Button
-                type="primary"
-                onClick={async () => {
-                  await api.patch(`/complete/${value}`);
-                  fetchOrder();
-                }}
-              >
-                Finish
-              </Button>
-            )}
-          </>
-        );
-      },
-
-      //       dataIndex: "action",
-      //       key: "action",
-      //       render: (_, record) => (
-      //         <Button onClick={() => handleAcceptOrder(record)}>Accept</Button>
-      //       ),
-=======
       dataIndex: "action",
       key: "action",
       render: (_, record) =>
         record.orderedStatus !== "COMPLETED" && (
           <Button onClick={() => handleAcceptOrder(record)}>Accept</Button>
         ),
->>>>>>> Stashed changes
     },
   ];
 
