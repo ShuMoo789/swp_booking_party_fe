@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from "react";
 
-import { Button, Modal, Table, Empty} from "antd";
+import { Button, Modal, Table, Empty } from "antd";
 import api from "../../config/axios";
 
 import { toast } from "react-toastify";
-import api from "../../config/axios";
 import { formatDistance } from "date-fns";
 export const ManageOrder = () => {
   const [orders, setOrders] = useState([]);
@@ -16,7 +15,6 @@ export const ManageOrder = () => {
     fetchOrders();
   }, []);
 
-
   const fetchOrder = async () => {
     const response = await api.get("/order-of-host");
     setOrders(response.data);
@@ -26,21 +24,20 @@ export const ManageOrder = () => {
     fetchOrder();
   }, []);
 
-//   const fetchOrders = async () => {
-//     try {
-//       const response = await api.get("/orders");
-//       setOrders(response.data);
-//     } catch (error) {
-//       console.error("Error fetching orders:", error);
-//     }
-//   };
+  //   const fetchOrders = async () => {
+  //     try {
+  //       const response = await api.get("/orders");
+  //       setOrders(response.data);
+  //     } catch (error) {
+  //       console.error("Error fetching orders:", error);
+  //     }
+  //   };
 
-//   const handlePreview = (image, title) => {
-//     setPreviewImage(image);
-//     setPreviewTitle(title);
-//     setPreviewVisible(true);
-//   };
-
+  //   const handlePreview = (image, title) => {
+  //     setPreviewImage(image);
+  //     setPreviewTitle(title);
+  //     setPreviewVisible(true);
+  //   };
 
   const columns = [
     {
@@ -93,12 +90,11 @@ export const ManageOrder = () => {
         );
       },
 
-//       dataIndex: "action",
-//       key: "action",
-//       render: (_, record) => (
-//         <Button onClick={() => handleAcceptOrder(record)}>Accept</Button>
-//       ),
-
+      //       dataIndex: "action",
+      //       key: "action",
+      //       render: (_, record) => (
+      //         <Button onClick={() => handleAcceptOrder(record)}>Accept</Button>
+      //       ),
     },
   ];
 
