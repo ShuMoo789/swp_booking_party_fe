@@ -2,6 +2,12 @@ import React, { useState, useEffect } from "react";
 
 import { Button, Modal, Table, Empty } from "antd";
 import api from "../../config/axios";
+<<<<<<< Updated upstream
+=======
+import { toast } from "react-toastify";
+import { formatDistance } from "date-fns";
+import dayjs from "dayjs";
+>>>>>>> Stashed changes
 
 import { toast } from "react-toastify";
 import { formatDistance } from "date-fns";
@@ -10,14 +16,25 @@ export const ManageOrder = () => {
   const [previewVisible, setPreviewVisible] = useState(false);
   const [previewImage, setPreviewImage] = useState("");
   const [previewTitle, setPreviewTitle] = useState("");
+  const [booking, setBooking] = useState(null);
 
   useEffect(() => {
     fetchOrders();
   }, []);
 
+<<<<<<< Updated upstream
   const fetchOrder = async () => {
     const response = await api.get("/order-of-host");
     setOrders(response.data);
+=======
+  const fetchOrders = async () => {
+    try {
+      const response = await api.get("/order-of-host");
+      setOrders(response.data);
+    } catch (error) {
+      console.error("Error fetching orders:", error);
+    }
+>>>>>>> Stashed changes
   };
 
   useEffect(() => {
@@ -39,15 +56,20 @@ export const ManageOrder = () => {
   //     setPreviewVisible(true);
   //   };
 
+  const handleAcceptOrder = async (record) => {
+    const response = await api.patch(`/complete/${record.id}`);
+    console.log(response.data);
+    toast.success("Complete success!");
+    fetchOrders();
+  };
+
   const columns = [
     {
       title: "Action",
       dataIndex: "action",
       key: "action",
       render: (_, record) => (
-        <Button onClick={() => handlePreview(record.image, record.title)}>
-          Preview
-        </Button>
+        <Button onClick={() => setBooking(record)}>Preview</Button>
       ),
     },
     {
@@ -69,6 +91,7 @@ export const ManageOrder = () => {
     },
     {
       title: "Action",
+<<<<<<< Updated upstream
 
       dataIndex: "id",
       key: "id",
@@ -95,6 +118,14 @@ export const ManageOrder = () => {
       //       render: (_, record) => (
       //         <Button onClick={() => handleAcceptOrder(record)}>Accept</Button>
       //       ),
+=======
+      dataIndex: "action",
+      key: "action",
+      render: (_, record) =>
+        record.orderedStatus !== "COMPLETED" && (
+          <Button onClick={() => handleAcceptOrder(record)}>Accept</Button>
+        ),
+>>>>>>> Stashed changes
     },
   ];
 
@@ -108,6 +139,25 @@ export const ManageOrder = () => {
           <Empty description="No orders" />
         )}
       </div>
+
+      <Modal
+        title="Booking Details"
+        open={booking}
+        onOk={() => setBooking(null)}
+        onCancel={() => setBooking(null)}
+      >
+        <p>ID: {booking?.id}</p>
+        <p>
+          Booking Date:{" "}
+          {`${dayjs(booking?.bookingDate).format(
+            "DD/MM/YYYY"
+          )} ${booking?.schedule?.time.substring(0, 5)}`}
+        </p>
+        <p>Total Price: {booking?.totalPrice}</p>
+        <p>Name Receiver: {booking?.nameReceiver}</p>
+        <p>Email: {booking?.email}</p>
+        {/* Render other booking details here */}
+      </Modal>
     </div>
   );
 };

@@ -17,7 +17,7 @@ import Modal from "@mui/material/Modal";
 import Fade from "@mui/material/Fade";
 import Checkbox from "@mui/material/Checkbox";
 import { useFormik } from "formik";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import * as Yup from "yup";
 // Import images from your constant file
 import { toast } from "react-toastify";
@@ -45,7 +45,7 @@ export default function SignUp() {
   const [showNameFields, setShowNameFields] = React.useState(true);
   const [policyContent, setPolicyContent] = React.useState("");
   const [policyAccepted, setPolicyAccepted] = React.useState(false); // State for checkbox
-
+  const navigate = useNavigate();
   const handleChange = (event) => {
     setValue(event.target.value);
     if (event.target.value === "customer") {
@@ -156,28 +156,29 @@ export default function SignUp() {
     },
     validationSchema: Yup.object({
       username: Yup.string()
-        .required("Please enter your username.")
-        .min(3, "The user name field requires a minimum of 3 characters.")
-        .max(20, "The user name field requires a maximum of 20 characters.")
+        .required("required!!")
+        .min(3, "at least 3 character")
+        .max(20, "max 20 character")
         .matches(
           /^[a-zA-Z0-9]+$/,
-          "The username must contain only letters and numbers."
+          "Username must contain only letters and numbers"
         ),
-      email: Yup.string()
-        .required("Please enter your email.")
-        .email("The email is invalid. Please try again."),
+      email: Yup.string().required("required!!").email("Invalid Email!"),
       password: Yup.string()
-        .required("Please enter your password.")
-        .min(3, "The email field requires a minimum of 3 characters.")
-        .max(20, "The email field requires a maximum of 20 characters.")
+        .required("required!!")
+        .min(3, "at least 3 character")
+        .max(20, "max 20 character")
         .matches(
           /^[a-zA-Z0-9]+$/,
-          "The password must contain only letters and numbers."
+          "Password must contain only letters and numbers"
         ),
-      firstname: Yup.string().required("Please enter your firstname."),
-      lastname: Yup.string().required("Please enter your lastname."),
+      firstname: Yup.string().required("First name is required"),
+      lastname: Yup.string().required("Last name is required"),
       phone: Yup.string()
+<<<<<<< Updated upstream
 
+=======
+>>>>>>> Stashed changes
         .matches(/^[0-9]+$/, "Phone number must contain only digits")
         .min(10, "Phone number must be at least 10 characters")
         .max(12, "Phone number must not exceed 12 characters")
@@ -188,6 +189,7 @@ export default function SignUp() {
         "Please enter your business short description"
       ),
 
+<<<<<<< Updated upstream
 
 //         .matches(/^[0-9]+$/, "The phone number must contain only digits.")
 //         .min(10, "Phone number must be at least 10 digits.")
@@ -198,12 +200,11 @@ export default function SignUp() {
 //         "Please enter the name of your business."
 //       ),
 
+=======
+>>>>>>> Stashed changes
       confirm: Yup.string()
-        .required("Please confirm your password.")
-        .oneOf(
-          [Yup.ref("password"), null],
-          "The confirmed password must match the original password."
-        ),
+        .required("required!!")
+        .oneOf([Yup.ref("password"), null], "Passwords must match"),
     }),
   });
 
@@ -254,6 +255,10 @@ export default function SignUp() {
       });
       console.log(response);
       toast.success("Please Verify your email!!");
+<<<<<<< Updated upstream
+=======
+      navigate("/login");
+>>>>>>> Stashed changes
     } catch (e) {
       console.log(e.response);
       toast.error("Đăng ký không thành công !!!");
@@ -269,17 +274,6 @@ export default function SignUp() {
         backgroundPosition: "center",
       }}
     >
-      {/* <CardMedia
-        className="image-signup"
-        component="img"
-        src={images.cake}
-        alt="images"
-        style={{
-          width: "25%",
-          paddingRight: "50px",
-          marginRight: "-20px",
-        }}
-      /> */}
       <Box
         className="form-signup"
         style={{ marginTop: "-65px", maxWidth: "500px", margin: "auto" }}
@@ -290,12 +284,12 @@ export default function SignUp() {
           </Typography>
 
           <Typography textAlign="center">
-            Already have an account?{" "}
+            Have an account ?{" "}
             <Link
               to="/login"
               style={{ color: "#0079FF", textDecoration: "none" }}
             >
-              Let's Login!
+              Lets Login !
             </Link>{" "}
           </Typography>
 
@@ -520,7 +514,7 @@ export default function SignUp() {
                     onChange={handlePolicyCheckboxChange}
                   />
                 }
-                label="I agree to all website terms and policies."
+                label="I agree with all policy about website"
               />
               <Modal
                 aria-labelledby="transition-modal-title"
@@ -545,8 +539,8 @@ export default function SignUp() {
                       sx={{ fontWeight: "bold" }}
                     >
                       {value === "customer"
-                        ? "Customer Policies"
-                        : "Party Host Policies"}
+                        ? "Customer Policy"
+                        : "Party Host Policy"}
                     </Typography>
                     <Typography
                       id="transition-modal-description"

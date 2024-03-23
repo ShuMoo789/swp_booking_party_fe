@@ -116,7 +116,11 @@ const paymentHistory = () => {
   return (
     <>
       <Table
+<<<<<<< Updated upstream
         style={{ margin: "100px" }}
+=======
+        style={{ margin: "100px", height: "60vh" }}
+>>>>>>> Stashed changes
         columns={columns}
         dataSource={orders}
       />

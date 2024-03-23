@@ -21,8 +21,10 @@ import uploadFile from "../../utils/upload";
 import api from "../../config/axios";
 import { toast } from "react-toastify";
 import { data } from "../statistic";
+import { useSelector } from "react-redux";
 
 export const ManagePackage = () => {
+  const user = useSelector((store) => store.authen);
   const [packages, setPakages] = useState([]);
   const [showModalAdd, setShowModalAdd] = useState(false);
   const [form] = useForm();
@@ -43,11 +45,11 @@ export const ManagePackage = () => {
     );
   };
   const fetchPackage = async () => {
-    const response = await api.get("/packageUpload");
+    const response = await api.get(`/packageUpload-by-host-id/${user.id}`);
     console.log(response.data);
     setPakages(
       response.data
-        .filter((item) => item.packageULStatus != "UNAVAILABLE")
+        ?.filter((item) => item.packageULStatus != "UNAVAILABLE")
         .map((item, index) => {
           return {
             key: index,
@@ -335,25 +337,6 @@ function ServiceList({ list, packages }) {
   //     }
   //   };
   // }, []);
-
-  const dataSource = [
-    {
-      key: "1",
-      name: "service 1",
-      quantity: 1,
-      description: "good",
-      price: 200,
-      status: "available",
-    },
-    {
-      key: "2",
-      name: "service 2",
-      quantity: 2,
-      description: "good",
-      price: 200,
-      status: "unavailable",
-    },
-  ];
 
   const columns = [
     {

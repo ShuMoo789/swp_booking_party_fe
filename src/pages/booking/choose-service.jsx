@@ -4,7 +4,10 @@ import { Modal } from "antd";
 import { Card } from "antd";
 import api from "../../config/axios";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteService, selectService } from "../../redux/features/bookingSlice";
+import {
+  deleteService,
+  selectService,
+} from "../../redux/features/bookingSlice";
 import { DeleteOutlined } from "@ant-design/icons";
 export const ChooseService = () => {
   return (
@@ -46,7 +49,9 @@ const Service = () => {
     setIsModalOpen(false);
   };
   const fetchService = async () => {
-    const response = await api.get(`/serviceUploadByPackage/${booking.package.id}`);
+    const response = await api.get(
+      `/serviceUploadByPackage/${booking.package.id}`
+    );
     setServices(response.data);
   };
 
@@ -56,7 +61,10 @@ const Service = () => {
 
   const calcTotal = () => {
     let total = 0;
-    booking?.services?.forEach((item) => (total += item.quantity * item.price + booking.package.priceTotal));
+    booking?.services?.forEach(
+      (item) =>
+        (total += item.quantity * item.price)
+    );
     return total;
   };
 
@@ -72,7 +80,7 @@ const Service = () => {
   };
 
   return (
-    <div style={{ display: "flex" }}>
+    <div style={{ display: "flex", minHeight: 700 }}>
       <div className="choose-service">
         <div className="choose-service__left">
           <Row gutter={[30, 30]}>
@@ -80,7 +88,9 @@ const Service = () => {
               return (
                 <Col span="4">
                   <Card
-                    className={`service-item ${checkSelected(item) ? "selected" : ""}`}
+                    className={`service-item ${
+                      checkSelected(item) ? "selected" : ""
+                    }`}
                     onClick={() => {
                       showModal(item);
                     }}
@@ -184,6 +194,7 @@ const Service = () => {
           <div style={{ display: "flex", flexDirection: "column" }}>
             {/* <h4 style={{ color: "orange" }}>Cat</h4> */}
             <h5 style={{ color: "orange" }}>${current?.price}</h5>
+            <h5 style={{ color: "orange" }}>{current?.description}</h5>
             <InputNumber
               value={quantity}
               min={1}

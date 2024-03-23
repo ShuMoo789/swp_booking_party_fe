@@ -133,7 +133,7 @@ function PartyHostList() {
           <PartyHost
             name={host.username}
             address={host.address}
-            description={host.description}
+            description={host.information}
             img={host.avatar}
             id={host.id}
           />

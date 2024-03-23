@@ -23,40 +23,68 @@ export default function Navigation() {
   const logoutHandler = () => {
     dispatch(logout());
   };
-  const items = [
-    {
-      label: (
-        <Link to={"/profile"} style={{ fontSize: "1rem" }}>
-          Profile
-        </Link>
-      ),
-      key: "0",
-    },
-    {
-      label: (
-        <Link to={"/dashboard/statistics"} style={{ fontSize: "1rem" }}>
-          Dashboard
-        </Link>
-      ),
-      key: "1",
-    },
-    {
-      label: (
-        <Link to={"/paymenthistory"} style={{ fontSize: "1rem" }}>
-          Payment History
-        </Link>
-      ),
-      key: "2",
-    },
-    {
-      label: (
-        <Button onClick={logoutHandler} style={{ color: "green" }}>
-          <Link to={"/login"}>Log out</Link>
-        </Button>
-      ),
-      key: "3",
-    },
-  ];
+  const generateItem = () => {
+    if (user?.role === "PARTY_HOST") {
+      return [
+        {
+          label: (
+            <Link to={"/profile"} style={{ fontSize: "1rem" }}>
+              Profile
+            </Link>
+          ),
+          key: "0",
+        },
+        {
+          label: (
+            <Link to={"/dashboard/package"} style={{ fontSize: "1rem" }}>
+              Dashboard
+            </Link>
+          ),
+          key: "1",
+        },
+        {
+          label: (
+            <Button onClick={logoutHandler} style={{ color: "green" }}>
+              <Link to={"/login"}>Log out</Link>
+            </Button>
+          ),
+          key: "2",
+        },
+      ];
+    }
+
+    if (user?.role === "CUSTOMER") {
+      return [
+        {
+          label: (
+            <Link to={"/profile"} style={{ fontSize: "1rem" }}>
+              Profile
+            </Link>
+          ),
+          key: "0",
+        },
+        {
+          label: (
+            <Link to={"/paymenthistory"} style={{ fontSize: "1rem" }}>
+              Payment History
+            </Link>
+          ),
+          key: "2",
+        },
+        {
+          label: (
+            <Button onClick={logoutHandler} style={{ color: "green" }}>
+              <Link to={"/login"}>Log out</Link>
+            </Button>
+          ),
+          key: "3",
+        },
+      ];
+    }
+
+    return [];
+  };
+  const items = generateItem();
   return (
     <div>
       <AppBar

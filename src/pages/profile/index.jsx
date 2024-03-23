@@ -14,10 +14,10 @@ export const Profile = () => {
   const [userName, setUserName] = useState("");
 
   const fetchProfile = async () => {
-    const response = await api.get("/profile");
+    const response = await api.get("profile");
     setProfile(response.data);
 
-    setUserName(response.data.username);
+    setUserName(response.data.firstName);
 
     form.setFieldsValue({
       fullname: response.data.firstName,
@@ -45,10 +45,10 @@ export const Profile = () => {
 
   return (
     <div className="profile">
-      <h1>Profile</h1>
+      <h1 style={{margin:"60px 0 0 0", textAlign:"center"}}>Profile</h1>
 
       <div className="box">
-        <div className="banner">
+        <div className="banner" >
           <img
             src="https://images.unsplash.com/photo-1530103862676-de8c9debad1d?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
             alt=""
@@ -82,17 +82,23 @@ export const Profile = () => {
             span: 24,
           }}
         >
-          <Form.Item label="Full name" name={"fullname"}>
-            <Input placeholder="*John Wick" />
+          <Form.Item label="Name" name={"Name"}>
+            <p>{profile?.firstName} {profile?.lastName}</p>
           </Form.Item>
           <Form.Item label="Email" name={"email"}>
-            <Input placeholder="*johnwick@gmail.com" />
+            <p>{profile?.email}</p>
           </Form.Item>
           <Form.Item label="Phone number" name={"phone"}>
-            <Input placeholder="*0919010111" />
+            <p>{profile?.phone}</p>
           </Form.Item>
-          <Form.Item label="Position" name={"role"}>
-            <Input placeholder="*Admin" />
+          <Form.Item label="Address" name={"address"}>
+            <p>{profile?.address}</p>
+          </Form.Item>
+          <Form.Item label="Infomation" name={"information"}>
+            <p>{profile?.information}</p>
+          </Form.Item>
+          <Form.Item label="Role" name={"role"}>
+            <p>{profile?.role}</p>
           </Form.Item>
         </Form>
       </div>

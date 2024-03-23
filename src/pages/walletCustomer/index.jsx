@@ -3,6 +3,7 @@ import "./index.scss"; // Import your SCSS file for styling
 import "./ordertable.scss"; // Import your SCSS file for styling
 import api from "../../config/axios";
 import { formatDistance } from "date-fns";
+import { Tag } from "antd";
 
 const Wallet = ({ data }) => {
   const [balance, setBalance] = useState(100); // Initial balance
@@ -82,7 +83,7 @@ const App = () => {
                             <td>{item.ordered.id}</td>
                             <td>VN PAY</td>
                             <td>
-                              <span className="badge success">Success</span>
+                              <Tag>{item.ordered.orderedStatus}</Tag>
                             </td>
                             <td>${item.moneyValue}</td>
                             <td>
