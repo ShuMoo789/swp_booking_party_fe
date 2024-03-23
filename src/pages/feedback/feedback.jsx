@@ -17,6 +17,7 @@ const Feedback = () => {
     console.log('Rating:', rating);
     console.log('Comment:', comment);
   };
+  
 
   return (
     <div className="feedback-container">
