@@ -101,7 +101,7 @@ const InfoReceive = ({ form, onSubmitInfo }) => {
               ]}
             >
               <Input
-                placeholder="Ex: Gepard Landau Honkai Star Rail"
+                placeholder="Ex: Phan Thanh Danh"
                 suffix={
                   <Tooltip title="The name of the person checking in to host the party">
                     <InfoCircleOutlined
@@ -122,7 +122,7 @@ const InfoReceive = ({ form, onSubmitInfo }) => {
               rules={[
                 {
                   required: true,
-                  message: "Please enter name!",
+                  message: "Please enter your phone!",
                 },
               ]}
             >
@@ -139,7 +139,7 @@ const InfoReceive = ({ form, onSubmitInfo }) => {
               rules={[
                 {
                   required: true,
-                  message: "Please enter name!",
+                  message: "Please enter your email!",
                 },
               ]}
             >
@@ -156,7 +156,7 @@ const InfoReceive = ({ form, onSubmitInfo }) => {
               rules={[
                 {
                   required: true,
-                  message: "Please enter name!",
+                  message: "Please enter some additional notes!",
                 },
               ]}
             >
@@ -164,7 +164,7 @@ const InfoReceive = ({ form, onSubmitInfo }) => {
                 showCount
                 maxLength={500}
                 onChangeText={onChangeText}
-                placeholder="Ex: Name of the main character of the party: taylor, Food should not be spicy"
+                placeholder="Ex: Name of the main character of the party: Taylor, The food should not be spicy."
               />
             </Form.Item>
             <Form.Item

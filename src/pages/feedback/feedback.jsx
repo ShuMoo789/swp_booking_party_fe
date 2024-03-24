@@ -1,9 +1,9 @@
-import { useState } from 'react';
-import '../../pages/feedback/feedback.scss';
+import { useState } from "react";
+import "../../pages/feedback/feedback.scss";
 
 const Feedback = () => {
   const [rating, setRating] = useState(0);
-  const [comment, setComment] = useState('');
+  const [comment, setComment] = useState("");
 
   const handleRatingChange = (value) => {
     setRating(value);
@@ -14,10 +14,9 @@ const Feedback = () => {
   };
 
   const handleSubmit = () => {
-    console.log('Rating:', rating);
-    console.log('Comment:', comment);
+    console.log("Rating:", rating);
+    console.log("Comment:", comment);
   };
-  
 
   return (
     <div className="feedback-container">
@@ -26,7 +25,7 @@ const Feedback = () => {
         {[1, 2, 3, 4, 5].map((value) => (
           <span
             key={value}
-            className={`star ${value <= rating ? 'filled' : ''}`}
+            className={`star ${value <= rating ? "filled" : ""}`}
             onClick={() => handleRatingChange(value)}
           >
             &#9733;
