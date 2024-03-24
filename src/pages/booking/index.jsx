@@ -63,9 +63,9 @@ export const BookingPage = () => {
     let total = 0;
     booking?.services?.forEach(
       (item) =>
-        (total += item.quantity * item.price + booking.package.priceTotal)
+        (total += item.quantity * item.price)
     );
-    return total;
+    return total + booking.package.priceTotal;
   };
 
   const handlePaymeny = async () => {

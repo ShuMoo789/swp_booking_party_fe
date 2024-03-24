@@ -73,6 +73,14 @@ export default function Navigation() {
         },
         {
           label: (
+            <Link to={"/wallet"} style={{ fontSize: "1rem" }}>
+              Wallet
+            </Link>
+          ),
+          key: "3",
+        },
+        {
+          label: (
             <Button onClick={logoutHandler} style={{ color: "green" }}>
               <Link to={"/login"}>Log out</Link>
             </Button>

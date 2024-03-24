@@ -4,6 +4,7 @@ import "./ordertable.scss"; // Import your SCSS file for styling
 import api from "../../config/axios";
 import { formatDistance } from "date-fns";
 import { Tag } from "antd";
+import { useSelector } from "react-redux";
 
 const Wallet = ({ data }) => {
   const [balance, setBalance] = useState(100); // Initial balance
@@ -34,6 +35,7 @@ const Wallet = ({ data }) => {
 const App = () => {
   const [wallet, setWallet] = useState();
   const [transaction, setTransactions] = useState([]);
+  const user = useSelector((store) => store.authen);
   const fetchWallet = async () => {
     const response = await api.get("wallet");
     setWallet(response.data);
@@ -83,9 +85,15 @@ const App = () => {
                             <td>{item.ordered.id}</td>
                             <td>VN PAY</td>
                             <td>
-                              <Tag>{item.ordered.orderedStatus}</Tag>
+                              <Tag>{item.status}</Tag>
                             </td>
-                            <td>${item.moneyValue}</td>
+                            <td>
+                              {item.toWallet.account.id === user.id ? (
+                                <Tag color="green">{`+${item.moneyValue}$`}</Tag>
+                              ) : (
+                                <Tag color="red">{`-${item.moneyValue}$`}</Tag>
+                              )}
+                            </td>
                             <td>
                               {formatDistance(
                                 new Date(item.createAt),
