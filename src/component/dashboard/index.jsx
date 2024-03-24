@@ -62,19 +62,19 @@ const itemsPartyHost = [
 const itemsAdmin = [
   {
     key: "1",
-    label: <Link to={"/dashboard/userlist"}>User list</Link>,
+    label: <Link to={"/dashboard/userlist"}>User List</Link>,
     icon: <UserOutlined />,
   },
   {
     key: "2",
     label: (
-      <Link to={"/dashboard/packageregisterlist"}>Package register list</Link>
+      <Link to={"/dashboard/packageregisterlist"}>Package Register List</Link>
     ),
     icon: <CodepenOutlined />,
   },
   {
     key: "3",
-    label: <Link to={"/dashboard/wallet"}>Wallet</Link>,
+    label: <Link to={"/dashboard/wallet"}> Your Wallet</Link>,
     icon: <WalletOutlined />,
   },
 ];
@@ -123,7 +123,11 @@ const Dashboard = () => {
       <Layout>
         <Header style={{ padding: 0, background: colorBgContainer }}>
           <Row style={{ height: "100%" }} justify="end">
-            <Dropdown menu={{ items }} placement="User">
+            <Dropdown
+              menu={{ items }}
+              placement="bottomRight"
+              style={{ zIndex: 1000000000000 }}
+            >
               <Button style={{ marginTop: 10, marginRight: 50 }}>
                 {user.username}
               </Button>
