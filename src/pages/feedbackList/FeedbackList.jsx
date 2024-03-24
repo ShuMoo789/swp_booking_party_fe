@@ -12,7 +12,7 @@ const FeedbackList = () => {
 
   const fetchFeedbacks = async () => {
     try {
-      const response = await api.get("/feedbacks");
+      const response = await api.get("/feedback");
       setFeedbacks(response.data);
     } catch (error) {
       console.error("Error fetching feedbacks:", error);
