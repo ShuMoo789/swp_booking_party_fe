@@ -36,12 +36,12 @@ export default function Footer() {
                 Plan Your Visit
               </h6>
               <p className="text-white">
-                <a href="#!" className="text-reset">
+                <a href="/partyhostlist" className="text-reset">
                   Our Packages
                 </a>
               </p>
               <p className="text-white">
-                <a href="#!" className="text-reset">
+                <a href="/partyhostlist" className="text-reset">
                   Our Services
                 </a>
               </p>

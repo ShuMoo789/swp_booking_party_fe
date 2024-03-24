@@ -156,38 +156,43 @@ export default function SignUp() {
     },
     validationSchema: Yup.object({
       username: Yup.string()
-        .required("required!!")
-        .min(3, "at least 3 character")
-        .max(20, "max 20 character")
+        .required("Please enter your username.")
+        .min(3, "The user name field requires a minimum of 3 characters.")
+        .max(20, "The user name field requires a maximum of 20 characters.")
         .matches(
           /^[a-zA-Z0-9]+$/,
-          "Username must contain only letters and numbers"
+          "Username must contain only letters and numbers."
         ),
-      email: Yup.string().required("required!!").email("Invalid Email!"),
+      email: Yup.string()
+        .required("Please enter your email.")
+        .email("The email is invaid! Please try again."),
       password: Yup.string()
-        .required("required!!")
-        .min(3, "at least 3 character")
-        .max(20, "max 20 character")
+        .required("Please confirm your password.")
+        .min(3, "The password field requires a minimum of 3 characters.")
+        .max(20, "The user name field requires a maximum of 20 characters.")
         .matches(
           /^[a-zA-Z0-9]+$/,
-          "Password must contain only letters and numbers"
+          "Password must contain only letters and numbers."
         ),
-      firstname: Yup.string().required("First name is required"),
-      lastname: Yup.string().required("Last name is required"),
+      firstname: Yup.string().required("Please enter your first name."),
+      lastname: Yup.string().required("Please enter your last name"),
       phone: Yup.string()
-        .matches(/^[0-9]+$/, "Phone number must contain only digits")
-        .min(10, "Phone number must be at least 10 characters")
-        .max(12, "Phone number must not exceed 12 characters")
-        .required("Phone number is required"),
-      address: Yup.string().required("Address is required"),
-      businessname: Yup.string().required("Business name is required"),
+        .matches(/^[0-9]+$/, "Phone number must contain only digits.")
+        .min(10, "Phone number must be at least 10 characters.")
+        .max(12, "Phone number must not exceed 12 characters.")
+        .required("Please enter your phone."),
+      address: Yup.string().required("Please enter your address."),
+      businessname: Yup.string().required("Please enter your business."),
       information: Yup.string().required(
-        "Please enter your business short description"
+        "Please enter short description about your business."
       ),
 
       confirm: Yup.string()
-        .required("required!!")
-        .oneOf([Yup.ref("password"), null], "Passwords must match"),
+        .required("Please confirm your password.")
+        .oneOf(
+          [Yup.ref("password"), null],
+          "The confirm password must match with the original password."
+        ),
     }),
   });
 
@@ -237,11 +242,11 @@ export default function SignUp() {
         address: formik.values.address,
       });
       console.log(response);
-      toast.success("Please Verify your email!!");
+      toast.success("Please verify your email!");
       navigate("/login");
     } catch (e) {
       console.log(e.response);
-      toast.error("Đăng ký không thành công !!!");
+      toast.error("Registration failed!");
       // alert(e.response.data);
     }
   };
@@ -264,12 +269,12 @@ export default function SignUp() {
           </Typography>
 
           <Typography textAlign="center">
-            Have an account ?{" "}
+            Have an account?{" "}
             <Link
               to="/login"
               style={{ color: "#0079FF", textDecoration: "none" }}
             >
-              Lets Login !
+              Let's Login !
             </Link>{" "}
           </Typography>
 
@@ -494,7 +499,7 @@ export default function SignUp() {
                     onChange={handlePolicyCheckboxChange}
                   />
                 }
-                label="I agree with all policy about website"
+                label="I agree with all policies and terms about the website."
               />
               <Modal
                 aria-labelledby="transition-modal-title"
