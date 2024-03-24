@@ -26,10 +26,6 @@ export const ManageOrder = () => {
     }
   };
 
-  useEffect(() => {
-    fetchOrder();
-  }, []);
-
   //   const fetchOrders = async () => {
   //     try {
   //       const response = await api.get("/orders");
