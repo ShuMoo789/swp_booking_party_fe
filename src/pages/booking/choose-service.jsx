@@ -61,10 +61,7 @@ const Service = () => {
 
   const calcTotal = () => {
     let total = 0;
-    booking?.services?.forEach(
-      (item) =>
-        (total += item.quantity * item.price)
-    );
+    booking?.services?.forEach((item) => (total += item.quantity * item.price));
     return total;
   };
 

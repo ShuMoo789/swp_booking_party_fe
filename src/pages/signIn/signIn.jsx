@@ -132,7 +132,7 @@ export default function SignIn() {
                 Register Now!
               </Link>
             </Typography>
-            <Typography textAlign="center" sx={{ color: "#526D82" }}>
+            {/* <Typography textAlign="center" sx={{ color: "#526D82" }}>
               Forgot password?{" "}
               <Link
                 to="/resetpassword"
@@ -140,7 +140,7 @@ export default function SignIn() {
               >
                 Click here to find your password!
               </Link>
-            </Typography>
+            </Typography> */}
             <Typography textAlign="center" sx={{ color: "#526D82" }}>
               Wanna back to homepage!{" "}
               <Link to="/" style={{ color: "#0079FF", textDecoration: "none" }}>
