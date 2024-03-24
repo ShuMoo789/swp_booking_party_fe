@@ -26,6 +26,7 @@ import { useSelector } from "react-redux";
 export const ManagePackage = () => {
   const user = useSelector((store) => store.authen);
   const [packages, setPakages] = useState([]);
+
   const [showModalAdd, setShowModalAdd] = useState(false);
   const [form] = useForm();
   const [previewOpen, setPreviewOpen] = useState(false);
@@ -291,7 +292,7 @@ export const ManagePackage = () => {
             >
               <TextArea rows={5} />
             </Form.Item>
-            <Form.Item label="Image about your service" name={"img"}>
+            <Form.Item label="Image about your package" name={"img"}>
               <Upload
                 action="https://run.mocky.io/v3/435e224c-44fb-4773-9faf-380c5e6a2188"
                 listType="picture-card"
@@ -325,18 +326,34 @@ export const ManagePackage = () => {
 };
 
 function ServiceList({ list, packages }) {
-  // console.log(list);
+  const [services, setServices] = useState([]);
+  console.log(list);
   console.log(packages);
-  // useEffect(() => {
-  //   const fetch = async () => {
-  //     try {
-  //       const response = await api.get("/packegaUpload");
-  //       console.log(response.data.data);
-  //     } catch (e) {
-  //       console(e);
-  //     }
-  //   };
-  // }, []);
+  useEffect(() => {
+    const fetchServices = async () => {
+      try {
+        const response = await api.get("/serviceUpload");
+        console.log(response.data.data);
+      } catch (e) {
+        console(e);
+      }
+    };
+  }, []);
+
+  const [showAddServiceModal, setShowAddServiceModal] = useState(false);
+
+  const handleShowAddServiceModal = () => {
+    setShowAddServiceModal(true);
+  };
+
+  const handleCancelAddServiceModal = () => {
+    setShowAddServiceModal(false);
+  };
+
+  const handleAddService = (service) => {
+    console.log("Added service:", service);
+    setShowAddServiceModal(false);
+  };
 
   const columns = [
     {
@@ -396,6 +413,21 @@ function ServiceList({ list, packages }) {
         </Button>
       </Row>
       <Table dataSource={list} columns={columns} />
+
+      {/* Modal chứa bảng dịch vụ */}
+      <Modal
+        visible={showAddServiceModal}
+        title="Add Service"
+        onCancel={handleCancelAddServiceModal}
+        footer={[
+          <Button key="cancel" onClick={handleCancelAddServiceModal}>
+            Cancel
+          </Button>,
+        ]}
+      >
+        {/* Đặt bảng dịch vụ ở đây */}
+        <Table dataSource={list} columns={columns} />
+      </Modal>
     </div>
   );
 }
@@ -424,14 +456,14 @@ const PackageDetail = ({ data, fetchPackage }) => {
         </Tag>
       </Col>
       <Col span={4}>
-        <Button
+        {/* <Button
           style={{
             marginRight: 10,
           }}
           type="primary"
         >
           Update
-        </Button>
+        </Button> */}
         <Button type="primary" danger onClick={handleDelete}>
           Delete
         </Button>

@@ -43,9 +43,9 @@ export const ManageSchedule = () => {
       render: (value) => {
         return (
           <Row gutter={12}>
-            <Col>
+            {/* <Col>
               <Button type="primary">Update</Button>
-            </Col>
+            </Col> */}
             <Col>
               <Button
                 type="primary"
