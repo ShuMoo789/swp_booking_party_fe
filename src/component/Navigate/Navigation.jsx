@@ -134,7 +134,7 @@ export default function Navigation() {
                   to="/partyhostlist"
                   sx={{ fontWeight: "bold" }}
                 >
-                  BOOK
+                  BOOKING
                 </Button>
                 <Button component={Link} to="/faqs" sx={{ fontWeight: "bold" }}>
                   FAQs
