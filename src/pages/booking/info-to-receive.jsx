@@ -196,15 +196,13 @@ const InfoReceive = ({ form, onSubmitInfo }) => {
                 }}
                 buttonStyle="solid"
               >
-                {/* <Radio.Button value="a">Hangzhou</Radio.Button>
-            <Radio.Button value="b">Shanghai</Radio.Button>
-            <Radio.Button value="c">Beijing</Radio.Button>
-            <Radio.Button value="d">Chengdu</Radio.Button> */}
-                {schedule.map((item) => {
-                  return (
-                    <Radio.Button value={item.id}>{item.time}</Radio.Button>
-                  );
-                })}
+                {schedule
+                  .filter((item) => !item.deleted)
+                  .map((item) => {
+                    return (
+                      <Radio.Button value={item.id}>{item.time}</Radio.Button>
+                    );
+                  })}
               </Radio.Group>
             </Form.Item>
           </Col>

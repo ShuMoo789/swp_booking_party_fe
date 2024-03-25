@@ -19,11 +19,10 @@ export const ConfirmPage = () => {
   const fetchSchedule = async () => {
     const response = await api.get(`schedule-by-host-id/${params.hostId}`);
     const timeString = response.data.filter(
-      (item) => item.id === booking?.information?.time
+      (item) => item.id && !item.deleted === booking?.information?.time
     );
     setTime(timeString[0].time);
   };
-
   useEffect(() => {
     fetchSchedule();
   }, []);
