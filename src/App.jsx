@@ -10,6 +10,7 @@ import Feedback from "./pages/feedback/feedback";
 
 import ServiceUploadDashboard from "./pages/serviceUploadDashboard";
 import AdminDashboard from "./pages/admindashboard";
+import UserAccount from "./pages/userAccount";
 
 import { useDispatch, useSelector } from "react-redux";
 import Password from "antd/es/input/Password";
@@ -135,6 +136,10 @@ function App() {
         {
           path: "feedbacklist",
           element: <FeedbackList />,
+        },
+        {
+          path: "userlist",
+          element: <UserAccount />,
         },
         {
           path: "packageregisterlist",

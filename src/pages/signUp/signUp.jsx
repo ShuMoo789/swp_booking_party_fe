@@ -242,8 +242,10 @@ export default function SignUp() {
         address: formik.values.address,
       });
       console.log(response);
-      toast.success("Please verify your email!");
-      navigate("/login");
+      toast("Please verify your email!");
+      setTimeout(() => {
+        navigate("/login");
+      }, 2000);
     } catch (e) {
       console.log(e.response);
       toast.error("Registration failed!");

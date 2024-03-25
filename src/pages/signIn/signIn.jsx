@@ -50,10 +50,10 @@ export default function SignIn() {
       localStorage.setItem("token", response.data.token);
       dispatch(login(response.data));
       console.log(response.data.role);
-      if (response.data.role == "PARTY_HOST") {
+      if (response.data.role === "PARTY_HOST") {
         navigate("/dashboard/package");
       } else if (response.data.role === "ADMIN") {
-        navigate("/dashboard");
+        navigate("/dashboard/userlist");
       } else {
         navigate("/");
       }

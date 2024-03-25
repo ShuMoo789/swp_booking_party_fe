@@ -1,158 +1,202 @@
-import * as React from "react";
-import Stack from "@mui/material/Stack";
-import Button from "@mui/material/Button";
-import Table from "@mui/material/Table";
-import TableBody from "@mui/material/TableBody";
-import TableCell from "@mui/material/TableCell";
-import TableContainer from "@mui/material/TableContainer";
-import TableHead from "@mui/material/TableHead";
-import TableRow from "@mui/material/TableRow";
-import Paper from "@mui/material/Paper";
-import TextField from "@mui/material/TextField";
-import Autocomplete from "@mui/material/Autocomplete";
-import DeleteIcon from "@mui/icons-material/Delete";
+import { useEffect, useState } from "react";
+
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  tableCellClasses,
+  TableHead,
+  TableRow,
+  Paper,
+  Select,
+  MenuItem,
+} from "@mui/material";
+import { styled } from "@mui/material/styles";
 import EditIcon from "@mui/icons-material/Edit";
+import DoneIcon from "@mui/icons-material/Done";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import api from "../../config/axios";
 
-function createData(username, role, status) {
-  return { username, role, status };
-}
+const StyledTableCell = styled(TableCell)(({ theme }) => ({
+  [`&.${tableCellClasses.head}`]: {
+    backgroundColor: theme.palette.common.black,
+    color: theme.palette.common.white,
+  },
+  [`&.${tableCellClasses.body}`]: {
+    fontSize: 14,
+  },
+}));
 
-const initialRows = [
-  createData("tuanla1717", "Admin", "Active"),
-  createData("danhngoc9182", "Admin", "Active"),
-  createData("phapkieu112", "Customer", "Active"),
-  createData("vantoan", "Party Host", "Active"),
-  createData("datkhongchin", "Customer", "Active"),
-];
+const StyledTableRow = styled(TableRow)(({ theme }) => ({
+  "&:nth-of-type(odd)": {
+    backgroundColor: theme.palette.grey[200],
+  },
+  // hide last border
+  "&:last-child td, &:last-child th": {
+    border: 0,
+  },
+}));
 
-const statusOptions = ["Active", "Disabled"];
+const UserAccount = () => {
+  const [data, setData] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [editableId, setEditableId] = useState(null);
+  const [newStatus, setNewStatus] = useState("");
 
-export default function UserAccount() {
-  const [statusValues, setStatusValues] = React.useState({});
-  const [rows, setRows] = React.useState(initialRows);
-  const [editingRowIndex, setEditingRowIndex] = React.useState(-1);
-  const [editedName, setEditedName] = React.useState("");
-  const [editedRole, setEditedRole] = React.useState("");
-  const [editedStatus, setEditedStatus] = React.useState("");
-
-  const handleEdit = (index) => {
-    const rowToEdit = rows[index];
-    setEditedName(rowToEdit.username);
-    setEditedRole(rowToEdit.role);
-    setEditedStatus(rowToEdit.status);
-    setEditingRowIndex(index);
-  };
-
-  const handleSave = () => {
-    const newRows = [...rows];
-    newRows[editingRowIndex] = {
-      username: editedName,
-      role: editedRole,
-      status: editedStatus,
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await api.get("/all-accounts");
+        setData(response.data);
+      } catch (error) {
+        setError(error);
+      } finally {
+        setLoading(false);
+      }
     };
-    setRows(newRows);
-    setEditingRowIndex(-1);
+
+    fetchData();
+  }, []);
+
+  const handleEdit = (id, currentStatus) => {
+    setEditableId(id);
+    setNewStatus(currentStatus);
   };
 
-  const handleDelete = (index) => {
-    setRows(rows.filter((_, rowIndex) => rowIndex !== index));
+  const handleDone = async (id) => {
+    try {
+      const response = await api.put(`/update-account-status/${id}`, {
+        accountStatus: newStatus,
+      });
+      if (response.status === 200) {
+        setData((prevData) => {
+          return prevData.map((item) => {
+            if (item.id === id) {
+              return { ...item, accountStatus: newStatus };
+            }
+            return item;
+          });
+        });
+        setEditableId(null);
+        // Hiển thị thông báo thành công
+        toast.success("Update successful!");
+      } else {
+        throw new Error("Failed to update user status.");
+      }
+    } catch (error) {
+      console.error("Error updating user status:", error);
+      toast.error("Update fail!!");
+    }
   };
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>Error: {error.message}</div>;
+  }
 
   return (
-    <div>
-      <h1 style={{ marginTop: "60px", marginLeft: "10px", marginLeft: "40%" }}>
-        User's Account
-      </h1>
-
-      <h3 style={{ marginTop: "20px", marginLeft: "20px" }}>List</h3>
-      <TableContainer
-        component={Paper}
-        style={{ marginTop: "16px", marginLeft: "20px", marginBottom: "100px" }}
-      >
-        <Table sx={{ minWidth: 650 }} aria-label="simple table">
+    <div style={{ textAlign: "center" }}>
+      <h1 style={{ margin: "25px 0px 15px" }}>User List</h1>
+      <TableContainer component={Paper}>
+        <Table sx={{ minWidth: 700 }} aria-label="customized table">
           <TableHead>
             <TableRow>
-              <TableCell>Username </TableCell>
-              <TableCell align="left">Role</TableCell>
-              <TableCell align="left">Status</TableCell>
-              <TableCell align="left">Actions</TableCell>
+              <TableCell
+                style={{ fontWeight: "bold", textTransform: "uppercase" }}
+              >
+                Name
+              </TableCell>
+              <TableCell
+                style={{ fontWeight: "bold", textTransform: "uppercase" }}
+              >
+                Email
+              </TableCell>
+              <TableCell
+                style={{ fontWeight: "bold", textTransform: "uppercase" }}
+              >
+                Phone
+              </TableCell>
+              <TableCell
+                style={{ fontWeight: "bold", textTransform: "uppercase" }}
+              >
+                Address
+              </TableCell>
+              <TableCell
+                style={{ fontWeight: "bold", textTransform: "uppercase" }}
+              >
+                Status
+              </TableCell>
+              <TableCell
+                style={{ fontWeight: "bold", textTransform: "uppercase" }}
+              >
+                Role
+              </TableCell>
+              <TableCell
+                style={{ fontWeight: "bold", textTransform: "uppercase" }}
+              >
+                Actions
+              </TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
-            {rows.map((row, index) => (
-              <TableRow
-                key={row.username}
-                sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-              >
-                <TableCell component="th" scope="row">
-                  {editingRowIndex === index ? (
-                    <TextField
-                      value={editedName}
-                      onChange={(e) => setEditedName(e.target.value)}
-                    />
-                  ) : (
-                    row.username
-                  )}
-                </TableCell>
-                <TableCell align="left">
-                  {editingRowIndex === index ? (
-                    <TextField
-                      value={editedRole}
-                      onChange={(e) => setEditedRole(e.target.value)}
-                    />
-                  ) : (
-                    row.role
-                  )}
-                </TableCell>
-                <TableCell align="left">
-                  {editingRowIndex === index ? (
-                    <Autocomplete
-                      value={editedStatus}
-                      onChange={(event, newValue) => setEditedStatus(newValue)}
-                      options={statusOptions}
-                      sx={{ width: 150 }}
-                      renderInput={(params) => <TextField {...params} />}
-                    />
-                  ) : (
-                    row.status
-                  )}
-                </TableCell>
-                <TableCell align="left">
-                  {editingRowIndex === index ? (
-                    <Button
-                      variant="contained"
-                      color="primary"
-                      size="small"
-                      onClick={handleSave}
-                    >
-                      Save
-                    </Button>
-                  ) : (
-                    <>
-                      <Button
-                        variant="contained"
-                        color="primary"
-                        size="small"
-                        onClick={() => handleEdit(index)}
+            {data &&
+              data.map((item) => (
+                <StyledTableRow key={item.id}>
+                  <StyledTableCell>
+                    {item.firstName} {item.lastName}
+                  </StyledTableCell>
+                  <StyledTableCell>{item.email}</StyledTableCell>
+                  <StyledTableCell>{item.phone}</StyledTableCell>
+                  <StyledTableCell>{item.address}</StyledTableCell>
+                  <StyledTableCell>
+                    {editableId === item.id ? (
+                      <Select
+                        value={newStatus}
+                        onChange={(e) => setNewStatus(e.target.value)}
                       >
-                        <EditIcon />
-                      </Button>
-                      <Button
-                        variant="contained"
-                        color="error"
-                        size="small"
-                        onClick={() => handleDelete(index)}
+                        <MenuItem value="ACTIVE">ACTIVE</MenuItem>
+                        <MenuItem value="BAN">BAN</MenuItem>
+                      </Select>
+                    ) : (
+                      <span
+                        style={{
+                          color:
+                            item.accountStatus === "ACTIVE" ? "green" : "red",
+                        }}
                       >
-                        <DeleteIcon />
-                      </Button>
-                    </>
-                  )}
-                </TableCell>
-              </TableRow>
-            ))}
+                        {item.accountStatus}
+                      </span>
+                    )}
+                  </StyledTableCell>
+                  <StyledTableCell>{item.role}</StyledTableCell>
+                  <StyledTableCell>
+                    {editableId === item.id ? (
+                      <DoneIcon
+                        style={{ color: "green", cursor: "pointer" }}
+                        onClick={() => handleDone(item.id)}
+                      />
+                    ) : (
+                      <EditIcon
+                        style={{ color: "blue", cursor: "pointer" }}
+                        onClick={() => handleEdit(item.id, item.accountStatus)}
+                      />
+                    )}
+                  </StyledTableCell>
+                </StyledTableRow>
+              ))}
           </TableBody>
         </Table>
       </TableContainer>
+      {/* Container for toast notifications */}
+      <ToastContainer position="top-right" />
     </div>
   );
-}
+};
+
+export default UserAccount;

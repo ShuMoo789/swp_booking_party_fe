@@ -50,6 +50,7 @@ export const Profile = () => {
           margin: "60px 0 0 0",
           textAlign: "center",
           borderColor: "pink",
+          color: "yellow",
         }}
       >
         Profile

@@ -53,6 +53,35 @@ export default function Navigation() {
       ];
     }
 
+    if (user?.role === "ADMIN") {
+      return [
+        {
+          label: (
+            <Link to={"/profile"} style={{ fontSize: "1rem" }}>
+              Profile
+            </Link>
+          ),
+          key: "0",
+        },
+        {
+          label: (
+            <Link to={"/dashboard/userlist"} style={{ fontSize: "1rem" }}>
+              Dashboard
+            </Link>
+          ),
+          key: "1",
+        },
+        {
+          label: (
+            <Button onClick={logoutHandler} style={{ color: "green" }}>
+              <Link to={"/login"}>Log out</Link>
+            </Button>
+          ),
+          key: "2",
+        },
+      ];
+    }
+
     if (user?.role === "CUSTOMER") {
       return [
         {
@@ -141,6 +170,10 @@ export default function Navigation() {
                   component={Link}
                   to="/partyhostlist"
                   sx={{ fontWeight: "bold" }}
+                  style={{
+                    display:
+                      user?.role === "CUSTOMER" ? "inline-block" : "none",
+                  }}
                 >
                   BOOKING
                 </Button>
