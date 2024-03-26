@@ -49,10 +49,19 @@ const Service = () => {
     setIsModalOpen(false);
   };
   const fetchService = async () => {
-    const response = await api.get(
-      `/serviceUploadByPackage/${booking.package.id}`
-    );
-    setServices(response.data);
+    try {
+      const response = await api.get("/serviceUpload");
+      console.log("id test:", response.data);
+
+      // Lọc những mục có serviceULStatus là AVAILABLE
+      const availableServices = response.data.filter(
+        (item) => item.serviceULStatus === "AVAILABLE"
+      );
+
+      setServices(availableServices);
+    } catch (error) {
+      console.error("Error fetching services:", error);
+    }
   };
 
   useEffect(() => {
@@ -60,9 +69,9 @@ const Service = () => {
   }, []);
 
   const calcTotal = () => {
-    let total = 0;
+    let total = booking?.package.priceTotal;
     booking?.services?.forEach((item) => (total += item.quantity * item.price));
-    return total + booking.package.priceTotal + ((booking.information.slot - booking.package.slot)*booking.package.pricePerChild);
+    return total;
   };
 
   const addService = (record) => {
