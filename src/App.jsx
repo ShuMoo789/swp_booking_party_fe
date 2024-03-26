@@ -12,10 +12,6 @@ import ServiceUploadDashboard from "./pages/serviceUploadDashboard";
 import AdminDashboard from "./pages/admindashboard";
 import UserAccount from "./pages/userAccount";
 
-import { useDispatch, useSelector } from "react-redux";
-import Password from "antd/es/input/Password";
-import axios from "axios";
-import { login, logout } from "./redux/features/authenSlice";
 import Dashboard from "./component/dashboard";
 import { Statistic } from "./pages/statistic";
 
@@ -23,12 +19,12 @@ import FaqsMain from "./pages/faqs/FaqsMain";
 import { ManagePackage } from "./pages/manage-package";
 import { ManageOrder } from "./pages/manage-order";
 import Wallet from "./pages/walletCustomer";
-import WalletPH from "./pages/walletPH";
+
 import Packageregisterlist from "./pages/package-register-list/packageregister";
 import { ManageSchedule } from "./pages/manage-schedule";
 
 import FeedbackList from "./pages/feedbackList/FeedbackList";
-import ManageService from "./pages/manage-service";
+import { ManageService } from "./pages/manage-service";
 import { BookingPage } from "./pages/booking";
 import SuccessPage from "./pages/checkout";
 import BasicTable from "./pages/paymentHistory";
