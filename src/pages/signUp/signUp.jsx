@@ -44,7 +44,7 @@ export default function SignUp() {
   const [showBusinessName, setShowBusinessName] = React.useState(false);
   const [showNameFields, setShowNameFields] = React.useState(true);
   const [policyContent, setPolicyContent] = React.useState("");
-  const [policyAccepted, setPolicyAccepted] = React.useState(false); // State for checkbox
+  const [policyAccepted, setPolicyAccepted] = React.useState(false);
   const navigate = useNavigate();
   const handleChange = (event) => {
     setValue(event.target.value);

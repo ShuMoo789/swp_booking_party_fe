@@ -1,214 +1,321 @@
-import React, { useState, useEffect } from "react";
 import {
   Button,
   Col,
   Collapse,
   Form,
+  Image,
   Input,
   InputNumber,
   Modal,
   Row,
+  Table,
+  Tag,
   Upload,
-  Grid,
-  Popconfirm,
 } from "antd";
-import {
-  MinusSquareOutlined,
-  PlusSquareOutlined,
-  UploadOutlined,
-} from "@ant-design/icons";
+import React, { useEffect, useState } from "react";
+import { MinusSquareOutlined, PlusSquareOutlined } from "@ant-design/icons";
+import TextArea from "antd/es/input/TextArea";
 import { useForm } from "antd/es/form/Form";
+import { PlusOutlined } from "@ant-design/icons";
+import uploadFile from "../../utils/upload";
 import api from "../../config/axios";
 import { toast } from "react-toastify";
-import uploadFile from "../../utils/upload";
+import { data } from "../statistic";
+import { useSelector } from "react-redux";
 
-const { useBreakpoint } = Grid;
-
-const ManageService = () => {
+export const ManageService = () => {
+  const user = useSelector((store) => store.authen);
   const [services, setServices] = useState([]);
+
   const [showModalAdd, setShowModalAdd] = useState(false);
   const [form] = useForm();
-  const [render, setRender] = useState(0);
+  const [previewOpen, setPreviewOpen] = useState(false);
+  const [previewImage, setPreviewImage] = useState("");
+  const [previewTitle, setPreviewTitle] = useState("");
+  const [activeKey, setActiveKey] = useState([]);
   const [fileList, setFileList] = useState([]);
-  const [deleteModalVisible, setDeleteModalVisible] = useState(false);
-  const [serviceToDelete, setServiceToDelete] = useState(null);
-  const screens = useBreakpoint();
-
-  const handleChange = ({ fileList: newFileList }) => setFileList(newFileList);
-
-  const uploadButton = (
-    <div>
-      <UploadOutlined />
-      <div style={{ marginTop: 8 }}>Upload</div>
-    </div>
-  );
-
-  const fetchServices = async () => {
-    try {
-      const response = await api.get("/serviceUpload");
-      setServices(
-        response.data.filter((item) => item.serviceULStatus !== "UNAVAILABLE")
-      );
-    } catch (error) {
-      console.error("Error fetching services:", error);
+  const [render, setRender] = useState(0);
+  const handleCancel = () => setPreviewOpen(false);
+  const handlePreview = async (file) => {
+    if (!file.url && !file.preview) {
+      file.preview = await getBase64(file.originFileObj);
     }
+    setPreviewImage(file.url || file.preview);
+    setPreviewOpen(true);
+    setPreviewTitle(
+      file.name || file.url.substring(file.url.lastIndexOf("/") + 1)
+    );
+  };
+  const fetchService = async () => {
+    const response = await api.get(`/serviceUpload/${user.id}`);
+    console.log(response.data.serviceUploads);
+    setServices(
+      response.data.serviceUploads
+        ?.filter((item) => item.serviceULStatus != "UNAVAILABLE")
+        .map((item, index) => {
+          return {
+            key: index,
+            label: <ServiceDetail data={item} fetchService={fetchService} />,
+            children: (
+              <ServiceList list={item.serviceUploads} services={item} />
+            ),
+          };
+        })
+    );
   };
 
   useEffect(() => {
-    fetchServices();
+    fetchService();
   }, [render]);
 
+  const handleChange = ({ fileList: newFileList }) => setFileList(newFileList);
+  const uploadButton = (
+    <button
+      style={{
+        border: 0,
+        background: "none",
+      }}
+      type="button"
+    >
+      <PlusOutlined />
+      <div
+        style={{
+          marginTop: 8,
+        }}
+      >
+        Upload
+      </div>
+    </button>
+  );
+
   const onFinish = async (values) => {
-    if (values.img) {
+    if (values.img.file) {
       const url = await uploadFile(values.img.file.originFileObj);
       values.img = url;
     }
-    try {
-      const response = await api.post("/create-serviceUpload", values);
-      toast.success("Successfully created a new service!");
-      fetchServices();
-      form.resetFields();
-      setShowModalAdd(false);
-    } catch (error) {
-      console.error("Error creating service:", error);
-      toast.error("Failed to create service!");
-    }
+    console.log(values);
+    const response = await api.post("/create-serviceUpload", values);
+    console.log(response);
+    toast.success("Successfully create a new service!");
+    fetchService();
+    form.resetFields();
+    setShowModalAdd(false);
   };
-
-  const handleDeleteService = async () => {
-    try {
-      if (serviceToDelete) {
-        await api.delete(`/delete-serviceUpload/${serviceToDelete.id}`);
-        toast.success("Successfully deleted service!");
-        fetchServices();
-        setDeleteModalVisible(false);
-      }
-    } catch (error) {
-      console.error("Error deleting service:", error);
-      toast.error("Failed to delete service!");
-    }
-  };
-
-  const handleConfirmDelete = (service) => {
-    setServiceToDelete(service);
-    setDeleteModalVisible(true);
+  const onChange = (value) => {
+    console.log("changed", value);
   };
 
   return (
     <div>
       <h2>Manage Service</h2>
-      <div style={{ padding: 20 }}>
-        <Row justify="end" style={{ marginBottom: 20 }}>
+      <div
+        style={{
+          padding: 20,
+        }}
+      >
+        <Row
+          justify={"end"}
+          style={{
+            marginBottom: 20,
+          }}
+        >
           <Button type="primary" onClick={() => setShowModalAdd(true)}>
             Add a new service
           </Button>
         </Row>
 
         <Collapse
-          items={services.map((service) => ({
-            header: service.name,
-            key: service.id,
-            panel: (
-              <div>
-                <p>Price: {service.price}</p>
-                <p>Quantity: {service.quantity}</p>
-                <p>Description: {service.description}</p>
-                <Button
-                  type="danger"
-                  onClick={() => handleConfirmDelete(service)}
-                >
-                  Delete
-                </Button>
-              </div>
-            ),
-          }))}
+          expandIcon={({ isActive }) =>
+            isActive ? <MinusSquareOutlined /> : <PlusSquareOutlined />
+          }
+          items={services}
+          activeKey={activeKey}
+          onChange={(keys) => setActiveKey(keys)}
+          // onChange={onChange}
         />
-      </div>
 
-      <Modal
-        title="Add a new service"
-        open={showModalAdd}
-        onOk={() => form.submit()}
-        onCancel={() => setShowModalAdd(false)}
-      >
-        <Form form={form} onFinish={onFinish} labelCol={{ span: 24 }}>
-          <Form.Item
-            label="Name of the service"
-            name="name"
-            rules={[
-              { required: true, message: "Please enter name of the service!" },
-            ]}
+        {/* Modal add */}
+        <Modal
+          title="Add a new service"
+          open={showModalAdd}
+          onOk={() => form.submit()}
+          onCancel={() => setShowModalAdd(false)}
+        >
+          <Form
+            form={form}
+            onFinish={onFinish}
+            labelCol={{
+              span: 24,
+            }}
           >
-            <Input />
-          </Form.Item>
-
-          <Row gutter={[16, 16]}>
-            <Col span={screens.xs ? 24 : 12}>
-              <Form.Item
-                label="Price of the service"
-                name="price"
-                rules={[
-                  {
-                    required: true,
-                    message: "Please enter price of the service!",
-                  },
-                ]}
-              >
-                <InputNumber suffix="$" style={{ width: "100%" }} />
-              </Form.Item>
-            </Col>
-            <Col span={screens.xs ? 24 : 12}>
-              <Form.Item
-                label="Quantity"
-                name="quantity"
-                rules={[
-                  {
-                    required: true,
-                    message: "Please enter quantity of the service!",
-                  },
-                ]}
-              >
-                <InputNumber style={{ width: "100%" }} />
-              </Form.Item>
-            </Col>
-          </Row>
-
-          <Form.Item
-            label="Description"
-            name="description"
-            rules={[
-              { required: true, message: "Please enter the description!" },
-            ]}
-          >
-            <Input.TextArea rows={5} />
-          </Form.Item>
-
-          {/* Form.Item for uploading image */}
-          <Form.Item label="Image about your service" name="img">
-            <Upload
-              action="https://run.mocky.io/v3/435e224c-44fb-4773-9faf-380c5e6a2188"
-              listType="picture-card"
-              fileList={fileList}
-              onChange={handleChange}
+            <Form.Item
+              label="Name of the service"
+              name={"name"}
+              rules={[
+                {
+                  required: true,
+                  message: "Please enter name of the service!",
+                },
+              ]}
             >
-              {fileList.length >= 8 ? null : uploadButton}
-            </Upload>
-          </Form.Item>
-        </Form>
-      </Modal>
+              <Input />
+            </Form.Item>
 
-      <Modal
-        title="Delete Service"
-        open={deleteModalVisible}
-        onOk={handleDeleteService}
-        onCancel={() => setDeleteModalVisible(false)}
-        okText="Delete"
-        cancelText="Cancel"
-      >
-        <p>Are you sure you want to delete this service?</p>
-      </Modal>
+            <Row gutter={12}>
+              <Col span={12}>
+                {" "}
+                <Form.Item
+                  label="Price"
+                  name={"Price"}
+                  rules={[
+                    {
+                      required: true,
+                      message: "Please enter the price!",
+                    },
+                  ]}
+                >
+                  <InputNumber
+                    style={{
+                      width: "100%",
+                    }}
+                    formatter={(value) =>
+                      `$ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+                    }
+                    parser={(value) => value.replace(/\$\s?|(,*)/g, "")}
+                    //   onChange={onChange}
+                  />
+                </Form.Item>
+              </Col>
+              <Col span={12}>
+                {" "}
+                <Form.Item
+                  label="Quantity"
+                  name={"Quantity"}
+                  rules={[
+                    {
+                      required: true,
+                      message: "Please enter the Quantity!",
+                    },
+                  ]}
+                >
+                  <InputNumber
+                    style={{
+                      width: "100%",
+                    }}
+                    formatter={(value) =>
+                      `$ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+                    }
+                    parser={(value) => value.replace(/\$\s?|(,*)/g, "")}
+                    //   onChange={onChange}
+                  />
+                </Form.Item>
+              </Col>
+            </Row>
+
+            <Form.Item
+              label="Description"
+              name={"description"}
+              rules={[
+                {
+                  required: true,
+                  message: "Please enter the description!",
+                },
+              ]}
+            >
+              <TextArea rows={5} />
+            </Form.Item>
+            <Form.Item label="Image about your service" name={"img"}>
+              <Upload
+                action="https://run.mocky.io/v3/435e224c-44fb-4773-9faf-380c5e6a2188"
+                listType="picture-card"
+                fileList={fileList}
+                onPreview={handlePreview}
+                onChange={handleChange}
+              >
+                {fileList.length >= 8 ? null : uploadButton}
+              </Upload>
+            </Form.Item>
+          </Form>
+        </Modal>
+
+        <Modal
+          open={previewOpen}
+          title={previewTitle}
+          footer={null}
+          onCancel={handleCancel}
+        >
+          <img
+            alt="example"
+            style={{
+              width: "100%",
+            }}
+            src={previewImage}
+          />
+        </Modal>
+      </div>
     </div>
   );
 };
 
-export default ManageService;
+function ServiceList({ list, services }) {
+  // const [services, setServices] = useState([]);
+  console.log(list);
+  console.log(services);
+  useEffect(() => {
+    const fetchServices = async () => {
+      try {
+        const response = await api.get("/serviceUpload");
+        console.log("test 2:", response.data.serviceUploads);
+      } catch (e) {
+        console(e);
+      }
+    };
+  }, []);
+
+  return (
+    <div style={{ margin: "10px 0" }}>
+      <Row>
+        <Col span={12} style={{ marginBottom: "8px" }}>
+          <strong>Quantity:</strong> {services.quantity}
+        </Col>
+        <Col span={12} style={{ marginBottom: "8px" }}>
+          <strong>Price:</strong> {services.price}
+        </Col>
+        <Col span={24} style={{ marginBottom: "8px" }}>
+          <strong>Description:</strong> {services.description}
+        </Col>
+      </Row>
+    </div>
+  );
+}
+
+const ServiceDetail = ({ data, fetchService }) => {
+  const handleDelete = async () => {
+    await api.delete(`/delete-serviceUpload/${data.id}`);
+    fetchService(); // Cập nhật dữ liệu sau khi xóa thành công
+    toast.success("Successfully delete service!");
+  };
+  return (
+    <Row>
+      <Col span={2}>
+        <Image width={40} src={data.img} />
+      </Col>
+      <Col span={18}>
+        <strong>{data.name}</strong>
+        <Tag
+          style={{
+            marginLeft: 10,
+          }}
+          color={data.serviceULStatus === "PENDING" ? "warning" : ""}
+        >
+          {data.serviceULStatus}
+        </Tag>
+      </Col>
+      <Col span={4}>
+        <Button type="primary" danger onClick={handleDelete}>
+          Delete
+        </Button>
+      </Col>
+    </Row>
+  );
+};

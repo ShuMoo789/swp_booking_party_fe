@@ -51,7 +51,7 @@ export default function Navigation() {
               <Button onClick={logoutHandler}>
                 <Link
                   to={"/login"}
-                  style={{ color: "green", textDecoration: "none" }}
+                  style={{ color: "red", textDecoration: "none" }}
                 >
                   Log out
                 </Link>
@@ -84,7 +84,7 @@ export default function Navigation() {
               <Button onClick={logoutHandler}>
                 <Link
                   to={"/login"}
-                  style={{ color: "green", textDecoration: "none" }}
+                  style={{ color: "red", textDecoration: "none" }}
                 >
                   Log out
                 </Link>
