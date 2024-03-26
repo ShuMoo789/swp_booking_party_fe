@@ -57,16 +57,16 @@ const InfoReceive = ({ form, onSubmitInfo }) => {
     fetchSchedule();
   }, [bookingDate]);
 
-  useEffect(() => {
-    const info = { ...information };
-    info.date = dayjs(info.date);
-    form.setFieldsValue(info);
-    if (info?.slot) {
-      setSlot(info?.slot);
-    } else {
-      setSlot(0);
-    }
-  }, [information]);
+  // useEffect(() => {
+  //   const info = { ...information };
+  //   info.date = dayjs(info.date);
+  //   form.setFieldsValue(info);
+  //   if (info?.slot) {
+  //     setSlot(info?.slot);
+  //   } else {
+  //     setSlot(0);
+  //   }
+  // }, [information]);
   console.log(data);
   return (
     <div style={{ maxWidth: "1600px", padding: 20 }}>
@@ -91,11 +91,15 @@ const InfoReceive = ({ form, onSubmitInfo }) => {
           <Col span={12}>
             <Form.Item
               label="Name"
-              name={"name"}
+              name="name"
               rules={[
                 {
                   required: true,
                   message: "Please enter your name!",
+                },
+                {
+                  pattern: /^[a-zA-Z\s]*$/,
+                  message: "Please enter alphabetic characters only!",
                 },
               ]}
             >
@@ -121,14 +125,31 @@ const InfoReceive = ({ form, onSubmitInfo }) => {
               rules={[
                 {
                   required: true,
-                  message: "Please enter your phone!",
+                  message: "Please enter your phone number!",
+                },
+                {
+                  pattern: /^(0)[0-9]{9,11}$/,
+                  message:
+                    "Please enter a valid phone number starting with 0 and between 10 to 12 digits!",
+                },
+                {
+                  validator: (_, value) => {
+                    if (
+                      value &&
+                      (value.length === 10 || value.length === 12) &&
+                      /^0+$/.test(value)
+                    ) {
+                      return Promise.reject("Please don't enter full 0!");
+                    }
+                    return Promise.resolve();
+                  },
                 },
               ]}
             >
               <Input
                 placeholder="Ex: 0838667899"
                 showCount
-                maxLength={10}
+                maxLength={12}
                 onChangeText={onChangeText}
               />
             </Form.Item>
@@ -139,6 +160,20 @@ const InfoReceive = ({ form, onSubmitInfo }) => {
                 {
                   required: true,
                   message: "Please enter your email!",
+                },
+                {
+                  type: "email",
+                  message: "Please enter a valid email address!",
+                },
+                {
+                  validator: (_, value) => {
+                    if (value && !value.includes("@")) {
+                      return Promise.reject(
+                        "Please enter a valid email address containing @!"
+                      );
+                    }
+                    return Promise.resolve();
+                  },
                 },
               ]}
             >
