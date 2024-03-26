@@ -50,7 +50,7 @@ export const ManageOrder = () => {
 
   const columns = [
     {
-      title: "Action",
+      title: "Information",
       dataIndex: "action",
       key: "action",
       render: (_, record) => (
@@ -75,13 +75,23 @@ export const ManageOrder = () => {
       key: "totalPrice",
     },
     {
-      title: "Action",
+      title: "Check-In",
       dataIndex: "action",
       key: "action",
-      render: (_, record) =>
-        record.orderedStatus !== "COMPLETED" && (
-          <Button onClick={() => handleAcceptOrder(record)}>Accept</Button>
-        ),
+      // render: (_, record) =>
+      //   record.orderedStatus !== "COMPLETED" && (
+      //     <Button onClick={() => handleAcceptOrder(record)}>Accept</Button>
+      //   ),
+      render: (_, record) => {
+        if (record.orderedStatus !== "COMPLETED") {
+          if (record.orderedStatus !== "CANCELLED") {
+            return <Button onClick={() => handleAcceptOrder(record)}>Accept</Button>;
+          } else {
+            return null; // Return null when status is "CANCELLED"
+          }
+        }
+        return null; // Return null when status is "COMPLETED"
+      },
     },
   ];
 

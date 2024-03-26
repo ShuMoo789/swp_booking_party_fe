@@ -22,38 +22,38 @@ const itemsPartyHost = [
     label: <Link to={"/"}>Home</Link>,
     icon: <HomeOutlined />,
   },
+  // {
+  //   key: "2",
+  //   label: <Link to={"/dashboard/statistics"}>Statistics</Link>,
+  //   icon: <LineChartOutlined />,
+  // },
   {
     key: "2",
-    label: <Link to={"/dashboard/statistics"}>Statistics</Link>,
-    icon: <LineChartOutlined />,
-  },
-  {
-    key: "3",
     label: <Link to={"/dashboard/schedule"}>Schedule</Link>,
     icon: <CalendarOutlined />,
   },
   {
-    key: "4",
+    key: "3",
     label: <Link to={"/dashboard/order"}>Manage Order</Link>,
     icon: <FileDoneOutlined />,
   },
   {
-    key: "5",
+    key: "4",
     label: <Link to={"/dashboard/package"}>Manage Package</Link>,
     icon: <CodepenOutlined />,
   },
   {
-    key: "6",
+    key: "5",
     label: <Link to={"/dashboard/service"}>Manage Service</Link>,
     icon: <CodepenOutlined />,
   },
   {
-    key: "7",
+    key: "6",
     label: <Link to={"/dashboard/wallet"}>Your Wallet</Link>,
     icon: <WalletOutlined />,
   },
   {
-    key: "8",
+    key: "7",
     label: <Link to={"/dashboard/feedbacklist"}>Feedback List</Link>,
     icon: <LikeOutlined />,
   },
@@ -65,15 +65,15 @@ const itemsAdmin = [
     label: <Link to={"/dashboard/userlist"}>User List</Link>,
     icon: <UserOutlined />,
   },
+  // {
+  //   key: "2",
+  //   label: (
+  //     <Link to={"/dashboard/packageregisterlist"}>Package Register List</Link>
+  //   ),
+  //   icon: <CodepenOutlined />,
+  // },
   {
     key: "2",
-    label: (
-      <Link to={"/dashboard/packageregisterlist"}>Package Register List</Link>
-    ),
-    icon: <CodepenOutlined />,
-  },
-  {
-    key: "3",
     label: <Link to={"/dashboard/wallet"}> Your Wallet</Link>,
     icon: <WalletOutlined />,
   },

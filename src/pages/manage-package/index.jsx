@@ -402,7 +402,7 @@ function ServiceList({ list, packages }) {
         </Col>
       </Row>
 
-      <Row
+      {/* <Row
         justify={"start"}
         style={{
           marginBottom: 20,
@@ -425,7 +425,7 @@ function ServiceList({ list, packages }) {
         ]}
       >
         <Table dataSource={list} columns={columns} />
-      </Modal>
+      </Modal> */}
     </div>
   );
 }
@@ -444,14 +444,14 @@ const PackageDetail = ({ data, fetchPackage }) => {
       </Col>
       <Col span={18}>
         <strong>{data.name}</strong>
-        <Tag
+        {/* <Tag
           style={{
             marginLeft: 10,
           }}
           color={data.packageULStatus === "PENDING" ? "warning" : ""}
         >
           {data.packageULStatus}
-        </Tag>
+        </Tag> */}
       </Col>
       <Col span={4}>
         {/* <Button

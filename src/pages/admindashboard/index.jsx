@@ -4,39 +4,6 @@ import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
 
 const { Search } = Input;
 
-const initialData = [
-  {
-    key: "1",
-    name: "John Brown",
-    venue: "New York No. 1 Lake Park",
-    priceperchild: "32$",
-    pricetotal: "320$",
-    description: "Funny event for children",
-    quantity: 10,
-    theme: "New York",
-  },
-  {
-    key: "2",
-    name: "Jim Green",
-    venue: "London No. 1 Lake Park",
-    priceperchild: "28$",
-    pricetotal: "280$",
-    description: "Exciting party with games",
-    quantity: 20,
-    theme: "London",
-  },
-  {
-    key: "3",
-    name: "Joe Black",
-    venue: "Sydney No. 1 Lake Park",
-    priceperchild: "35$",
-    pricetotal: "350$",
-    description: "Educational workshop",
-    quantity: 15,
-    theme: "Sydney",
-  },
-];
-
 const AdminDashboard = () => {
   const [dataSource, setDataSource] = useState(initialData);
   const [editingRowIndex, setEditingRowIndex] = useState(-1);
