@@ -50,7 +50,7 @@ export const ManageOrder = () => {
 
   const columns = [
     {
-      title: "Information",
+      title: "Action",
       dataIndex: "action",
       key: "action",
       render: (_, record) => (
@@ -75,23 +75,13 @@ export const ManageOrder = () => {
       key: "totalPrice",
     },
     {
-      title: "Check-In",
+      title: "Action",
       dataIndex: "action",
       key: "action",
-      // render: (_, record) =>
-      //   record.orderedStatus !== "COMPLETED" && (
-      //     <Button onClick={() => handleAcceptOrder(record)}>Accept</Button>
-      //   ),
-      render: (_, record) => {
-        if (record.orderedStatus !== "COMPLETED") {
-          if (record.orderedStatus !== "CANCELLED") {
-            return <Button onClick={() => handleAcceptOrder(record)}>Accept</Button>;
-          } else {
-            return null; // Return null when status is "CANCELLED"
-          }
-        }
-        return null; // Return null when status is "COMPLETED"
-      },
+      render: (_, record) =>
+        record.orderedStatus !== "COMPLETED" && (
+          <Button onClick={() => handleAcceptOrder(record)}>Accept</Button>
+        ),
     },
   ];
 
@@ -113,6 +103,40 @@ export const ManageOrder = () => {
         onCancel={() => setBooking(null)}
       >
         <p>ID: {booking?.id}</p>
+        <p>
+          <span style={{ color: "green", fontWeight: "bold" }}>Package: </span>{" "}
+          {booking?.apackage?.name} - Slot: {booking?.apackage?.slot} - Price:{" "}
+          {booking?.apackage?.priceTotal}
+        </p>
+        <div style={{ display: "flex" }}>
+          <h7 style={{ color: "blue", fontWeight: "bold" }}>Services:</h7>
+          <ul>
+            {booking?.services.map((service) => (
+              <li
+                style={{ textDecoration: "none", listStyleType: "none" }}
+                key={service.id}
+              >
+                <div style={{ display: "flex", alignItems: "center" }}>
+                  <p
+                    style={{
+                      marginRight: "10px",
+                      marginBottom: "0",
+                      marginLeft: "-25px",
+                    }}
+                  >
+                    {service.name}
+                  </p>
+                  <p style={{ marginRight: "10px", marginBottom: "0" }}>
+                    - Price: {service.price}
+                  </p>
+                  <p style={{ marginRight: "10px", marginBottom: "0" }}>
+                    - Quantity: {service.quantity}
+                  </p>
+                </div>
+              </li>
+            ))}
+          </ul>
+        </div>
         <p>
           Booking Date:{" "}
           {`${dayjs(booking?.bookingDate).format(

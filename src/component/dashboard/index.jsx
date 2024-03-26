@@ -84,8 +84,6 @@ const items = [
   { key: "2", label: <a href="/login">Logout</a> },
 ];
 
-const onFinish = (values) => {};
-
 const Dashboard = () => {
   const user = useSelector((store) => store.authen);
   const [collapsed, setCollapsed] = useState(false);
