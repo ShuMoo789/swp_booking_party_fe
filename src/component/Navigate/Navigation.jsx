@@ -27,7 +27,6 @@ export default function Navigation() {
   const generateItem = () => {
     let items = [];
 
-
     switch (user?.role) {
       case "PARTY_HOST":
         items = [
@@ -111,6 +110,15 @@ export default function Navigation() {
                 Payment History
               </Link>
             ),
+            key: "1",
+          },
+
+          {
+            label: (
+              <Link to={"/wallet"} style={{ fontSize: "1rem" }}>
+                Wallet
+              </Link>
+            ),
             key: "2",
           },
           {
@@ -118,7 +126,7 @@ export default function Navigation() {
               <Button onClick={logoutHandler}>
                 <Link
                   to={"/login"}
-                  style={{ color: "green", textDecoration: "none" }}
+                  style={{ color: "red", textDecoration: "none" }}
                 >
                   Log out
                 </Link>
@@ -130,7 +138,6 @@ export default function Navigation() {
         break;
       default:
         break;
-   
     }
 
     return items;
