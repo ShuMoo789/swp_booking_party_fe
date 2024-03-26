@@ -69,9 +69,14 @@ const Service = () => {
   }, []);
 
   const calcTotal = () => {
-    let total = booking?.package.priceTotal;
+    let total = 0;
     booking?.services?.forEach((item) => (total += item.quantity * item.price));
-    return total;
+    return (
+      total +
+      booking.package.priceTotal +
+      (booking.information.slot - booking.package.slot) *
+        booking.package.pricePerChild
+    );
   };
 
   const addService = (record) => {
