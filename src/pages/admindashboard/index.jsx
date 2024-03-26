@@ -74,7 +74,7 @@ const AdminDashboard = () => {
 
   const handleSearch = (value) => {
     setSearchValue(value);
-    const filteredDataSource = initialData.filter((item) =>
+    const filteredDataSource = dataSource.filter((item) =>
       Object.values(item).some((val) =>
         val.toString().toLowerCase().includes(value.toLowerCase())
       )

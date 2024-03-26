@@ -18,117 +18,127 @@ import "./Navigation.scss";
 
 export default function Navigation() {
   const dispatch = useDispatch();
-
   const user = useSelector((store) => store.authen);
+
   const logoutHandler = () => {
     dispatch(logout());
   };
+
   const generateItem = () => {
-    if (user?.role === "PARTY_HOST") {
-      return [
-        {
-          label: (
-            <Link to={"/profile"} style={{ fontSize: "1rem" }}>
-              Profile
-            </Link>
-          ),
-          key: "0",
-        },
-        {
-          label: (
-            <Link to={"/dashboard/package"} style={{ fontSize: "1rem" }}>
-              Dashboard
-            </Link>
-          ),
-          key: "1",
-        },
-        {
-          label: (
-            <Button onClick={logoutHandler} style={{ color: "green" }}>
-              <Link to={"/login"}>Log out</Link>
-            </Button>
-          ),
-          key: "2",
-        },
-      ];
+    let items = [];
+
+    switch (user?.role) {
+      case "PARTY_HOST":
+        items = [
+          {
+            label: (
+              <Link to={"/profile"} style={{ fontSize: "1rem" }}>
+                Profile
+              </Link>
+            ),
+            key: "0",
+          },
+          {
+            label: (
+              <Link to={"/dashboard/package"} style={{ fontSize: "1rem" }}>
+                Dashboard
+              </Link>
+            ),
+            key: "1",
+          },
+          {
+            label: (
+              <Button onClick={logoutHandler}>
+                <Link
+                  to={"/login"}
+                  style={{ color: "green", textDecoration: "none" }}
+                >
+                  Log out
+                </Link>
+              </Button>
+            ),
+            key: "2",
+          },
+        ];
+        break;
+      case "ADMIN":
+        items = [
+          {
+            label: (
+              <Link to={"/profile"} style={{ fontSize: "1rem" }}>
+                Profile
+              </Link>
+            ),
+            key: "0",
+          },
+          {
+            label: (
+              <Link to={"/dashboard/userlist"} style={{ fontSize: "1rem" }}>
+                Dashboard
+              </Link>
+            ),
+            key: "1",
+          },
+          {
+            label: (
+              <Button onClick={logoutHandler}>
+                <Link
+                  to={"/login"}
+                  style={{ color: "green", textDecoration: "none" }}
+                >
+                  Log out
+                </Link>
+              </Button>
+            ),
+            key: "2",
+          },
+        ];
+        break;
+      case "CUSTOMER":
+        items = [
+          {
+            label: (
+              <Link to={"/profile"} style={{ fontSize: "1rem" }}>
+                Profile
+              </Link>
+            ),
+            key: "0",
+          },
+          {
+            label: (
+              <Link to={"/paymenthistory"} style={{ fontSize: "1rem" }}>
+                Payment History
+              </Link>
+            ),
+            key: "2",
+          },
+          {
+            label: (
+              <Button onClick={logoutHandler}>
+                <Link
+                  to={"/login"}
+                  style={{ color: "green", textDecoration: "none" }}
+                >
+                  Log out
+                </Link>
+              </Button>
+            ),
+            key: "3",
+          },
+        ];
+        break;
+      default:
+        break;
     }
 
-    if (user?.role === "ADMIN") {
-      return [
-        {
-          label: (
-            <Link to={"/profile"} style={{ fontSize: "1rem" }}>
-              Profile
-            </Link>
-          ),
-          key: "0",
-        },
-        {
-          label: (
-            <Link to={"/dashboard/userlist"} style={{ fontSize: "1rem" }}>
-              Dashboard
-            </Link>
-          ),
-          key: "1",
-        },
-        {
-          label: (
-            <Button onClick={logoutHandler} style={{ color: "green" }}>
-              <Link to={"/login"}>Log out</Link>
-            </Button>
-          ),
-          key: "2",
-        },
-      ];
-    }
-
-    if (user?.role === "CUSTOMER") {
-      return [
-        {
-          label: (
-            <Link to={"/profile"} style={{ fontSize: "1rem" }}>
-              Profile
-            </Link>
-          ),
-          key: "0",
-        },
-        {
-          label: (
-            <Link to={"/paymenthistory"} style={{ fontSize: "1rem" }}>
-              Payment History
-            </Link>
-          ),
-          key: "2",
-        },
-        {
-          label: (
-            <Link to={"/wallet"} style={{ fontSize: "1rem" }}>
-              Wallet
-            </Link>
-          ),
-          key: "3",
-        },
-        {
-          label: (
-            <Button onClick={logoutHandler} style={{ color: "green" }}>
-              <Link to={"/login"}>Log out</Link>
-            </Button>
-          ),
-          key: "3",
-        },
-      ];
-    }
-
-    return [];
+    return items;
   };
+
   const items = generateItem();
+
   return (
     <div>
-      <AppBar
-        sx={{
-          backgroundColor: "#CCFBFF",
-        }}
-      >
+      <AppBar style={{ backgroundColor: "#CCFBFF" }}>
         <Toolbar>
           <Grid container alignItems="center" justifyContent="space-between">
             <Grid item xs={4}>
@@ -136,7 +146,7 @@ export default function Navigation() {
                 <Grid item>
                   <Link to="/" style={{ textDecoration: "none" }}>
                     <CardMedia
-                      sx={{ height: 38, width: 38, borderRadius: "50%" }}
+                      style={{ height: 38, width: 38, borderRadius: "50%" }}
                       image={images.birthday_logo}
                     />
                   </Link>
@@ -145,7 +155,7 @@ export default function Navigation() {
                   <Typography
                     variant="h6"
                     component="div"
-                    sx={{
+                    style={{
                       marginLeft: "10px",
                       fontWeight: "bold",
                       color: "#AF6480",
@@ -159,36 +169,35 @@ export default function Navigation() {
             <Grid
               item
               xs={4}
-              sx={{ display: "flex", justifyContent: "center" }}
+              style={{ display: "flex", justifyContent: "center" }}
             >
-              <Box sx={{ display: "flex", justifyContent: "space-around" }}>
-                <Button component={Link} to="/" sx={{ fontWeight: "bold" }}>
+              <Box style={{ display: "flex", justifyContent: "space-around" }}>
+                <Button component={Link} to="/" style={{ fontWeight: "bold" }}>
                   HOME
                 </Button>
-
                 <Button
                   component={Link}
                   to="/partyhostlist"
-                  sx={{ fontWeight: "bold" }}
                   style={{
+                    fontWeight: "bold",
                     display:
                       user?.role === "CUSTOMER" ? "inline-block" : "none",
                   }}
                 >
                   BOOKING
                 </Button>
-                <Button component={Link} to="/faqs" sx={{ fontWeight: "bold" }}>
+                <Button
+                  component={Link}
+                  to="/faqs"
+                  style={{ fontWeight: "bold" }}
+                >
                   FAQs
                 </Button>
               </Box>
             </Grid>
-            <Grid item xs={4} sx={{ textAlign: "right" }}>
+            <Grid item xs={4} style={{ textAlign: "right" }}>
               {user ? (
-                <Dropdown
-                  menu={{
-                    items,
-                  }}
-                >
+                <Dropdown menu={{ items }}>
                   <Button
                     className="user_info"
                     onClick={(e) => e.preventDefault()}

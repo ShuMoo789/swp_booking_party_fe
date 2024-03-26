@@ -94,12 +94,12 @@ const InfoReceive = ({ form, onSubmitInfo }) => {
               rules={[
                 {
                   required: true,
-                  message: "Please enter name!",
+                  message: "Please enter your name!",
                 },
               ]}
             >
               <Input
-                placeholder="Ex: Phan Thanh Danh"
+                placeholder="Ex: Nguyen Van A"
                 suffix={
                   <Tooltip title="The name of the person checking in to host the party">
                     <InfoCircleOutlined
@@ -142,14 +142,14 @@ const InfoReceive = ({ form, onSubmitInfo }) => {
               ]}
             >
               <Input
-                placeholder="Ex: bookingforkidz@online.com"
+                placeholder="Ex: nguyenvana@gmail.com"
                 showCount
                 maxLength={100}
                 onChangeText={onChangeText}
               />
             </Form.Item>
             <Form.Item
-              label="Additional Notes"
+              label="Notes:"
               name="note"
               rules={[
                 {
@@ -162,7 +162,7 @@ const InfoReceive = ({ form, onSubmitInfo }) => {
                 showCount
                 maxLength={500}
                 onChangeText={onChangeText}
-                placeholder="Ex: Name of the main character of the party: Taylor, The food should not be spicy."
+                placeholder="Ex: Name of the main character of the party: Ben. The food should not be spicy or should not have too much sugar."
               />
             </Form.Item>
             <Form.Item
@@ -171,7 +171,7 @@ const InfoReceive = ({ form, onSubmitInfo }) => {
               rules={[
                 {
                   required: true,
-                  message: "Please pick your date",
+                  message: "Please pick a date!",
                 },
               ]}
             >

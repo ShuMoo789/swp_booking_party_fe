@@ -10,23 +10,28 @@ import uploadFile from "../../utils/upload";
 export const Profile = () => {
   const [avatar, setAvatar] = useState("");
   const [form] = Form.useForm();
-  const [profile, setProfile] = useState();
+  const [profile, setProfile] = useState(null);
   const [userName, setUserName] = useState("");
 
   const fetchProfile = async () => {
-    const response = await api.get("profile");
-    setProfile(response.data);
-
-    setUserName(response.data.firstName);
-
-    form.setFieldsValue({
-      fullname: response.data.firstName,
-      email: response.data.email,
-      phone: response.data.phone,
-      role: response.data.role,
-    });
-
-    setAvatar(response.data.avatar);
+    try {
+      const response = await api.get("profile");
+      if (response.data) {
+        setProfile(response.data);
+        setUserName(response.data.firstName);
+        form.setFieldsValue({
+          fullname: response.data.firstName,
+          email: response.data.email,
+          phone: response.data.phone,
+          role: response.data.role,
+        });
+        setAvatar(response.data.avatar);
+      } else {
+        console.error("No data available in profile response");
+      }
+    } catch (error) {
+      console.error("Error fetching profile:", error);
+    }
   };
 
   useEffect(() => {
@@ -34,13 +39,19 @@ export const Profile = () => {
   }, []);
 
   const handleUpload = async ({ fileList }) => {
-    const url = await uploadFile(fileList[0].originFileObj);
-    setAvatar(url);
-    api.put("/profile", {
-      ...profile,
-      avatar: url,
-    });
-    toast.success("Avatar updated successfully!");
+    try {
+      const url = await uploadFile(fileList[0].originFileObj);
+      setAvatar(url);
+      const updatedProfile = { ...profile, avatar: url };
+      await api.put("/profile", updatedProfile);
+      toast.success("Avatar updated successfully!");
+
+      setProfile(updatedProfile);
+    } catch (error) {
+      console.error("Error updating avatar:", error);
+
+      toast.error("Failed to update avatar");
+    }
   };
 
   return (
@@ -67,9 +78,8 @@ export const Profile = () => {
           <Image
             width={140}
             src={
-              avatar
-                ? avatar
-                : "https://media.istockphoto.com/id/1131164548/vi/vec-to/th%E1%BA%BF-th%E1%BA%A7n-5.jpg?s=612x612&w=0&k=20&c=4qLeuiEXy8mR2r_M81wB9-FTSxaV5aoOBnYkGqHZnUw="
+              avatar ||
+              "https://sipr.mojokertokab.go.id/images/avatar/no-image.jpg"
             }
           />
         </div>
@@ -91,7 +101,7 @@ export const Profile = () => {
             span: 24,
           }}
         >
-          <Form.Item label="Name" name={"Name"}>
+          <Form.Item label="Name" name={"fullname"}>
             <p>
               {profile?.firstName} {profile?.lastName}
             </p>

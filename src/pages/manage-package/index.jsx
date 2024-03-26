@@ -216,7 +216,7 @@ export const ManagePackage = () => {
                   rules={[
                     {
                       required: true,
-                      message: "Please enter Slot!",
+                      message: "Please enter slot!",
                     },
                   ]}
                 >
@@ -414,7 +414,6 @@ function ServiceList({ list, packages }) {
       </Row>
       <Table dataSource={list} columns={columns} />
 
-      {/* Modal chứa bảng dịch vụ */}
       <Modal
         visible={showAddServiceModal}
         title="Add Service"
@@ -425,7 +424,6 @@ function ServiceList({ list, packages }) {
           </Button>,
         ]}
       >
-        {/* Đặt bảng dịch vụ ở đây */}
         <Table dataSource={list} columns={columns} />
       </Modal>
     </div>
