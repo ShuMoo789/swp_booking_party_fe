@@ -42,8 +42,9 @@ const InfoReceive = ({ form, onSubmitInfo }) => {
     console.log("changed", value);
   };
   function disabledPreviousDate(current) {
+    const currentDatePlusThreeDays = dayjs().add(5, "day");
     // Can not select days before today
-    return current && current < moment().startOf("day");
+    return current && current < currentDatePlusThreeDays.startOf("day");
   }
   const fetchSchedule = async () => {
     const response = await api.get(
@@ -232,7 +233,7 @@ const InfoReceive = ({ form, onSubmitInfo }) => {
                   <InputNumber
                     value={slot}
                     min={1}
-                    max={dataPackage?.slot}
+                    // max={dataPackage?.slot}
                     defaultValue={1}
                     onChange={onChangeNumber}
                     style={{ width: "100px", height: "50px", fontSize: "25px" }}
@@ -250,7 +251,17 @@ const InfoReceive = ({ form, onSubmitInfo }) => {
                   }}
                 >
                   <h4>Total Price</h4>
-                  <h1> ${dataPackage?.priceTotal} </h1>
+                  {slot <= dataPackage?.slot ? (
+                    <h1> ${dataPackage?.priceTotal} </h1>
+                  ) : (
+                    <h1>
+                      {" "}
+                      $
+                      {dataPackage?.priceTotal +
+                        (dataPackage?.slot - slot) *
+                          -dataPackage?.pricePerChild}{" "}
+                    </h1>
+                  )}
                 </Col>
                 <Col
                   span="5"
@@ -263,7 +274,11 @@ const InfoReceive = ({ form, onSubmitInfo }) => {
                   }}
                 >
                   <h4>Slot Left</h4>
-                  <h1> {dataPackage?.slot - slot} </h1>
+                  {dataPackage?.slot - slot <= 0 ? (
+                    <h1> 0</h1>
+                  ) : (
+                    <h1> {dataPackage?.slot - slot} </h1>
+                  )}
                 </Col>
               </Row>
             </Form.Item>

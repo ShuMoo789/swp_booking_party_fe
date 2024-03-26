@@ -62,7 +62,7 @@ const Service = () => {
   const calcTotal = () => {
     let total = 0;
     booking?.services?.forEach((item) => (total += item.quantity * item.price));
-    return total + booking.package.priceTotal;
+    return total + booking.package.priceTotal + ((booking.information.slot - booking.package.slot)*booking.package.pricePerChild);
   };
 
   const addService = (record) => {
@@ -116,7 +116,6 @@ const Service = () => {
                       <h4 style={{ color: "orange" }}>
                         {item?.name} ${item?.price}
                       </h4>
-                      {/* <h5 style={{ color: "orange" }}>${item?.price}</h5> */}
                     </div>
                   </Card>
                 </Col>

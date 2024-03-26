@@ -12,7 +12,10 @@ export const ConfirmPage = () => {
   const [time, setTime] = useState("");
   const params = useParams();
   const calcTotal = () => {
-    let total = booking.package.priceTotal;
+    let total =
+      booking.package.priceTotal +
+      (booking.information.slot - booking.package.slot) *
+        booking.package.pricePerChild;
     booking?.services?.forEach((item) => (total += item.quantity * item.price));
     return total;
   };
@@ -94,8 +97,13 @@ export const ConfirmPage = () => {
                 />
               </td>
               <td>{booking.package.name}</td>
-              <td>{booking.package.slot} slot</td>
-              <td>${booking.package.priceTotal}</td>
+              <td>{booking.information.slot} slot</td>
+              <td>
+                $
+                {booking.package.priceTotal +
+                  (booking.information.slot - booking.package.slot) *
+                    booking.package.pricePerChild}
+              </td>
             </tr>
             {booking.services.map((item, index) => {
               return (

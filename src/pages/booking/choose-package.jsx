@@ -68,14 +68,14 @@ export const Package = ({ isSelect, data }) => {
               <h2>${data.priceTotal}</h2>
             </Col>
           </Row>
-          <p>{data.description}</p>
           <p>Price per kid: ${data.pricePerChild}</p>
-          <p>Add more Servive:</p>
+          <p>{data.description}</p>
+          {/* <p>Add more Servive:</p>
           <ul>
             {data?.serviceUploads?.map((item) => {
               return <li>{item.name}</li>;
             })}
-          </ul>
+          </ul> */}
         </Col>
       </Row>
     </div>
