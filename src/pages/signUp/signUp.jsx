@@ -230,7 +230,7 @@ export default function SignUp() {
   const handleRegister = async () => {
     console.log(formik.values);
     try {
-      const response = await api.post("/authentication/register", {
+      const response = await api.post("authentication/register", {
         username: formik.values.username,
         password: formik.values.password,
         firstName: formik.values.firstname,
@@ -245,7 +245,7 @@ export default function SignUp() {
       toast("Please verify your email!");
       setTimeout(() => {
         navigate("/login");
-      }, 2000);
+      }, 1000);
     } catch (e) {
       console.log(e.response);
       toast.error("Registration failed!");

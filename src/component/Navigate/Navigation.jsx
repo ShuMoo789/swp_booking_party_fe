@@ -98,7 +98,7 @@ export default function Navigation() {
               Payment History
             </Link>
           ),
-          key: "2",
+          key: "1",
         },
         {
           label: (
@@ -114,8 +114,24 @@ export default function Navigation() {
               <Link to={"/login"}>Log out</Link>
             </Button>
           ),
-          key: "3",
+          key: "4",
         },
+        // {
+        //   label: (
+        //     <Link to={"/wallet"} style={{ fontSize: "1rem" }}>
+        //       Wallet
+        //     </Link>
+        //   ),
+        //   key: "3",
+        // },
+        // {
+        //   label: (
+        //     <Button onClick={logoutHandler} style={{ color: "green" }}>
+        //       <Link to={"/login"}>Log out</Link>
+        //     </Button>
+        //   ),
+        //   key: "3",
+        // },
       ];
     }
 
