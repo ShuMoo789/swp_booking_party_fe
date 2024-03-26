@@ -2,11 +2,56 @@ import React, { useEffect, useState } from "react";
 import { Space, Table, Tag, Button, Form, Modal, Rate, Input } from "antd";
 import api from "../../config/axios";
 import dayjs from "dayjs";
+import { useDispatch, useSelector } from "react-redux";
 
 const paymentHistory = () => {
   const [orders, setOrders] = useState("");
   const [form] = Form.useForm();
   const [showModal, setShowModal] = useState(false);
+  const dispatch = useDispatch();
+  const handleDelete = async (id) => {
+    try {
+      const confirmDelete = window.confirm("Bạn có muốn xóa này không?");
+      if (confirmDelete) {
+        await api.patch(`/cancel/${id}`);
+        fetchOrders();
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const calcTotal = (filterOrder) => {
+    let total = 0;
+    filterOrder?.services?.forEach(
+      (item) => (total += item.quantity * item.price)
+    );
+    return total + filterOrder.apackage.priceTotal;
+  };
+
+  const handlePaymeny = async (id) => {
+    const filterOrder = orders?.filter((order) => order.id === id)[0];
+    const response = await api.post("/create-payment", {
+      totalPrice: 10,
+      nameReceiver: filterOrder?.nameReceiver,
+      phone: filterOrder?.phone,
+      email: filterOrder?.email,
+      slot: filterOrder?.slot,
+      additionalNotes: filterOrder?.additionalNotes,
+      scheduleId: filterOrder?.scheduleId,
+      date: filterOrder?.date,
+      packageUploadId: filterOrder?.packageUploadId,
+      services: filterOrder?.services.map((item) => {
+        return {
+          id: item.id,
+          quantity: item.quantity,
+          price: item.price,
+        };
+      }),
+    });
+
+    window.open(response.data, "_self");
+  };
   const columns = [
     {
       title: "Package Name",
@@ -84,12 +129,30 @@ const paymentHistory = () => {
             </Button>
           ) : (
             <>
-              <Button style={{ color: "white", backgroundColor: "orange" }}>
-                Delete
-              </Button>
-              <Button style={{ color: "white", backgroundColor: "orange" }}>
-                Update
-              </Button>
+              {record.orderedStatus === "PAID" && (
+                <Button
+                  style={{ color: "white", backgroundColor: "orange" }}
+                  onClick={() => handleDelete(record?.id)}
+                >
+                  Delete
+                </Button>
+              )}
+              {record.orderedStatus === "ODERED" && (
+                <>
+                  <Button
+                    style={{ color: "white", backgroundColor: "orange" }}
+                    onClick={() => handleDelete(record?.id)}
+                  >
+                    Delete
+                  </Button>
+                  <Button
+                    style={{ color: "white", backgroundColor: "orange" }}
+                    onClick={() => handlePaymeny(record?.id)}
+                  >
+                    Payment
+                  </Button>
+                </>
+              )}
             </>
           )}
         </Space>
@@ -114,20 +177,6 @@ const paymentHistory = () => {
     form.resetFields();
     setShowModal(false);
   };
-
-  // const handleDelete = async (record) => {
-  //   try {
-  //     // Gọi API để xóa đối tượng
-  //     await api.delete(`/orders/${record.id}`);
-  //     // Làm mới danh sách đơn hàng
-  //     fetchOrders();
-  //     // Hiển thị thông báo xóa thành công (nếu cần)
-  //     console.log("Order deleted successfully!");
-  //   } catch (error) {
-  //     console.error("Error deleting order:", error);
-  //     // Xử lý lỗi (nếu cần)
-  //   }
-  // };
 
   return (
     <>
