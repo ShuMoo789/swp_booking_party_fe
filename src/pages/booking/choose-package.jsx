@@ -69,9 +69,9 @@ export const Package = ({ isSelect, data }) => {
             </Col>
           </Row>
           <p>{data.description}</p>
-
+          <p>Price per kid: ${data.pricePerChild}</p>
+          <p>Add more Servive:</p>
           <ul>
-            <li>Price per kid: ${data.pricePerChild}</li>
             {data?.serviceUploads?.map((item) => {
               return <li>{item.name}</li>;
             })}

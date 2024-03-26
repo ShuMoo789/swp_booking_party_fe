@@ -28,9 +28,6 @@ const { TextArea } = Input;
 const onChangeText = (e) => {
   console.log("Change:", e.target.value);
 };
-const onChangeDate = (date, dateString) => {
-  console.log(date, dateString);
-};
 
 const InfoReceive = ({ form, onSubmitInfo }) => {
   const information = useSelector((store) => store.booking.information);
@@ -39,6 +36,7 @@ const InfoReceive = ({ form, onSubmitInfo }) => {
   const params = useParams();
   const dataPackage = data.payload.booking.package;
   const [schedule, setSchedule] = useState([]);
+  const [bookingDate, setBookingDate] = useState();
   const onChangeNumber = (value) => {
     setSlot(value);
     console.log("changed", value);
@@ -48,18 +46,18 @@ const InfoReceive = ({ form, onSubmitInfo }) => {
     return current && current < moment().startOf("day");
   }
   const fetchSchedule = async () => {
-    const response = await api.get(`schedule-by-host-id/${params.hostId}`);
+    const response = await api.get(
+      `/input-day?hostId=${params.hostId}&dateStr=${bookingDate}`
+    );
     setSchedule(response.data);
   };
 
   useEffect(() => {
     fetchSchedule();
-  }, []);
+  }, [bookingDate]);
 
   useEffect(() => {
     const info = { ...information };
-    // console.log(info.date);
-    // console.log(`${info.date.$D}-${info.date.$M + 1}-${info.date.$y}`);
     info.date = dayjs(info.date);
     form.setFieldsValue(info);
     if (info?.slot) {
@@ -177,34 +175,36 @@ const InfoReceive = ({ form, onSubmitInfo }) => {
                 },
               ]}
             >
-              <DatePicker disabledDate={disabledPreviousDate} />
-            </Form.Item>
-            <Form.Item
-              label="Pick a Time"
-              name={"time"}
-              // name="time"
-              // rules={[
-              //   {
-              //     required: true,
-              //     message: "Please pick your date",
-              //   },
-              // ]}
-            >
-              <Radio.Group
-                onChange={(e) => {
-                  form.setFieldValue("timeString", e);
+              <DatePicker
+                onChange={(value) => {
+                  setBookingDate(dayjs(value.$d).format("YYYY/MM/DD"));
                 }}
-                buttonStyle="solid"
-              >
-                {schedule
-                  .filter((item) => !item.deleted)
-                  .map((item) => {
-                    return (
-                      <Radio.Button value={item.id}>{item.time}</Radio.Button>
-                    );
-                  })}
-              </Radio.Group>
+                disabledDate={disabledPreviousDate}
+              />
             </Form.Item>
+            {bookingDate && (
+              <Form.Item label="Pick a Time" name={"time"}>
+                <Radio.Group
+                  onChange={(e) => {
+                    form.setFieldValue("timeString", e);
+                  }}
+                  buttonStyle="solid"
+                >
+                  {schedule
+                    .filter((item) => !item.deleted)
+                    .map((item) => {
+                      return (
+                        <Radio.Button
+                          disabled={!item.available}
+                          value={item.id}
+                        >
+                          {item.time}
+                        </Radio.Button>
+                      );
+                    })}
+                </Radio.Group>
+              </Form.Item>
+            )}
           </Col>
           <Col span={12}>
             <Form.Item label="Package">
