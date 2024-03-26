@@ -27,6 +27,7 @@ export default function Navigation() {
   const generateItem = () => {
     let items = [];
 
+
     switch (user?.role) {
       case "PARTY_HOST":
         items = [
@@ -129,6 +130,7 @@ export default function Navigation() {
         break;
       default:
         break;
+   
     }
 
     return items;

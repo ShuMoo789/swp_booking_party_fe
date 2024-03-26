@@ -14,7 +14,7 @@ export const authenSlice = createSlice({
       return store;
     },
     logout: () => {
-      return initialState;
+      return null;
     },
   },
 });
