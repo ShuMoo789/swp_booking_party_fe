@@ -21,7 +21,7 @@ const paymentHistory = () => {
       render: (text, record) => <a>{record.apackage.venue}</a>,
     },
     {
-      title: "Day",
+      title: "Date",
       dataIndex: "bookingDate",
       key: "bookingDate",
       render: (value) => {
@@ -37,7 +37,7 @@ const paymentHistory = () => {
       },
     },
     {
-      title: "Reciever",
+      title: "Receiver",
       dataIndex: "nameReceiver",
       key: "nameReceiver",
     },
@@ -111,12 +111,28 @@ const paymentHistory = () => {
       description: values.feedback,
       rating: values.rating,
     });
+    form.resetFields();
+    setShowModal(false);
   };
+
+  // const handleDelete = async (record) => {
+  //   try {
+  //     // Gọi API để xóa đối tượng
+  //     await api.delete(`/orders/${record.id}`);
+  //     // Làm mới danh sách đơn hàng
+  //     fetchOrders();
+  //     // Hiển thị thông báo xóa thành công (nếu cần)
+  //     console.log("Order deleted successfully!");
+  //   } catch (error) {
+  //     console.error("Error deleting order:", error);
+  //     // Xử lý lỗi (nếu cần)
+  //   }
+  // };
 
   return (
     <>
       <Table
-        style={{ margin: "100px", height: "60vh" }}
+        style={{ margin: "100px", height: "90vh" }}
         columns={columns}
         dataSource={orders}
       />
@@ -133,14 +149,16 @@ const paymentHistory = () => {
           <Form.Item
             name="rating"
             label="Rate your experience:"
-            rules={[{ required: true, message: "Please rate your experience" }]}
+            rules={[
+              { required: true, message: "Please rate your experience." },
+            ]}
           >
             <Rate />
           </Form.Item>
           <Form.Item
             name="feedback"
             label="Feedback:"
-            rules={[{ required: true, message: "Please provide feedback" }]}
+            rules={[{ required: true, message: "Please provide feedback." }]}
           >
             <Input.TextArea rows={4} />
           </Form.Item>

@@ -47,7 +47,7 @@ const ForgotPassword = () => {
     },
     validationSchema: Yup.object({
       password: Yup.string()
-        .required("required!!")
+        .required("Please enter your passoword!")
         .min(3, "at least 3 character")
         .max(20, "max 20 character")
         .matches(
@@ -56,7 +56,7 @@ const ForgotPassword = () => {
         ),
 
       confirm: Yup.string()
-        .required("required!!")
+        .required("Please confirm your password!")
         .oneOf([Yup.ref("password"), null], "Passwords must match"),
     }),
   });
