@@ -58,7 +58,7 @@ export const ConfirmPage = () => {
     {
       key: "6",
       label: "Time",
-      children: time,
+      children: booking?.information?.time,
     },
     {
       key: "7",

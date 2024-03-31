@@ -553,7 +553,6 @@ export default function SignUp() {
               formik.values.phone,
               formik.values.address,
               formik.values.businessname,
-
               formik.values.confirm
             )}
           >

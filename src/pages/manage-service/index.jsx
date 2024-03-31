@@ -166,7 +166,7 @@ export const ManageService = () => {
                 {" "}
                 <Form.Item
                   label="Price"
-                  name={"Price"}
+                  name={"price"}
                   rules={[
                     {
                       required: true,
@@ -190,7 +190,7 @@ export const ManageService = () => {
                 {" "}
                 <Form.Item
                   label="Quantity"
-                  name={"Quantity"}
+                  name={"quantity"}
                   rules={[
                     {
                       required: true,

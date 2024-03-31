@@ -59,6 +59,12 @@ const paymentHistory = () => {
       key: "name",
       render: (text, record) => <a>{record.apackage.name}</a>,
     },
+    // {
+    //   title: "Package Name",
+    //   dataIndex: "name",
+    //   key: "name",
+    //   render: (text, record) => <a>{record.apackage.partyHost}</a>,
+    // },
     {
       title: "Address",
       dataIndex: "venue",

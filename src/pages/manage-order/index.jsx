@@ -78,10 +78,18 @@ export const ManageOrder = () => {
       title: "Action",
       dataIndex: "action",
       key: "action",
-      render: (_, record) =>
-        record.orderedStatus !== "COMPLETED" && (
-          <Button onClick={() => handleAcceptOrder(record)}>Accept</Button>
-        ),
+      render: (_, record) => {
+        if (record.orderedStatus !== "COMPLETED") {
+          if (record.orderedStatus !== "CANCELLED") {
+            return (
+              <Button onClick={() => handleAcceptOrder(record)}>Accept</Button>
+            );
+          } else {
+            return null; // Return null when status is "CANCELLED"
+          }
+        }
+        return null; // Return null when status is "COMPLETED"
+      },
     },
   ];
 
