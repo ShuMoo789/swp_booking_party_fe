@@ -408,7 +408,13 @@ function ServiceList({ list, packages }) {
           marginBottom: 20,
         }}
       >
-        <Button style={{ marginTop: 20 }} type="primary">
+        <Button
+          style={{ marginTop: 20 }}
+          type="primary"
+          onClick={() => {
+            setShowAddServiceModal(true);
+          }}
+        >
           Add new service
         </Button>
       </Row>

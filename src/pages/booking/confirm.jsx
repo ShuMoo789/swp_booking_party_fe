@@ -105,7 +105,7 @@ export const ConfirmPage = () => {
                     booking.package.pricePerChild}
               </td>
             </tr>
-            {booking.services.map((item, index) => {
+            {booking?.services?.map((item, index) => {
               return (
                 <tr>
                   <td>

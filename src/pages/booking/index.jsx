@@ -26,7 +26,13 @@ export const BookingPage = () => {
     },
     {
       title: "Info To Receive",
-      content: <InfoToReceive form={form} onSubmitInfo={onSubmitInfo} />,
+      content: (
+        <InfoToReceive
+          current={current}
+          form={form}
+          onSubmitInfo={onSubmitInfo}
+        />
+      ),
     },
     {
       title: "Choose Service",
@@ -61,10 +67,7 @@ export const BookingPage = () => {
   };
   const calcTotal = () => {
     let total = 0;
-    booking?.services?.forEach(
-      (item) =>
-        (total += item.quantity * item.price)
-    );
+    booking?.services?.forEach((item) => (total += item.quantity * item.price));
     return total + booking.package.priceTotal;
   };
 
@@ -79,7 +82,7 @@ export const BookingPage = () => {
       scheduleId: booking?.information?.time,
       date: booking?.information?.date,
       packageUploadId: booking?.package?.id,
-      services: booking.services.map((item) => {
+      services: booking?.services?.map((item) => {
         return {
           id: item.id,
           quantity: item.quantity,
@@ -93,6 +96,13 @@ export const BookingPage = () => {
 
   return (
     <div className="booking">
+      <Button
+        onClick={() => {
+          dispatch(reset());
+        }}
+      >
+        Clear cart
+      </Button>
       <Steps current={current} items={items} />
       <div style={contentStyle}>{steps[current].content}</div>
       <div

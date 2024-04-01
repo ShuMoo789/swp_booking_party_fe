@@ -16,7 +16,7 @@ import moment from "moment";
 import dayjs from "dayjs";
 import api from "../../config/axios";
 import { useParams } from "react-router-dom";
-export const InfoToReceive = ({ form, onSubmitInfo }) => {
+export const InfoToReceive = ({ form, onSubmitInfo, current }) => {
   return (
     <div>
       <InfoReceive form={form} onSubmitInfo={onSubmitInfo} />
@@ -29,7 +29,7 @@ const onChangeText = (e) => {
   console.log("Change:", e.target.value);
 };
 
-const InfoReceive = ({ form, onSubmitInfo }) => {
+const InfoReceive = ({ form, onSubmitInfo, current }) => {
   const information = useSelector((store) => store.booking.information);
   const [slot, setSlot] = useState(0);
   const data = useSelector(selectPackage);
@@ -48,14 +48,22 @@ const InfoReceive = ({ form, onSubmitInfo }) => {
   }
   const fetchSchedule = async () => {
     const response = await api.get(
-      `/input-day?hostId=${params.hostId}&dateStr=${bookingDate}`
+      `/input-day?hostId=${params.hostId}&dateStr=${
+        bookingDate ? bookingDate : dayjs().format("YYYY/MM/DD")
+      }`
     );
     setSchedule(response.data);
   };
 
   useEffect(() => {
     fetchSchedule();
-  }, [bookingDate]);
+  }, [bookingDate, current]);
+
+  useEffect(() => {
+    if (information) {
+      form.setFieldsValue(information);
+    }
+  }, [information]);
 
   // useEffect(() => {
   //   const info = { ...information };
@@ -218,29 +226,24 @@ const InfoReceive = ({ form, onSubmitInfo }) => {
                 disabledDate={disabledPreviousDate}
               />
             </Form.Item>
-            {bookingDate && (
-              <Form.Item label="Pick a Time" name={"time"}>
-                <Radio.Group
-                  onChange={(e) => {
-                    form.setFieldValue("timeString", e);
-                  }}
-                  buttonStyle="solid"
-                >
-                  {schedule
-                    .filter((item) => !item.deleted)
-                    .map((item) => {
-                      return (
-                        <Radio.Button
-                          disabled={!item.available}
-                          value={item.id}
-                        >
-                          {item.time}
-                        </Radio.Button>
-                      );
-                    })}
-                </Radio.Group>
-              </Form.Item>
-            )}
+            <Form.Item label="Pick a Time" name={"time"}>
+              <Radio.Group
+                onChange={(e) => {
+                  form.setFieldValue("timeString", e);
+                }}
+                buttonStyle="solid"
+              >
+                {schedule
+                  .filter((item) => !item.deleted)
+                  .map((item) => {
+                    return (
+                      <Radio.Button disabled={!item.available} value={item.id}>
+                        {item.time}
+                      </Radio.Button>
+                    );
+                  })}
+              </Radio.Group>
+            </Form.Item>
           </Col>
           <Col span={12}>
             <Form.Item label="Package">
