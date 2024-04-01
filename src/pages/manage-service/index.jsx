@@ -22,6 +22,7 @@ import api from "../../config/axios";
 import { toast } from "react-toastify";
 import { data } from "../statistic";
 import { useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
 
 export const ManageService = () => {
   const user = useSelector((store) => store.authen);
@@ -47,7 +48,7 @@ export const ManageService = () => {
     );
   };
   const fetchService = async () => {
-    const response = await api.get(`/serviceUpload/${user.id}`);
+    const response = await api.get(`/serviceUploadByPackage/${user.id}`);
     console.log(response.data.serviceUploads);
     setServices(
       response.data.serviceUploads
@@ -203,7 +204,7 @@ export const ManageService = () => {
                       width: "100%",
                     }}
                     formatter={(value) =>
-                      `$ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+                      ` ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ",")
                     }
                     parser={(value) => value.replace(/\$\s?|(,*)/g, "")}
                     //   onChange={onChange}
@@ -259,12 +260,11 @@ export const ManageService = () => {
 
 function ServiceList({ list, services }) {
   // const [services, setServices] = useState([]);
-  console.log(list);
-  console.log(services);
+  const params = useParams();
   useEffect(() => {
     const fetchServices = async () => {
       try {
-        const response = await api.get("/serviceUpload");
+        const response = await api.get(`/serviceUploadByHost/${params.hostId}`);
         console.log("test 2:", response.data.serviceUploads);
       } catch (e) {
         console(e);

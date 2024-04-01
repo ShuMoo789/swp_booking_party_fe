@@ -12,12 +12,19 @@ export const ConfirmPage = () => {
   const [time, setTime] = useState("");
   const params = useParams();
   const calcTotal = () => {
-    let total =
-      booking.package.priceTotal +
-      (booking.information.slot - booking.package.slot) *
-        booking.package.pricePerChild;
+    let total = 0;
     booking?.services?.forEach((item) => (total += item.quantity * item.price));
-    return total;
+    return (
+      <div>
+        $
+        {booking.information.slot > booking.package.slot
+          ? total +
+            booking.package.priceTotal +
+            (booking.information.slot - booking.package.slot) *
+              booking.package.pricePerChild
+          : total + booking.package.priceTotal}
+      </div>
+    );
   };
   const fetchSchedule = async () => {
     const response = await api.get(`schedule-by-host-id/${params.hostId}`);
@@ -58,7 +65,7 @@ export const ConfirmPage = () => {
     {
       key: "6",
       label: "Time",
-      children: booking?.information?.time,
+      children: booking?.information?.timeString.substring(0, 5),
     },
     {
       key: "7",
@@ -100,9 +107,11 @@ export const ConfirmPage = () => {
               <td>{booking.information.slot} slot</td>
               <td>
                 $
-                {booking.package.priceTotal +
-                  (booking.information.slot - booking.package.slot) *
-                    booking.package.pricePerChild}
+                {booking.information.slot < booking.package.slot
+                  ? booking.package.priceTotal
+                  : booking.package.priceTotal +
+                    (booking.information.slot - booking.package.slot) *
+                      booking.package.pricePerChild}
               </td>
             </tr>
             {booking?.services?.map((item, index) => {
@@ -128,7 +137,7 @@ export const ConfirmPage = () => {
               <td>Total</td>
               <td></td>
               <td></td>
-              <td>${calcTotal()}</td>
+              <td>{calcTotal()}</td>
             </tr>
           </tbody>
         </table>

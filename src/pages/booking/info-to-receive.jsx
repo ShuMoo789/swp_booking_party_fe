@@ -86,6 +86,9 @@ const InfoReceive = ({ form, onSubmitInfo, current }) => {
       <Form
         onFinish={(values) => {
           values.slot = slot;
+          values.timeString = schedule.filter(
+            (item) => item.id === values.time
+          )[0].time;
           onSubmitInfo(values);
         }}
         form={form}

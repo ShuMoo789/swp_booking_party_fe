@@ -68,7 +68,17 @@ export const BookingPage = () => {
   const calcTotal = () => {
     let total = 0;
     booking?.services?.forEach((item) => (total += item.quantity * item.price));
-    return total + booking.package.priceTotal;
+    return (
+      <div>
+        $
+        {booking.information.slot > booking.package.slot
+          ? total +
+            booking.package.priceTotal +
+            (booking.information.slot - booking.package.slot) *
+              booking.package.pricePerChild
+          : total + booking.package.priceTotal}
+      </div>
+    );
   };
 
   const handlePaymeny = async () => {

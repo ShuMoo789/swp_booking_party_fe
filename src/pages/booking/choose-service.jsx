@@ -9,6 +9,7 @@ import {
   selectService,
 } from "../../redux/features/bookingSlice";
 import { DeleteOutlined } from "@ant-design/icons";
+import { useParams } from "react-router-dom";
 export const ChooseService = () => {
   return (
     <div>
@@ -23,6 +24,7 @@ const Service = () => {
   const booking = useSelector((store) => store.booking);
   const [current, setCurrent] = useState(null);
   const [quantity, setQuantity] = useState(1);
+  const params = useParams();
   const dispatch = useDispatch();
   const onChangeNumber = (value) => {
     setQuantity(value);
@@ -50,7 +52,7 @@ const Service = () => {
   };
   const fetchService = async () => {
     try {
-      const response = await api.get("/serviceUpload");
+      const response = await api.get(`/serviceUploadByHost/${params.hostId}`);
       console.log("id test:", response.data);
 
       // Lọc những mục có serviceULStatus là AVAILABLE
@@ -72,10 +74,15 @@ const Service = () => {
     let total = 0;
     booking?.services?.forEach((item) => (total += item.quantity * item.price));
     return (
-      total +
-      booking.package.priceTotal +
-      (booking.information.slot - booking.package.slot) *
-        booking.package.pricePerChild
+      <div>
+        $
+        {booking.information.slot > booking.package.slot
+          ? total +
+            booking.package.priceTotal +
+            (booking.information.slot - booking.package.slot) *
+              booking.package.pricePerChild
+          : total + booking.package.priceTotal}
+      </div>
     );
   };
 
@@ -168,7 +175,7 @@ const Service = () => {
               <tr>
                 <td>Total</td>
                 <td></td>
-                <td>${calcTotal()}</td>
+                <td>{calcTotal()}</td>
               </tr>
             </tbody>
           </table>
