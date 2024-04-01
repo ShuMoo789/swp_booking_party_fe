@@ -232,7 +232,16 @@ const InfoReceive = ({ form, onSubmitInfo, current }) => {
                 disabledDate={disabledPreviousDate}
               />
             </Form.Item>
-            <Form.Item label="Pick a Time" name={"time"}>
+            <Form.Item
+              label="Pick a Time"
+              name={"time"}
+              rules={[
+                {
+                  required: true,
+                  message: "Please pick your time!",
+                },
+              ]}
+            >
               <Radio.Group
                 onChange={(e) => {
                   form.setFieldValue("timeString", e);
