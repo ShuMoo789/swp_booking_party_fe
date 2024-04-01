@@ -31,7 +31,7 @@ const onChangeText = (e) => {
 
 const InfoReceive = ({ form, onSubmitInfo, current }) => {
   const information = useSelector((store) => store.booking.information);
-  const [slot, setSlot] = useState(0);
+  const [slot, setSlot] = useState(1);
   const data = useSelector(selectPackage);
   const params = useParams();
   const dataPackage = data.payload.booking.package;
@@ -42,9 +42,9 @@ const InfoReceive = ({ form, onSubmitInfo, current }) => {
     console.log("changed", value);
   };
   function disabledPreviousDate(current) {
-    const currentDatePlusThreeDays = dayjs().add(5, "day");
+    const currentDatePlusFiveDays = dayjs().add(5, "day");
     // Can not select days before today
-    return current && current < currentDatePlusThreeDays.startOf("day");
+    return current && current < currentDatePlusFiveDays.startOf("day");
   }
   const fetchSchedule = async () => {
     const response = await api.get(
@@ -65,16 +65,21 @@ const InfoReceive = ({ form, onSubmitInfo, current }) => {
     }
   }, [information]);
 
-  // useEffect(() => {
-  //   const info = { ...information };
-  //   info.date = dayjs(info.date);
-  //   form.setFieldsValue(info);
-  //   if (info?.slot) {
-  //     setSlot(info?.slot);
-  //   } else {
-  //     setSlot(0);
-  //   }
-  // }, [information]);
+  useEffect(() => {
+    if (information) {
+      const info = { ...information };
+      info.date = dayjs(info.date);
+      console.log(info);
+      form.setFieldsValue(info);
+      if (info?.slot) {
+        setSlot(info?.slot);
+      } else {
+        setSlot(0);
+      }
+    } else {
+      form.setFieldValue("date", dayjs().add(5, "day"));
+    }
+  }, [information]);
   console.log(data);
   return (
     <div style={{ maxWidth: "1600px", padding: 20 }}>
@@ -212,6 +217,7 @@ const InfoReceive = ({ form, onSubmitInfo, current }) => {
             <Form.Item
               label="Pick a date"
               name="date"
+              initialValue={dayjs().add(5, "day")}
               rules={[
                 {
                   required: true,
@@ -261,6 +267,7 @@ const InfoReceive = ({ form, onSubmitInfo, current }) => {
                 <Col span="16">
                   <h1>{dataPackage?.name}</h1>
                   <p>Total Capacity: {dataPackage?.slot} Slot</p>
+                  <p>Price Per Child: ${dataPackage?.pricePerChild}</p>
                   <p>Location: {dataPackage?.venue}</p>
                   <p>Description: {dataPackage?.description} </p>
                 </Col>
