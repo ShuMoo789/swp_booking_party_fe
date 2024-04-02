@@ -48,21 +48,26 @@ export const ManageService = () => {
     );
   };
   const fetchService = async () => {
-    const response = await api.get(`/serviceUploadByPackage/${user.id}`);
-    console.log(response.data.serviceUploads);
-    setServices(
-      response.data.serviceUploads
-        ?.filter((item) => item.serviceULStatus != "UNAVAILABLE")
-        .map((item, index) => {
-          return {
-            key: index,
-            label: <ServiceDetail data={item} fetchService={fetchService} />,
-            children: (
-              <ServiceList list={item.serviceUploads} services={item} />
-            ),
-          };
-        })
-    );
+    // const response = await api.get(`/serviceUploadByPackage/${user.id}`);
+    try {
+      const response = await api.get(`/serviceUploadByHost/${user.id}`);
+      console.log(response.data);
+      setServices(
+        response.data
+          ?.filter((item) => item.serviceULStatus != "UNAVAILABLE")
+          .map((item, index) => {
+            return {
+              key: index,
+              label: <ServiceDetail data={item} fetchService={fetchService} />,
+              children: (
+                <ServiceList list={item.serviceUploads} services={item} />
+              ),
+            };
+          })
+      );
+    } catch (e) {
+      console.log(e);
+    }
   };
 
   useEffect(() => {
@@ -264,7 +269,7 @@ function ServiceList({ list, services }) {
   useEffect(() => {
     const fetchServices = async () => {
       try {
-        const response = await api.get(`/serviceUploadByHost/${params.hostId}`);
+        const response = await api.get(`/serviceUploadByHost/${user.id}`);
         console.log("test 2:", response.data.serviceUploads);
       } catch (e) {
         console(e);

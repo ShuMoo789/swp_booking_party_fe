@@ -450,6 +450,8 @@ const PackageDetail = ({ data, fetchPackage }) => {
       </Col>
       <Col span={18}>
         <strong>{data.name}</strong>
+        <br />
+        <strong style={{ color: "yellowgreen" }}>${data.priceTotal}</strong>
         {/* <Tag
           style={{
             marginLeft: 10,

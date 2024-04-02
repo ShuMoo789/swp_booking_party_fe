@@ -68,40 +68,41 @@ export const BookingPage = () => {
   const calcTotal = () => {
     let total = 0;
     booking?.services?.forEach((item) => (total += item.quantity * item.price));
-    return (
-      <div>
-        $
-        {booking.information.slot > booking.package.slot
-          ? total +
-            booking.package.priceTotal +
-            (booking.information.slot - booking.package.slot) *
-              booking.package.pricePerChild
-          : total + booking.package.priceTotal}
-      </div>
-    );
+    return booking.information.slot > booking.package.slot
+      ? total +
+          booking.package.priceTotal +
+          (booking.information.slot - booking.package.slot) *
+            booking.package.pricePerChild
+      : total + booking.package.priceTotal;
   };
 
   const handlePaymeny = async () => {
-    const response = await api.post("/create-payment", {
-      totalPrice: calcTotal(),
-      nameReceiver: booking?.information?.name,
-      phone: booking?.information?.phone,
-      email: booking?.information?.email,
-      slot: booking?.information?.slot,
-      additionalNotes: booking?.information?.note,
-      scheduleId: booking?.information?.time,
-      date: booking?.information?.date,
-      packageUploadId: booking?.package?.id,
-      services: booking?.services?.map((item) => {
-        return {
-          id: item.id,
-          quantity: item.quantity,
-          price: item.price,
-        };
-      }),
-    });
-    dispatch(reset());
-    window.open(response.data, "_self");
+    console.log(calcTotal());
+    try {
+      const response = await api.post("/create-payment", {
+        totalPrice: calcTotal(),
+        nameReceiver: booking?.information?.name,
+        phone: booking?.information?.phone,
+        email: booking?.information?.email,
+        slot: booking?.information?.slot,
+        additionalNotes: booking?.information?.note,
+        scheduleId: booking?.information?.time,
+        date: booking?.information?.date,
+        packageUploadId: booking?.package?.id,
+        services: booking?.services?.map((item) => {
+          return {
+            id: item.id,
+            price: item.price,
+            quantity: item.quantity,
+          };
+        }),
+      });
+      dispatch(reset());
+      setCurrent(0);
+      window.open(response.data, "_self");
+    } catch (e) {
+      console.log(e);
+    }
   };
 
   return (

@@ -23,11 +23,6 @@ const Wallet = ({ data }) => {
         <h1>Account Balance</h1>
         <div className="balance">${data?.balance?.toFixed(2)}</div>
       </div>
-      <div className="button-container">
-        <button className="add-money-btn" onClick={addMoney}>
-          Add Money to Wallet
-        </button>
-      </div>
     </div>
   );
 };
@@ -43,6 +38,7 @@ const App = () => {
 
   const fetchTransaction = async () => {
     const response = await api.get("transaction");
+    console.log(response.data);
     setTransactions(response.data);
   };
 
@@ -88,11 +84,27 @@ const App = () => {
                               <Tag>{item.status}</Tag>
                             </td>
                             <td>
-                              {item.toWallet.account.id === user.id ? (
+                              {item.status === "PAYMENT" ? (
+                                item.toWallet.account.id === user.id ? (
+                                  <Tag color="green">{`+${
+                                    item.moneyValue * 0.95
+                                  }$`}</Tag>
+                                ) : (
+                                  <Tag color="red">{`-${
+                                    item.moneyValue * 0.95
+                                  }$`}</Tag>
+                                )
+                              ) : item.toWallet.account.id === user.id ? (
                                 <Tag color="green">{`+${item.moneyValue}$`}</Tag>
                               ) : (
                                 <Tag color="red">{`-${item.moneyValue}$`}</Tag>
                               )}
+
+                              {/* {item.toWallet.account.id === user.id ? (
+                                <Tag color="green">{`+${item.moneyValue}$`}</Tag>
+                              ) : (
+                                <Tag color="red">{`-${item.moneyValue}$`}</Tag>
+                              )} */}
                             </td>
                             <td>
                               {formatDistance(

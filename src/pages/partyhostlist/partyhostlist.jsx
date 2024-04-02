@@ -93,37 +93,6 @@ function PartyHostList() {
   return (
     <div className="party-host-list">
       <ScrollToTopOnMount />
-      <AppBar
-        position="static"
-        style={{
-          backgroundColor: "#152d32",
-          borderRadius: "40px",
-          marginBottom: "60px",
-          marginTop: "-15px",
-        }}
-      >
-        {" "}
-        {/* Change background color here */}
-        <Toolbar>
-          {" "}
-          {/* Adding padding to move the search bar downward */}
-          <h1
-            style={{
-              fontSize: "28px",
-              flexGrow: 1,
-              marginRight: "10px",
-              marginBottom: "10px",
-              color: "#f2f2f2",
-            }}
-          ></h1>
-          <SearchContainer>
-            <SearchIconWrapper>
-              <SearchIcon />
-            </SearchIconWrapper>
-            <SearchInput placeholder="Search…" color="white" />
-          </SearchContainer>
-        </Toolbar>
-      </AppBar>
       <h1>Party Hosts</h1>
       <List
         style={{ marginBottom: "50px", marginTop: "10px" }}
