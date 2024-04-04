@@ -220,7 +220,7 @@ const InfoReceive = ({ form, onSubmitInfo, current }) => {
             <Form.Item
               label="Pick a date"
               name="date"
-              initialValue={dayjs().add(5, "day")}
+              initialValue={dayjs().add(5, "date")}
               rules={[
                 {
                   required: true,

@@ -233,8 +233,12 @@ export default function SignUp() {
       const response = await api.post("authentication/register", {
         username: formik.values.username,
         password: formik.values.password,
-        firstName: formik.values.firstname,
-        lastName: formik.values.lastname,
+        firstName:
+          formik.values.role === "CUSTOMER"
+            ? formik.values.firstname
+            : formik.values.businessname,
+        lastName:
+          formik.values.role === "CUSTOMER" ? formik.values.lastname : "Store",
         email: formik.values.email,
         phone: formik.values.phone,
         information: formik.values.information,
@@ -548,8 +552,12 @@ export default function SignUp() {
               formik.values.username,
               formik.values.email,
               formik.values.password,
-              formik.values.firstname,
-              formik.values.lastname,
+              formik.values.role === "CUSTOMER"
+                ? formik.values.firstname
+                : formik.values.businessname,
+              formik.values.role === "CUSTOMER"
+                ? formik.values.lastname
+                : "Store",
               formik.values.phone,
               formik.values.address,
               formik.values.businessname,
