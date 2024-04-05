@@ -9,6 +9,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { reset, updateInfo } from "../../redux/features/bookingSlice";
 import { ConfirmPage } from "./confirm";
 import api from "../../config/axios";
+import dayjs from "dayjs";
 export const BookingPage = () => {
   const [current, setCurrent] = useState(0);
   const booking = useSelector((store) => store.booking);
@@ -87,7 +88,9 @@ export const BookingPage = () => {
         slot: booking?.information?.slot,
         additionalNotes: booking?.information?.note,
         scheduleId: booking?.information?.time,
-        date: booking?.information?.date,
+        date:
+          dayjs(booking?.information?.date).format("YYYY-MM-DD") +
+          "T00:00:00.000Z",
         packageUploadId: booking?.package?.id,
         services: booking?.services?.map((item) => {
           return {

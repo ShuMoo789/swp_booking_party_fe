@@ -47,9 +47,10 @@ const InfoReceive = ({ form, onSubmitInfo, current }) => {
     return current && current < currentDatePlusFiveDays.startOf("day");
   }
   const fetchSchedule = async () => {
+    console.log(bookingDate ? bookingDate : dayjs().format("YYYY/MM/DD"));
     const response = await api.get(
       `/input-day?hostId=${params.hostId}&dateStr=${
-        bookingDate ? bookingDate : dayjs().format("YYYY/MM/DD")
+        bookingDate ? bookingDate : dayjs().add(5, "day").format("YYYY/MM/DD")
       }`
     );
     setSchedule(response.data);
