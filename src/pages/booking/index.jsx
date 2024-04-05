@@ -78,7 +78,26 @@ export const BookingPage = () => {
   };
 
   const handlePaymeny = async () => {
-    console.log(calcTotal());
+    console.log({
+      totalPrice: calcTotal(),
+      nameReceiver: booking?.information?.name,
+      phone: booking?.information?.phone,
+      email: booking?.information?.email,
+      slot: booking?.information?.slot,
+      additionalNotes: booking?.information?.note,
+      scheduleId: booking?.information?.time,
+      date:
+        dayjs(booking?.information?.date).format("YYYY-MM-DD") +
+        "T00:00:00.000Z",
+      packageUploadId: booking?.package?.id,
+      services: booking?.services?.map((item) => {
+        return {
+          id: item.id,
+          price: item.price,
+          quantity: item.quantity,
+        };
+      }),
+    });
     try {
       const response = await api.post("/create-payment", {
         totalPrice: calcTotal(),

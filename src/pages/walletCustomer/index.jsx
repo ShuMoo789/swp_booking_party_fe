@@ -5,6 +5,7 @@ import api from "../../config/axios";
 import { formatDistance } from "date-fns";
 import { Tag } from "antd";
 import { useSelector } from "react-redux";
+import { convertToVND } from "../../utils/currency";
 
 const Wallet = ({ data }) => {
   const [balance, setBalance] = useState(100); // Initial balance
@@ -21,7 +22,7 @@ const Wallet = ({ data }) => {
     <div className="wallet-container">
       <div className="balance-container">
         <h1>Account Balance</h1>
-        <div className="balance">${data?.balance?.toFixed(2)}</div>
+        <div className="balance">{convertToVND(data?.balance)}</div>
       </div>
     </div>
   );
@@ -86,18 +87,22 @@ const App = () => {
                             <td>
                               {item.status === "PAYMENT" ? (
                                 item.toWallet.account.id === user.id ? (
-                                  <Tag color="green">{`+${
+                                  <Tag color="green">{`+${convertToVND(
                                     item.moneyValue * 0.95
-                                  }$`}</Tag>
+                                  )}`}</Tag>
                                 ) : (
-                                  <Tag color="red">{`-${
+                                  <Tag color="red">{`-${convertToVND(
                                     item.moneyValue * 0.95
-                                  }$`}</Tag>
+                                  )}`}</Tag>
                                 )
-                              ) : item.toWallet.account.id === user.id ? (
-                                <Tag color="green">{`+${item.moneyValue}$`}</Tag>
+                              ) : item.toWallet.account.id === user?.id ? (
+                                <Tag color="green">{`+${convertToVND(
+                                  item.moneyValue
+                                )}`}</Tag>
                               ) : (
-                                <Tag color="red">{`-${item.moneyValue}$`}</Tag>
+                                <Tag color="red">{`-${convertToVND(
+                                  item.moneyValue
+                                )}`}</Tag>
                               )}
 
                               {/* {item.toWallet.account.id === user.id ? (

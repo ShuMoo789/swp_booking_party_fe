@@ -6,6 +6,7 @@ import { Description } from "@material-ui/icons";
 import dayjs from "dayjs";
 import api from "../../config/axios";
 import { useParams } from "react-router-dom";
+import { convertToVND } from "../../utils/currency";
 
 export const ConfirmPage = () => {
   const booking = useSelector((store) => store.booking);
@@ -16,13 +17,14 @@ export const ConfirmPage = () => {
     booking?.services?.forEach((item) => (total += item.quantity * item.price));
     return (
       <div>
-        $
-        {booking.information.slot > booking.package.slot
-          ? total +
-            booking.package.priceTotal +
-            (booking.information.slot - booking.package.slot) *
-              booking.package.pricePerChild
-          : total + booking.package.priceTotal}
+        {convertToVND(
+          booking.information.slot > booking.package.slot
+            ? total +
+                booking.package.priceTotal +
+                (booking.information.slot - booking.package.slot) *
+                  booking.package.pricePerChild
+            : total + booking.package.priceTotal
+        )}
       </div>
     );
   };
@@ -106,12 +108,13 @@ export const ConfirmPage = () => {
               <td>{booking.package.name}</td>
               <td>{booking.information.slot} slot</td>
               <td>
-                $
-                {booking.information.slot < booking.package.slot
-                  ? booking.package.priceTotal
-                  : booking.package.priceTotal +
-                    (booking.information.slot - booking.package.slot) *
-                      booking.package.pricePerChild}
+                {convertToVND(
+                  booking.information.slot < booking.package.slot
+                    ? booking.package.priceTotal
+                    : booking.package.priceTotal +
+                        (booking.information.slot - booking.package.slot) *
+                          booking.package.pricePerChild
+                )}
               </td>
             </tr>
             {booking?.services?.map((item, index) => {
@@ -128,7 +131,7 @@ export const ConfirmPage = () => {
                   </td>
                   <td>{item.name}</td>
                   <td>{item.quantity}</td>
-                  <td>${item.price}</td>
+                  <td>{convertToVND(item.price)}</td>
                 </tr>
               );
             })}

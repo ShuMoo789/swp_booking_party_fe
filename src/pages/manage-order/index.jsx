@@ -5,6 +5,7 @@ import api from "../../config/axios";
 import { toast } from "react-toastify";
 import { formatDistance } from "date-fns";
 import dayjs from "dayjs";
+import { convertToVND } from "../../utils/currency";
 
 export const ManageOrder = () => {
   const [orders, setOrders] = useState([]);
@@ -73,6 +74,7 @@ export const ManageOrder = () => {
       title: "Total Price",
       dataIndex: "totalPrice",
       key: "totalPrice",
+      render: (value) => convertToVND(value),
     },
     {
       title: "Action",
@@ -151,7 +153,7 @@ export const ManageOrder = () => {
             "DD/MM/YYYY"
           )} ${booking?.schedule?.time.substring(0, 5)}`}
         </p>
-        <p>Total Price: {booking?.totalPrice}</p>
+        <p>Total Price: {convertToVND(booking?.totalPrice)}</p>
         <p>Name Receiver: {booking?.nameReceiver}</p>
         <p>Email: {booking?.email}</p>
         {/* Render other booking details here */}

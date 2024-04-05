@@ -4,6 +4,7 @@ import api from "../../config/axios";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { selectPackage } from "../../redux/features/bookingSlice";
+import { convertToVND } from "../../utils/currency";
 
 export const ChoosePackage = () => {
   const params = useParams();
@@ -65,10 +66,10 @@ export const Package = ({ isSelect, data }) => {
               <h1>{data.name}</h1>
             </Col>
             <Col span="5" style={{ color: isSelect ? "orange" : "" }}>
-              <h2>${data.priceTotal}</h2>
+              <h2>{convertToVND(data.priceTotal)}</h2>
             </Col>
           </Row>
-          <p>Price per kid: ${data.pricePerChild}</p>
+          <p>Price per kid: vnd {data.pricePerChild}</p>
           <p>{data.description}</p>
           {/* <p>Add more Servive:</p>
           <ul>

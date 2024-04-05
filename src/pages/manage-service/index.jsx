@@ -23,6 +23,7 @@ import { toast } from "react-toastify";
 import { data } from "../statistic";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
+import { convertToVND } from "../../utils/currency";
 
 export const ManageService = () => {
   const user = useSelector((store) => store.authen);
@@ -284,7 +285,7 @@ function ServiceList({ list, services }) {
           <strong>Quantity:</strong> {services.quantity}
         </Col>
         <Col span={12} style={{ marginBottom: "8px" }}>
-          <strong>Price:</strong> {services.price}
+          <strong>Price:</strong> {convertToVND(services.price)}
         </Col>
         <Col span={24} style={{ marginBottom: "8px" }}>
           <strong>Description:</strong> {services.description}

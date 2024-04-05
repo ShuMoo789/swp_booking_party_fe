@@ -16,6 +16,7 @@ import moment from "moment";
 import dayjs from "dayjs";
 import api from "../../config/axios";
 import { useParams } from "react-router-dom";
+import { convertToVND } from "../../utils/currency";
 export const InfoToReceive = ({ form, onSubmitInfo, current }) => {
   return (
     <div>
@@ -280,7 +281,9 @@ const InfoReceive = ({ form, onSubmitInfo, current }) => {
                 <Col span="16">
                   <h1>{dataPackage?.name}</h1>
                   <p>Total Capacity: {dataPackage?.slot} Slot</p>
-                  <p>Price Per Child: ${dataPackage?.pricePerChild}</p>
+                  <p>
+                    Price Per Child: {convertToVND(dataPackage?.pricePerChild)}
+                  </p>
                   <p>Location: {dataPackage?.venue}</p>
                   <p>Description: {dataPackage?.description} </p>
                 </Col>
@@ -310,14 +313,14 @@ const InfoReceive = ({ form, onSubmitInfo, current }) => {
                 >
                   <h4>Total Price</h4>
                   {slot <= dataPackage?.slot ? (
-                    <h1> ${dataPackage?.priceTotal} </h1>
+                    <h1> {convertToVND(dataPackage?.priceTotal)} </h1>
                   ) : (
                     <h1>
-                      {" "}
-                      $
-                      {dataPackage?.priceTotal +
-                        (dataPackage?.slot - slot) *
-                          -dataPackage?.pricePerChild}{" "}
+                      {convertToVND(
+                        dataPackage?.priceTotal +
+                          (dataPackage?.slot - slot) *
+                            -dataPackage?.pricePerChild
+                      )}
                     </h1>
                   )}
                 </Col>

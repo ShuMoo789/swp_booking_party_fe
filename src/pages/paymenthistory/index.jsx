@@ -30,24 +30,8 @@ const paymentHistory = () => {
   };
 
   const handlePaymeny = async (id) => {
-    const filterOrder = orders?.filter((order) => order.id === id)[0];
     const response = await api.post("/create-payment", {
-      totalPrice: 10,
-      nameReceiver: filterOrder?.nameReceiver,
-      phone: filterOrder?.phone,
-      email: filterOrder?.email,
-      slot: filterOrder?.slot,
-      additionalNotes: filterOrder?.additionalNotes,
-      scheduleId: filterOrder?.scheduleId,
-      date: filterOrder?.date,
-      packageUploadId: filterOrder?.packageUploadId,
-      services: filterOrder?.services.map((item) => {
-        return {
-          id: item.id,
-          quantity: item.quantity,
-          price: item.price,
-        };
-      }),
+      orderId: id,
     });
 
     window.open(response.data, "_self");

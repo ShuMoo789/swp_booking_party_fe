@@ -10,6 +10,7 @@ import {
 } from "../../redux/features/bookingSlice";
 import { DeleteOutlined } from "@ant-design/icons";
 import { useParams } from "react-router-dom";
+import { convertToVND } from "../../utils/currency";
 export const ChooseService = () => {
   return (
     <div>
@@ -75,13 +76,14 @@ const Service = () => {
     booking?.services?.forEach((item) => (total += item.quantity * item.price));
     return (
       <div>
-        $
-        {booking.information.slot > booking.package.slot
-          ? total +
-            booking.package.priceTotal +
-            (booking.information.slot - booking.package.slot) *
-              booking.package.pricePerChild
-          : total + booking.package.priceTotal}
+        {convertToVND(
+          booking.information.slot > booking.package.slot
+            ? total +
+                booking.package.priceTotal +
+                (booking.information.slot - booking.package.slot) *
+                  booking.package.pricePerChild
+            : total + booking.package.priceTotal
+        )}
       </div>
     );
   };
@@ -135,7 +137,7 @@ const Service = () => {
                       }}
                     >
                       <h4 style={{ color: "orange" }}>
-                        {item?.name} ${item?.price}
+                        {item?.name} {convertToVND(item?.price)}
                       </h4>
                     </div>
                   </Card>
@@ -160,7 +162,7 @@ const Service = () => {
                   <tr>
                     <td>{item.name}</td>
                     <td>{item.quantity}</td>
-                    <td>{item.price}</td>
+                    <td>{convertToVND(item.price)}</td>
                     <td
                       className="delete"
                       onClick={() => {
@@ -210,7 +212,7 @@ const Service = () => {
           />
           <div style={{ display: "flex", flexDirection: "column" }}>
             {/* <h4 style={{ color: "orange" }}>Cat</h4> */}
-            <h5 style={{ color: "orange" }}>${current?.price}</h5>
+            <h5 style={{ color: "orange" }}>{convertToVND(current?.price)}</h5>
             <h5 style={{ color: "orange" }}>{current?.description}</h5>
             <InputNumber
               value={quantity}

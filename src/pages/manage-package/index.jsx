@@ -22,6 +22,7 @@ import api from "../../config/axios";
 import { toast } from "react-toastify";
 import { data } from "../statistic";
 import { useSelector } from "react-redux";
+import { convertToVND } from "../../utils/currency";
 
 export const ManagePackage = () => {
   const user = useSelector((store) => store.authen);
@@ -395,7 +396,7 @@ function ServiceList({ list, packages }) {
           <strong>Price per child:</strong> {packages.pricePerChild}
         </Col>
         <Col span={12} style={{ marginBottom: "8px" }}>
-          <strong>Price total:</strong> {packages.priceTotal}
+          <strong>Price total:</strong> {convertToVND(packages.priceTotal)}
         </Col>
         <Col span={24} style={{ marginBottom: "8px" }}>
           <strong>Description:</strong> {packages.description}
@@ -451,7 +452,9 @@ const PackageDetail = ({ data, fetchPackage }) => {
       <Col span={18}>
         <strong>{data.name}</strong>
         <br />
-        <strong style={{ color: "yellowgreen" }}>${data.priceTotal}</strong>
+        <strong style={{ color: "yellowgreen" }}>
+          {convertToVND(data.priceTotal)}
+        </strong>
         {/* <Tag
           style={{
             marginLeft: 10,
